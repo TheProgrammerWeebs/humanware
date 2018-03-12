@@ -172,7 +172,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
             lbErrorEmpresas.setVisible(true);
         } else {
             String ruta = "archivos\\database\\empresas";
-            try (PrintWriter pw = Utilidades.openFileWrite(ruta)) {
+            try (PrintWriter pw = Utilidades.openFileWrite(ruta, true)) {
                 pw.println(tfNombre.getText() + ";" + Utilidades.quitarEspacios(Utilidades.formatearTelefono(tfTelefono.getText())));
             }
             empresas.add(new Empresa(tfNombre.getText(), tfTelefono.getText()));

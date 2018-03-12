@@ -182,7 +182,7 @@ public class FXMLAgregarVacanteController implements Initializable
         tfTitulo.setVisible(false);
         if (!Utilidades.quitarEspacios(tfTitulo.getText()).equals("")) {
             String ruta = "archivos\\database\\titulos";
-            PrintWriter pw = Utilidades.openFileWrite(ruta);
+            PrintWriter pw = Utilidades.openFileWrite(ruta, true);
             pw.println(tfTitulo.getText());
             inicializarTitulos();
             pw.close();
@@ -260,7 +260,7 @@ public class FXMLAgregarVacanteController implements Initializable
                 FXMLUsuarioController.vacantes.add(nuevaVacante);
                 String linea = nuevaVacante.convertirString();
                 String ruta = "archivos\\database\\vacantes";
-                PrintWriter pw = Utilidades.openFileWrite(ruta);
+                PrintWriter pw = Utilidades.openFileWrite(ruta, true);
                 pw.println(linea);
                 pw.close();
                 Utilidades.formatearArchivo(ruta);

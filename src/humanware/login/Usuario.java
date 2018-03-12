@@ -136,7 +136,7 @@ public class Usuario
                     Utilidades.eliminarLinea(linea, ruta);
                     campos.set(posCampo, nuevo);
                     linea = campos.get(NOMBRE) + ";" + campos.get(CONTRASENIA) + ";" + campos.get(TIPO);
-                    pw = Utilidades.openFileWrite(ruta);
+                    pw = Utilidades.openFileWrite(ruta, true);
                     pw.println(linea);
                     pw.close();
                     break;
@@ -161,7 +161,7 @@ public class Usuario
         try
         {
             String ruta = "archivos\\database\\usuarios";
-            pw = Utilidades.openFileWrite(ruta);
+            pw = Utilidades.openFileWrite(ruta, true);
             pw.println(this.nombre.get() + ";" + this.contrasenia.get() + ";" + this.tipo);
         }
         finally

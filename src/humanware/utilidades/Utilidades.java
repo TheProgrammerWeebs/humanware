@@ -85,7 +85,7 @@ public class Utilidades
         File archivo = new File(Utilidades.getRutaAbs(ruta));
         File temporal = new File(archivo.getAbsolutePath() + ".tmp");;
         boolean encontrado;
-        try (BufferedReader buffer = openFileRead(ruta); PrintWriter pw = Utilidades.openFileWrite(ruta + ".tmp")) {
+        try (BufferedReader buffer = openFileRead(ruta); PrintWriter pw = Utilidades.openFileWrite(ruta + ".tmp", true)) {
             String line;
             encontrado = false;
             while (buffer.ready() && !encontrado) {
@@ -116,10 +116,10 @@ public class Utilidades
     }
 
     
-    public static PrintWriter openFileWrite(String ruta)
+    public static PrintWriter openFileWrite(String ruta, boolean append)
     {
         try {
-            FileOutputStream fileStream = new FileOutputStream(new File(getRutaAbs(ruta)), true);
+            FileOutputStream fileStream = new FileOutputStream(new File(getRutaAbs(ruta)), append);
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(fileStream, "UTF-8"));
             return pw;
             //return new PrintWriter(new BufferedWriter(new FileWriter(new File(getRutaAbs(ruta)), true)));

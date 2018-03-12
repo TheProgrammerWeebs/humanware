@@ -142,7 +142,7 @@ public class FXMLoginController implements Initializable
     {
         String ruta = "archivos\\database\\cookies";
         PrintWriter pw;
-        pw = Utilidades.openFileWrite(ruta);
+        pw = Utilidades.openFileWrite(ruta, false);
         if (cbRemember.isSelected())
         {
             pw.println("true"); //en la primera línea se guarda el estado del checkbox

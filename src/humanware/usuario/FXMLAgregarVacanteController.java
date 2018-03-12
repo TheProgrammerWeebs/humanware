@@ -265,6 +265,12 @@ public class FXMLAgregarVacanteController implements Initializable
                 pw.close();
                 Utilidades.formatearArchivo(ruta);
                 this.lbError.getScene().getWindow().hide();
+                this.tfTitulo.setText("");
+                this.tfMaxSalario.setText("");
+                this.tfMinSalario.setText("");
+                this.rbAmbas.setSelected(false);
+                this.rbCompleta.setSelected(false);
+                this.rbParcial.setSelected(false);
             }
         }
     }

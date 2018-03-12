@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="configuracionPane" prefHeight="394.0" prefWidth="435.0" style="-fx-background-color: #17252A;" stylesheets="@fxmlconfiguraciones.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.utilidades.FXMLConfiguracionController">
+   <children>
+      <JFXTextField fx:id="tfUsuario" editable="false" layoutX="14.0" layoutY="111.0" prefHeight="25.0" prefWidth="236.0" />
+      <Label fx:id="lbConfiguracion" layoutX="14.0" layoutY="14.0" text="Configuración:" textFill="#aabbb8">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="94.0" text="Usuario:" textFill="#aabbb8" />
+      <JFXButton fx:id="btEditar" layoutX="280.0" layoutY="107.0" onAction="#editarNombre" prefHeight="33.0" prefWidth="111.0" text="EDITAR" />
+      <Label fx:id="lbErrorUsuario" layoutX="14.0" layoutY="140.0" styleClass="error" textFill="RED" />
+      <Label layoutX="14.0" layoutY="198.0" text="Contraseña:" textFill="#aabbb8" />
+      <JFXPasswordField fx:id="pfActual" editable="false" layoutX="14.0" layoutY="228.0" prefHeight="25.0" prefWidth="236.0" promptText="Ingresa la contraseña actual" />
+      <JFXPasswordField fx:id="pfNueva" editable="false" layoutX="14.0" layoutY="269.0" prefHeight="25.0" prefWidth="236.0" promptText="Ingresa la contraseña nueva" />
+      <JFXPasswordField fx:id="pfNuevaConfirmar" editable="false" layoutX="14.0" layoutY="309.0" prefHeight="25.0" prefWidth="236.0" promptText="Confirma la nueva contraseña" />
+      <JFXButton fx:id="btCambiar" layoutX="280.0" layoutY="305.0" onAction="#cambiarContrasenia" prefHeight="33.0" prefWidth="111.0" text="CAMBIAR" />
+      <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="396.0" layoutY="14.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/close.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="lbError" layoutX="14.0" layoutY="347.0" prefHeight="17.0" prefWidth="236.0" styleClass="error" textFill="RED" />
+   </children>
+</AnchorPane>

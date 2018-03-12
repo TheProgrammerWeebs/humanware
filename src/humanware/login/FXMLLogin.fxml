@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="loginPane" prefHeight="420.0" prefWidth="527.0" style="-fx-background-color: #17252A;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.login.FXMLoginController">
+   <children>
+      <Label layoutX="129.0" layoutY="25.0" text="HUMAN" textFill="#2b7a78">
+         <font>
+            <Font name="System Bold" size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="289.0" layoutY="25.0" text="WARE" textFill="#2b7a78">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="45.0" fitWidth="29.0" layoutX="131.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/user.png" />
+         </image>
+      </ImageView>
+      <JFXTextField fx:id="tfUser" layoutX="171.0" layoutY="143.0" prefHeight="25.0" prefWidth="216.0" promptText="Ingrese su nombre de usuario" style="-fx-text-inner-color: white;" unFocusColor="#6c6b64" />
+      <ImageView fitHeight="58.0" fitWidth="29.0" layoutX="131.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/lock.png" />
+         </image>
+      </ImageView>
+      <JFXPasswordField fx:id="pfPassword" layoutX="171.0" layoutY="197.0" prefHeight="25.0" prefWidth="216.0" promptText="Ingrese su contraseña" style="-fx-text-inner-color: white;" unFocusColor="#6c6b64" />
+      <JFXCheckBox fx:id="cbRemember" checkedColor="#9199be" layoutX="137.0" layoutY="253.0" text="Recuérdame" textFill="#6c6b64" />
+      <JFXButton fx:id="btIngresar" layoutX="210.0" layoutY="293.0" onAction="#ingresar" prefHeight="29.0" prefWidth="108.0" style="-fx-background-color: #2B7A78;" text="INGRESAR" textFill="WHITE" />
+      <Hyperlink fx:id="hpRegister" layoutX="115.0" layoutY="381.0" onAction="#registrarse" text="Regístrate" />
+      <Label layoutX="14.0" layoutY="384.0" text="¿No tienes cuenta?" textFill="#9199be" />
+      <Label fx:id="lbIncorrecto" layoutX="171.0" layoutY="225.0" prefHeight="17.0" prefWidth="181.0" text="Usuario o contraseña incorrectos" textFill="RED" visible="false" />
+      <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="484.0" layoutY="11.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/close.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

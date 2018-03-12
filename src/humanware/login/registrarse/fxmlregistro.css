@@ -1,0 +1,17 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-color: #FEFFFF;
+}
+
+.text-field
+{
+    -fx-prompt-text-fill: gray;
+}
+
+.jfx-radio-button
+{
+    -fx-selected-color: #e74c3c;
+}

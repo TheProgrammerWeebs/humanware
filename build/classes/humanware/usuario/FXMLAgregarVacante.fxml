@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="vacantePane" prefHeight="553.0" prefWidth="684.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuario.FXMLAgregarVacanteController">
+    <stylesheets>
+        <URL value="@fxmlagregarvacante.css" />
+    </stylesheets>
+   <children>
+      <JFXTextField fx:id="tfDescripcion" layoutX="14.0" layoutY="77.0" prefHeight="25.0" prefWidth="625.0" promptText="Ingrese el nombre y descripcion del puesto" />
+      <Label layoutX="14.0" layoutY="14.0" text="Agregar vacante" textFill="#aabbb8">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="tfMinSalario" layoutX="14.0" layoutY="154.0" prefHeight="25.0" prefWidth="123.0" promptText="Mínimo" />
+      <Label layoutX="14.0" layoutY="130.0" text="Rango Salarial:" textFill="WHITE" />
+      <Label layoutX="144.0" layoutY="160.0" text="—" textFill="WHITE" />
+      <JFXTextField fx:id="tfMaxSalario" layoutX="165.0" layoutY="154.0" prefHeight="25.0" prefWidth="105.0" promptText="Maximo" />
+      <JFXRadioButton fx:id="rbCompleta" layoutX="331.0" layoutY="152.0" text="Completa" />
+      <JFXRadioButton fx:id="rbParcial" layoutX="441.0" layoutY="152.0" text="Parcial" />
+      <JFXRadioButton fx:id="rbAmbas" layoutX="531.0" layoutY="152.0" text="Ambas" />
+      <JFXTextArea fx:id="taTitulaciones" editable="false" layoutX="16.0" layoutY="228.0" prefHeight="58.0" prefWidth="335.0" />
+      <JFXButton layoutX="376.0" layoutY="270.0" onAction="#agregarTitulo" prefHeight="32.0" prefWidth="132.0" text="Agregar titulación" />
+      <Label layoutX="16.0" layoutY="213.0" text="Titulaciones:" textFill="WHITE" />
+      <Label layoutX="20.0" layoutY="312.0" text="Habilidades:" textFill="WHITE" />
+      <JFXButton layoutX="376.0" layoutY="359.0" onAction="#agregarHabilidad" prefHeight="32.0" prefWidth="132.0" text="Agregar habilidad" />
+      <JFXTextArea fx:id="taHabilidades" editable="false" layoutX="20.0" layoutY="327.0" prefHeight="58.0" prefWidth="335.0" />
+      <JFXButton id="agregar-vacante" layoutX="449.0" layoutY="498.0" onAction="#agregarVacante" prefHeight="41.0" prefWidth="221.0" style="-fx-background-color: #8BC34A;" text="AGREGAR VACANTE" />
+      <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="634.0" layoutY="13.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/close.png" />
+         </image>
+      </ImageView>
+      <JFXComboBox fx:id="cbNivel" layoutX="535.0" layoutY="372.0" prefHeight="25.0" prefWidth="113.0" promptText="Nivel" />
+      <JFXComboBox fx:id="cbPrioridad" layoutX="531.0" layoutY="273.0" prefHeight="25.0" prefWidth="113.0" promptText="Prioridad" />
+      <JFXComboBox fx:id="cbTitulos" layoutX="376.0" layoutY="231.0" prefHeight="25.0" prefWidth="262.0" promptText="Seleccione titulacion" />
+      <JFXTextField fx:id="tfHabilidad" layoutX="375.0" layoutY="323.0" prefHeight="25.0" prefWidth="271.0" promptText="Ingrese habilidad" />
+      <JFXComboBox fx:id="cbEmpresas" layoutX="19.0" layoutY="427.0" prefHeight="25.0" prefWidth="335.0" promptText="Seleccione la empresa" />
+      <Label fx:id="lbError" layoutX="16.0" layoutY="522.0" prefHeight="17.0" prefWidth="402.0" textFill="RED" visible="false" />
+      <Label layoutX="270.0" layoutY="139.0" text="*" textFill="RED">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="614.0" layoutY="137.0" text="*" textFill="RED">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="347.0" layoutY="222.0" text="*" textFill="RED">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="357.0" layoutY="423.0" text="*" textFill="RED">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <Label layoutX="644.0" layoutY="74.0" text="*" textFill="RED">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Label>
+      <JFXTextField fx:id="tfTitulo" layoutX="375.0" layoutY="231.0" prefHeight="25.0" prefWidth="262.0" promptText="Ingrese el nombre de la titulación" visible="false" />
+   </children>
+</AnchorPane>

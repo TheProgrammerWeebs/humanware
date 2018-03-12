@@ -1,0 +1,21 @@
+.text-field
+{
+    -fx-text-inner-color: white;
+    -fx-prompt-text-fill: gray;
+}
+
+.button
+{
+    -fx-background-color: #464866;
+    -fx-text-fill: #AABBB8;
+}
+
+.label
+{
+    -fx-text-fill: #AABBB8;
+}
+
+.error
+{
+    -fx-text-fill: red;
+}

@@ -21,11 +21,7 @@
     -fx-text-fill:white;
 }
 
-#agregar-vacante
-{
-    -fx-background-color: #8BC34A;
-    -fx-text-fill: white;
-}
+
 
 .button
 {
@@ -33,3 +29,9 @@
     -fx-text-fill: #AABBB8;
 }
 
+/*.agregar
+{
+    -fx-background-color: #8BC34A;
+    -fx-text-fill: white;
+}
+*/

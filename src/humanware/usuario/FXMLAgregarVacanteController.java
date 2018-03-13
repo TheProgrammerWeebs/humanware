@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import humanware.Empresa;
 import humanware.Habilidad;
+import humanware.Listas;
 import humanware.TipoJornada;
 import humanware.TitulacionEmpresa;
 import humanware.Vacante;
@@ -65,9 +66,7 @@ public class FXMLAgregarVacanteController implements Initializable
     
     private ToggleGroup grupo;
 
-    private final ObservableList<String> nombreEmpresas = FXCollections.observableArrayList();
-    private final ObservableList<String> titulos = FXCollections.observableArrayList();
-    private final ObservableList<Integer> niveles = FXCollections.observableArrayList();
+    
     private double xOffset;
     private double yOffset;
 
@@ -80,15 +79,15 @@ public class FXMLAgregarVacanteController implements Initializable
         inicializarNombreEmpresas();
         inicializarNiveles();
         inicializarTitulos();
-        enableMoveOnDrag();
+        inicializarMover();
         grupo = new ToggleGroup();
         rbCompleta.setToggleGroup(grupo);
         rbParcial.setToggleGroup(grupo);
         rbAmbas.setToggleGroup(grupo);
-        cbEmpresas.setItems(nombreEmpresas);
-        cbTitulos.setItems(titulos);
-        cbNivel.setItems(niveles);
-        cbPrioridad.setItems(niveles);
+        cbEmpresas.setItems(Listas.nombreEmpresas);
+        cbTitulos.setItems(Listas.titulos);
+        cbNivel.setItems(Listas.niveles);
+        cbPrioridad.setItems(Listas.niveles);
         cbTitulos.valueProperty().addListener((value, viejo, nuevo) -> {
             if (nuevo.equals("--No aparece en la lista--")) {
                 cbTitulos.setValue(false);
@@ -97,7 +96,7 @@ public class FXMLAgregarVacanteController implements Initializable
         });
     }
 
-    private void enableMoveOnDrag() {
+    private void inicializarMover() {
         vacantePane.setOnMousePressed(event
                 -> {
             xOffset = event.getSceneX();
@@ -111,9 +110,9 @@ public class FXMLAgregarVacanteController implements Initializable
     }
 
     private void inicializarNombreEmpresas() {
-        if (!FXMLUsuarioController.empresas.isEmpty()) {
-            for (Empresa e : FXMLUsuarioController.empresas) {
-                nombreEmpresas.add(e.getNombre());
+        if (!Listas.empresas.isEmpty()) {
+            for (Empresa e : Listas.empresas) {
+                Listas.nombreEmpresas.add(e.getNombre());
             }
         }
 
@@ -124,7 +123,7 @@ public class FXMLAgregarVacanteController implements Initializable
             String ruta = "archivos\\database\\titulos";
             BufferedReader buffer = Utilidades.openFileRead(ruta);
             while (buffer.ready()) {
-                titulos.add(buffer.readLine());
+                Listas.titulos.add(buffer.readLine());
             }
             buffer.close();
         } catch (FileNotFoundException ex) {
@@ -136,7 +135,7 @@ public class FXMLAgregarVacanteController implements Initializable
 
     private void inicializarNiveles() {
         for (int i = 1; i <= 5; i++) {
-            niveles.add(i);
+            Listas.niveles.add(i);
         }
     }
 
@@ -257,7 +256,7 @@ public class FXMLAgregarVacanteController implements Initializable
             }
             if (correcto) {
                 Vacante nuevaVacante = new Vacante(salario, jornada, titulaciones, habilidades, nombreEmpresa, descripcion);
-                FXMLUsuarioController.vacantes.add(nuevaVacante);
+                Listas.vacantes.add(nuevaVacante);
                 String linea = nuevaVacante.convertirString();
                 String ruta = "archivos\\database\\vacantes";
                 PrintWriter pw = Utilidades.openFileWrite(ruta, true);

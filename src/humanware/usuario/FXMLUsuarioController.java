@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import humanware.Habilidad;
+import humanware.Listas;
 import humanware.TipoJornada;
 import humanware.TitulacionEmpresa;
 import humanware.utilidades.Rango;
@@ -36,9 +37,7 @@ import javafx.scene.image.Image;
 public class FXMLUsuarioController implements Initializable, ControladorUsuario
 {
 
-    public static final ObservableList<Empresa> empresas = FXCollections.observableArrayList();
-    public static final ObservableList<Vacante> vacantes = FXCollections.observableArrayList();
-    public static final ObservableList<Candidato> candidatos = FXCollections.observableArrayList();
+    
     private double xOffset;
     private double yOffset;
     private Usuario usuario;
@@ -148,7 +147,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         btAgregarEmpresa.setDefaultButton(true);
         tbcNombreEmpresa.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tbcTelefonoEmpresa.setCellValueFactory(new PropertyValueFactory<>("numeroTelefono"));
-        tbEmpresas.setItems(empresas);
+        tbEmpresas.setItems(Listas.empresas);
         tbEmpresas.getSelectionModel().selectedItemProperty().addListener((obs, viejo, nuevo) -> {
             if (nuevo != null) {
                 btEliminarEmpresa.setDisable(false);
@@ -175,7 +174,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
             try (PrintWriter pw = Utilidades.openFileWrite(ruta, true)) {
                 pw.println(tfNombre.getText() + ";" + Utilidades.quitarEspacios(Utilidades.formatearTelefono(tfTelefono.getText())));
             }
-            empresas.add(new Empresa(tfNombre.getText(), tfTelefono.getText()));
+            Listas.empresas.add(new Empresa(tfNombre.getText(), tfTelefono.getText()));
             tfNombre.setText("");
             tfTelefono.setText("");
         }
@@ -189,7 +188,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         }
         String empresa = e.getNombre() + ";" + e.getTelefonoSinEspacios();
         Utilidades.eliminarLinea(empresa, ruta);
-        empresas.remove(e);
+        Listas.empresas.remove(e);
         btEliminarEmpresa.setDisable(true);
         tbEmpresas.getSelectionModel().select(null);
     }
@@ -202,7 +201,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
                 boolean encontrado = false;
                 ArrayList<String> campos = Utilidades.split(linea, ";");
                 if (!Utilidades.quitarEspacios(linea).equals("")) {
-                    empresas.add(new Empresa(campos.get(0), campos.get(1)));
+                    Listas.empresas.add(new Empresa(campos.get(0), campos.get(1)));
                 }
             }
         } catch (IOException ex) {
@@ -216,7 +215,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         tbVacantes.setEditable(false);
         tbcNombreVacante.setCellValueFactory(new PropertyValueFactory<>("descripcionPuesto"));
         tbcEmpresaVacante.setCellValueFactory(new PropertyValueFactory<>("nombreEmpresa"));
-        tbVacantes.setItems(vacantes);
+        tbVacantes.setItems(Listas.vacantes);
         tbVacantes.getSelectionModel().selectedItemProperty().addListener((obs, viejo, nuevo) -> {
             if (nuevo != null) {
                 btEliminarVacante.setDisable(false);
@@ -236,7 +235,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
 
     public void eliminarVacante() {
         Vacante v = tbVacantes.getSelectionModel().getSelectedItem();
-        vacantes.remove(v);
+        Listas.vacantes.remove(v);
         System.out.println(v.convertirString());
         Utilidades.eliminarLinea(v.convertirString(), "archivos\\database\\vacantes");
         btEliminarVacante.setDisable(true);
@@ -260,7 +259,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
                     if (campos.size() > 5) {
                         vaca.setHabilidades(Habilidad.convertirAHabilidades(campos.get(Vacante.HABILIDADES))); //Si tiene habilidades
                     }
-                    vacantes.add(vaca);
+                    Listas.vacantes.add(vaca);
                 }
             }
         } catch (IOException ex) {
@@ -285,7 +284,11 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
     // </editor-fold>    
     //<editor-fold defaultstate="collapsed" desc="lógica de candidatos">
     private void inicializarCandidatos() {
-
+        
+    }
+    public void abrirAgregarCandidato() throws IOException
+    {
+        Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarCandidato.fxml");
     }
     //</editor-fold>
 }

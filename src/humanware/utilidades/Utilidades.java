@@ -83,7 +83,7 @@ public class Utilidades
     }
     public static boolean eliminarLinea(String linea, String ruta) {
         File archivo = new File(Utilidades.getRutaAbs(ruta));
-        File temporal = new File(archivo.getAbsolutePath() + ".tmp");;
+        File temporal = new File(archivo.getAbsolutePath() + ".tmp");
         boolean encontrado;
         try (BufferedReader buffer = openFileRead(ruta); PrintWriter pw = Utilidades.openFileWrite(ruta + ".tmp", true)) {
             String line;
@@ -91,7 +91,6 @@ public class Utilidades
             while (buffer.ready() && !encontrado) {
                 line = buffer.readLine();
                 if (!line.equals(linea)) {
-                
                     pw.println(line);
                     pw.flush();
                 } else {
@@ -135,7 +134,6 @@ public class Utilidades
             BufferedReader buffer;
             buffer = new BufferedReader(new InputStreamReader(new FileInputStream(Utilidades.getRutaAbs(ruta)), "UTF-8"));
             return buffer;
-            //return new BufferedReader(new FileReader(new File(getRutaAbs(ruta))));
         } catch (FileNotFoundException ex) {
             System.err.println("No se encontró el archivo");
             return null;

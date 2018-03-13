@@ -284,7 +284,11 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
     // </editor-fold>    
     //<editor-fold defaultstate="collapsed" desc="lógica de candidatos">
     private void inicializarCandidatos() {
-
+        
+    }
+    public void abrirAgregarCandidato() throws IOException
+    {
+        Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarCandidato.fxml");
     }
     //</editor-fold>
 }

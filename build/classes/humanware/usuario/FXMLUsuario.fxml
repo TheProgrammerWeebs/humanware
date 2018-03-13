@@ -62,7 +62,7 @@
                               <TableColumn fx:id="tbcCandidatoEmail" prefWidth="277.0" text="e-mail" />
                            </columns>
                         </TableView>
-                        <JFXButton layoutX="603.0" layoutY="14.0" prefHeight="36.0" prefWidth="164.0" style="-fx-background-color: #474B4F;" text="AGREGAR CANDIDATO" textFill="#aabbb8" />
+                        <JFXButton layoutX="603.0" layoutY="14.0" onAction="#abrirAgregarCandidato" prefHeight="36.0" prefWidth="164.0" style="-fx-background-color: #474B4F;" text="AGREGAR CANDIDATO" textFill="#aabbb8" />
                         <JFXButton disable="true" layoutX="603.0" layoutY="60.0" prefHeight="36.0" prefWidth="164.0" style="-fx-background-color: #474B4F;" text="VER CANDIDATO" textFill="#aabbb8" />
                         <JFXButton disable="true" layoutX="603.0" layoutY="105.0" prefHeight="36.0" prefWidth="164.0" style="-fx-background-color: #F44336;" text="ELIMINAR CANDIDATO" textFill="WHITE" />
                      </children></AnchorPane>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.net.*?>
 <?import com.jfoenix.controls.*?>
 <?import javafx.scene.text.*?>
@@ -9,15 +10,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="431.0" prefWidth="618.0" style="-fx-background-color: #212121;" stylesheets="@fxmlagregarvacante.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuario.FXMLAgregarCandidatoController">
+<AnchorPane id="AnchorPane" fx:id="agregarCandidatoPane" prefHeight="431.0" prefWidth="618.0" style="-fx-background-color: #212121;" stylesheets="@fxmlagregarvacante.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuario.FXMLAgregarCandidatoController">
    <children>
       <Label layoutX="14.0" layoutY="14.0" text="Agregar candidato" textFill="#aabbb8">
          <font>
             <Font size="17.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="tfNombreCandidato" layoutX="14.0" layoutY="60.0" prefHeight="25.0" prefWidth="558.0" promptText="Ingrese el nombre de usuario" />
-      <Label layoutX="575.0" layoutY="57.0" text="*" textFill="RED">
+      <JFXTextField fx:id="tfNombreCandidato" layoutX="14.0" layoutY="60.0" prefHeight="25.0" prefWidth="573.0" promptText="Ingrese el nombre de usuario" />
+      <Label layoutX="590.0" layoutY="57.0" text="*" textFill="RED">
          <font>
             <Font size="21.0" />
          </font>
@@ -34,7 +35,7 @@
       <JFXTextArea fx:id="taTitulaciones" layoutX="14.0" layoutY="163.0" prefHeight="77.0" prefWidth="353.0" />
       <JFXComboBox fx:id="cbTitulos" layoutX="383.0" layoutY="163.0" prefHeight="25.0" prefWidth="219.0" promptText="Seleccione titulacion" />
       <JFXButton layoutX="384.0" layoutY="206.0" prefHeight="31.0" prefWidth="219.0" text="AGREGAR TÍTULO" />
-      <JFXButton layoutX="471.0" layoutY="310.0" prefHeight="31.0" prefWidth="133.0" text="AGREGAR HABILIDAD" />
+      <JFXButton layoutX="471.0" layoutY="310.0" onAction="#agregarHabilidad" prefHeight="31.0" prefWidth="133.0" text="AGREGAR HABILIDAD" />
       <JFXTextArea fx:id="taHabilidades" layoutX="15.0" layoutY="258.0" prefHeight="77.0" prefWidth="353.0" />
       <JFXComboBox fx:id="cbHabilidadNivel" layoutX="383.0" layoutY="313.0" prefHeight="25.0" prefWidth="68.0" promptText="Nivel" />
       <JFXButton layoutX="383.0" layoutY="373.0" prefHeight="41.0" prefWidth="221.0" style="-fx-background-color: #8BC34A; -fx-text-fill: white;" styleClass="agregar" text="AGREGAR CANDIDATO" />
@@ -49,5 +50,10 @@
          </font>
       </Label>
       <JFXTextField fx:id="tfHabilidad" layoutX="384.0" layoutY="263.0" prefHeight="25.0" prefWidth="219.0" promptText="Ingrese habilidad" />
+      <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="580.0" layoutY="6.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../resources/close.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

@@ -1,10 +1,10 @@
 package humanware.usuario;
 
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import humanware.Listas;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -53,7 +53,8 @@ public class FXMLAgregarCandidatoController implements Initializable
         rbAmbas.setToggleGroup(grupo);
         rbParcial.setToggleGroup(grupo);
         rbCompleta.setToggleGroup(grupo);
-        
+        cbHabilidadNivel.setItems(Listas.niveles);
+        cbTitulos.setItems(Listas.titulos);
     }
     
     private void inicializarMover() {
@@ -71,16 +72,22 @@ public class FXMLAgregarCandidatoController implements Initializable
     
     public void agregarHabilidad()
     {
-        //TODO: agregar habilidad
+        taHabilidades.setText(taHabilidades.getText() + "\n"
+                           + tfHabilidad.getText() + "/" + cbHabilidadNivel.getValue());
     }
         
     public void agregarTitulacion()
     {
-       
+       //TODO: agregar titulacion
     }
     
     public void agregarCandidato()
     {
         //TODO: agregar candidato
+    }
+    
+    public void cerrar()
+    {
+        agregarCandidatoPane.getScene().getWindow().hide();
     }
 }

@@ -9,6 +9,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 public class FXMLMostrarController implements Initializable
 {
@@ -25,6 +26,37 @@ public class FXMLMostrarController implements Initializable
     private Vacante vacante;
     private double xOffset;
     private double yOffset;
+    private ToggleGroup grupo;
+    
+            
+    @Override
+    public void initialize(URL url, ResourceBundle rb) 
+    {
+        inicializarComponentes();
+    }    
+    
+    public void inicializarComponentes()
+    {
+        inicializarMover();
+        grupo = new ToggleGroup();
+        rbAmbasVer.setToggleGroup(grupo);
+        rbParcialVer.setToggleGroup(grupo);
+        rbCompletaVer.setToggleGroup(grupo);
+    }
+    
+    public void inicializarMover()
+    {
+        mostrarPane.setOnMousePressed(event ->
+        {
+            xOffset = event.getSceneX();
+            yOffset = event.getSceneY();
+        });
+        mostrarPane.setOnMouseDragged(event ->
+        {
+            mostrarPane.getScene().getWindow().setX(event.getScreenX() - xOffset);
+            mostrarPane.getScene().getWindow().setY(event.getScreenY() - yOffset);
+        });
+    }
     
     public void setVacante(Vacante vacante)
     {
@@ -53,21 +85,6 @@ public class FXMLMostrarController implements Initializable
             taHabilidadesVer.setText(taHabilidadesVer.getText() + "\n" + habilidad.habilidad + "/" + habilidad.nivel);
         }
     }
-            
-    @Override
-    public void initialize(URL url, ResourceBundle rb) 
-    {
-        mostrarPane.setOnMousePressed(event ->
-        {
-            xOffset = event.getSceneX();
-            yOffset = event.getSceneY();
-        });
-        mostrarPane.setOnMouseDragged(event ->
-        {
-            mostrarPane.getScene().getWindow().setX(event.getScreenX() - xOffset);
-            mostrarPane.getScene().getWindow().setY(event.getScreenY() - yOffset);
-        });
-    }    
     
     public void cerrar()
     {

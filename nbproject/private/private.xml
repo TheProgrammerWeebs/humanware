@@ -3,15 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/src/humanware/usuario/FXMLMostrarController.java</file>
+            <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/src/humanware/usuario/FXMLAgregarCandidato.fxml</file>
             <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/archivos/database/titulos</file>
-            <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/src/humanware/login/registrarse/FXMLRegistroController.java</file>
             <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/src/humanware/usuario/FXMLAgregarVacanteController.java</file>
             <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/archivos/database/empresas</file>
-            <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/archivos/database/vacantes</file>
-            <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/archivos/database/usuarios</file>
-            <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/src/humanware/usuario/FXMLUsuarioController.java</file>
-            <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/src/humanware/login/FXMLoginController.java</file>
+            <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/src/humanware/utilidades/Utilidades.java</file>
+            <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/src/humanware/usuario/fxmlagregarvacante.css</file>
+            <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/src/humanware/usuario/FXMLAgregarCandidatoController.java</file>
         </group>
     </open-files>
 </project-private>

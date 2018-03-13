@@ -122,14 +122,11 @@ public class Utilidades
             FileOutputStream fileStream = new FileOutputStream(new File(getRutaAbs(ruta)), append);
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(fileStream, "UTF-8"));
             return pw;
-            //return new PrintWriter(new BufferedWriter(new FileWriter(new File(getRutaAbs(ruta)), true)));
         } catch (FileNotFoundException ex) {
             System.err.println("Archivo no encontrado");
         } catch (UnsupportedEncodingException ex) {
             System.err.println("Codificación no soportada");
-        } /*catch (IOException ex) {
-            System.out.println("Error de lectura o escritura");
-        }*/
+        }
         return null;
     }
     

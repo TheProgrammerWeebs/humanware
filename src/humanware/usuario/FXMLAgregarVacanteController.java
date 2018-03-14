@@ -77,8 +77,7 @@ public class FXMLAgregarVacanteController implements Initializable
 
     private void inicializarComponentes() {
         inicializarNombreEmpresas();
-        inicializarNiveles();
-        inicializarTitulos();
+        Listas.inicializarTitulos();
         inicializarMover();
         grupo = new ToggleGroup();
         rbCompleta.setToggleGroup(grupo);
@@ -115,29 +114,8 @@ public class FXMLAgregarVacanteController implements Initializable
                 Listas.nombreEmpresas.add(e.getNombre());
             }
         }
-
     }
-
-    private void inicializarTitulos() {
-        try {
-            String ruta = "archivos\\database\\titulos";
-            BufferedReader buffer = Utilidades.openFileRead(ruta);
-            while (buffer.ready()) {
-                Listas.titulos.add(buffer.readLine());
-            }
-            buffer.close();
-        } catch (FileNotFoundException ex) {
-            System.err.println("Archivo titulaciones no encontrado");
-        } catch (IOException ex) {
-            System.err.println("Error de lectura o escritura al cargar titulos");
-        }
-    }
-
-    private void inicializarNiveles() {
-        for (int i = 1; i <= 5; i++) {
-            Listas.niveles.add(i);
-        }
-    }
+    
 
     public void cerrar() {
         vacantePane.getScene().getWindow().hide();
@@ -183,7 +161,7 @@ public class FXMLAgregarVacanteController implements Initializable
             String ruta = "archivos\\database\\titulos";
             PrintWriter pw = Utilidades.openFileWrite(ruta, true);
             pw.println(tfTitulo.getText());
-            inicializarTitulos();
+            Listas.inicializarTitulos();
             pw.close();
         }
     }

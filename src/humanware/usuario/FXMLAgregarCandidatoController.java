@@ -49,6 +49,7 @@ public class FXMLAgregarCandidatoController implements Initializable
     public void inicializarComponentes()
     {
         inicializarMover();
+        Listas.inicializarTitulos();
         grupo = new ToggleGroup();
         rbAmbas.setToggleGroup(grupo);
         rbParcial.setToggleGroup(grupo);
@@ -75,10 +76,10 @@ public class FXMLAgregarCandidatoController implements Initializable
         taHabilidades.setText(taHabilidades.getText() + "\n"
                            + tfHabilidad.getText() + "/" + cbHabilidadNivel.getValue());
     }
-        
+    
     public void agregarTitulacion()
     {
-       //TODO: agregar titulacion
+       
     }
     
     public void agregarCandidato()

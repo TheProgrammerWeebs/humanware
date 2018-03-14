@@ -1,5 +1,6 @@
 package humanware;
 
+import humanware.utilidades.ObtenerDatos;
 import javafx.application.Application;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ public class HumanWare extends Application
     @Override
     public void start(Stage stage)
     {
+        System.out.println(ObtenerDatos.mostrarVentana("Ingresa el mensaje a mostrar:"));
         inicializarComponentes(stage);
     }
     

@@ -58,9 +58,9 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
     @FXML
     private TableView<Candidato> tbCandidatos;
     @FXML
-    private TableColumn<Candidato, String> tbcCandidatoNombre;
+    private TableColumn<Candidato, String> tbcNombreCandidato;
     @FXML
-    private TableColumn<Candidato, String> tbcCandidatoEmail;
+    private TableColumn<Candidato, String> tbcEmailCandidato;
     @FXML
     private JFXTextField tfNombre;
     @FXML
@@ -224,7 +224,6 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         });
         cargarVacantes();
     }
-
     public void agregarVacante() {
         try {
             Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarVacante.fxml");
@@ -232,7 +231,6 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
             System.err.println("Error de lectuta o escritura al abrir agregar vacante");
         }
     }
-
     public void eliminarVacante() {
         Vacante v = tbVacantes.getSelectionModel().getSelectedItem();
         Listas.vacantes.remove(v);
@@ -241,7 +239,6 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         btEliminarVacante.setDisable(true);
         tbVacantes.getSelectionModel().select(null);
     }
-
     public void cargarVacantes() {
         String ruta = "archivos\\database\\vacantes";
         try (BufferedReader lector = Utilidades.openFileRead(ruta)) {
@@ -284,7 +281,15 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
     // </editor-fold>    
     //<editor-fold defaultstate="collapsed" desc="lógica de candidatos">
     private void inicializarCandidatos() {
-        
+        tbCandidatos.setEditable(false);
+        this.tbcNombreCandidato.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        this.tbcEmailCandidato.setCellValueFactory(new PropertyValueFactory<>("email"));
+        this.tbCandidatos.setItems(Listas.candidatos);
+        tbCandidatos.getSelectionModel().selectedItemProperty().addListener((obs, viejo, nuevo) -> {
+            if (nuevo != null) {
+                btEliminarCandidato.setDisable(false);
+            }
+        });
     }
     public void abrirAgregarCandidato() throws IOException
     {

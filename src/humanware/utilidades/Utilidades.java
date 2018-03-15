@@ -113,8 +113,6 @@ public class Utilidades
         }
         return false;
     }
-
-    
     public static PrintWriter openFileWrite(String ruta, boolean append)
     {
         try {
@@ -136,11 +134,10 @@ public class Utilidades
             return buffer;
         } catch (FileNotFoundException ex) {
             System.err.println("No se encontró el archivo");
-            return null;
         }catch (UnsupportedEncodingException ex) {
             System.out.println("Codificación no soportada");
-            return null;
         }
+        return null;
     }
 
     public static void formatearArchivo(String ruta) throws FileNotFoundException, IOException {
@@ -172,7 +169,7 @@ public class Utilidades
 
     public static boolean esNumero(String s) {
         try {
-            Integer.parseInt(s);
+            Double.parseDouble(s);
             return true;
         } catch (NumberFormatException e) {
             return false;

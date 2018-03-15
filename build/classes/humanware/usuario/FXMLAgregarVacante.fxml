@@ -71,6 +71,5 @@
             <Font size="21.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="tfTitulo" layoutX="375.0" layoutY="231.0" prefHeight="25.0" prefWidth="262.0" promptText="Ingrese el nombre de la titulación" visible="false" />
    </children>
 </AnchorPane>

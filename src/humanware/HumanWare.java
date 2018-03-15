@@ -19,7 +19,6 @@ public class HumanWare extends Application
     @Override
     public void start(Stage stage)
     {
-        System.out.println(ObtenerDatos.mostrarVentana("Ingresa el mensaje a mostrar:"));
         inicializarComponentes(stage);
     }
     

@@ -10,10 +10,9 @@ import humanware.Listas;
 import humanware.TipoJornada;
 import humanware.TitulacionEmpresa;
 import humanware.Vacante;
+import humanware.utilidades.ObtenerDatos;
 import humanware.utilidades.Rango;
 import humanware.utilidades.Utilidades;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
@@ -21,14 +20,13 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 
 public class FXMLAgregarVacanteController implements Initializable
 {
+
     //<editor-fold defaultstate="collapsed" desc="JavaFx Variables">
     @FXML
     private JFXComboBox cbEmpresas;
@@ -60,13 +58,10 @@ public class FXMLAgregarVacanteController implements Initializable
     private JFXTextField tfMinSalario;
     @FXML
     private JFXTextField tfMaxSalario;
-    @FXML
-    private JFXTextField tfTitulo;
     //</editor-fold>
-    
+
     private ToggleGroup grupo;
 
-    
     private double xOffset;
     private double yOffset;
 
@@ -88,13 +83,17 @@ public class FXMLAgregarVacanteController implements Initializable
         cbNivel.setItems(Listas.niveles);
         cbPrioridad.setItems(Listas.niveles);
         cbTitulos.valueProperty().addListener((value, viejo, nuevo) -> {
-            if (nuevo.equals("--No aparece en la lista--")) {
-                cbTitulos.setValue(false);
-                tfTitulo.setVisible(true);
+            if (!cbTitulos.getItems().isEmpty() && nuevo != null && nuevo.equals("--No aparece en la lista--")) {
+                try {
+                    agregarTitulacionBaseDatos(ObtenerDatos.mostrarVentana("Ingrese el nombre de la titulación", "Agregar titulación"));
+                    Listas.inicializarTitulos();
+                    cbTitulos.setItems(Listas.titulos);
+                } catch (IOException ex) {
+                    System.out.println("Error de lectura o escritura al abrir obtener datos");
+                }
             }
         });
     }
-
     private void inicializarMover() {
         vacantePane.setOnMousePressed(event
                 -> {
@@ -115,7 +114,6 @@ public class FXMLAgregarVacanteController implements Initializable
             }
         }
     }
-    
 
     public void cerrar() {
         vacantePane.getScene().getWindow().hide();
@@ -123,7 +121,6 @@ public class FXMLAgregarVacanteController implements Initializable
 
     public void agregarTitulo() throws IOException {
         lbError.setVisible(false);
-        tfTitulo.setVisible(false);
         String opcion = (String) cbTitulos.getValue();
         if (opcion == null || cbPrioridad.getValue() == null) {
             lbError.setText("Debe llenar todos los campos");
@@ -147,23 +144,16 @@ public class FXMLAgregarVacanteController implements Initializable
                     lbError.setText("El título ya está agregado");
                     lbError.setVisible(true);
                 }
-            } else {
-                agregarTitulacionBaseDatos();
             }
-
         }
     }
 
-    public void agregarTitulacionBaseDatos() throws IOException {
-        cbTitulos.setVisible(true);
-        tfTitulo.setVisible(false);
-        if (!Utilidades.quitarEspacios(tfTitulo.getText()).equals("")) {
-            String ruta = "archivos\\database\\titulos";
-            PrintWriter pw = Utilidades.openFileWrite(ruta, true);
-            pw.println(tfTitulo.getText());
-            Listas.inicializarTitulos();
-            pw.close();
-        }
+    public void agregarTitulacionBaseDatos(String titulacion) throws IOException {
+        String ruta = "archivos\\database\\titulos";
+        PrintWriter pw = Utilidades.openFileWrite(ruta, true);
+        pw.println(titulacion);
+        pw.close();
+        Listas.inicializarTitulos();
     }
 
     public void agregarHabilidad() {
@@ -214,8 +204,8 @@ public class FXMLAgregarVacanteController implements Initializable
             String nombreEmpresa = (String) cbEmpresas.getValue();
             String descripcion = tfDescripcion.getText();
             ArrayList<String> lineasHabilidades = Utilidades.split(taHabilidades.getText(), "\n");
-            lineasHabilidades.remove(0);
             ArrayList<String> lineasTitulaciones = Utilidades.split(taTitulaciones.getText(), "\n");
+            lineasHabilidades.remove(0);
             lineasTitulaciones.remove(0);
             try {
                 salario = new Rango(Double.parseDouble(tfMinSalario.getText()), Double.parseDouble(tfMaxSalario.getText()));
@@ -242,7 +232,6 @@ public class FXMLAgregarVacanteController implements Initializable
                 pw.close();
                 Utilidades.formatearArchivo(ruta);
                 this.lbError.getScene().getWindow().hide();
-                this.tfTitulo.setText("");
                 this.tfMaxSalario.setText("");
                 this.tfMinSalario.setText("");
                 this.rbAmbas.setSelected(false);

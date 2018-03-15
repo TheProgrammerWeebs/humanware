@@ -14,7 +14,6 @@ public class ObtenerDatos
 {
 
     public static String informacion;
-
     public static String mostrarVentana(String mensaje, String titulo) {
         Scene scene;
         VBox pane;
@@ -26,7 +25,8 @@ public class ObtenerDatos
         btAceptar.setDefaultButton(true);
         pane = new VBox(msj, tfInput, btAceptar);
         btAceptar.setOnAction(e -> {
-            if (informacion == null || Utilidades.quitarEspacios(informacion).equals("")) {
+            if (tfInput.getText() == null || Utilidades.quitarEspacios(tfInput.getText()).equals("")) {
+                System.out.println(informacion==null);
                 tfInput.setText("");
                 tfInput.setPromptText("Debe ingresar un dato");
                 tfInput.setVisible(true);
@@ -49,7 +49,6 @@ public class ObtenerDatos
         stage.showAndWait();
         return informacion;
     }
-
     public static String mostrarVentana(String mensaje) {
         return mostrarVentana(mensaje, "Ingrese la información");
     }

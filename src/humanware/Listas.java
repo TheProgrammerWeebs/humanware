@@ -6,7 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
+    
 /**
  *
  * @author d-ani
@@ -21,6 +21,8 @@ public class Listas
     }
     public static void inicializarTitulos() {
         try {
+            //titulos.clear();
+            titulos = FXCollections.observableArrayList();
             String ruta = "archivos\\database\\titulos";
             BufferedReader buffer = Utilidades.openFileRead(ruta);
             while (buffer.ready()) {
@@ -32,9 +34,6 @@ public class Listas
         } catch (IOException ex) {
             System.err.println("Error de lectura o escritura al cargar titulos");
         }
-    }
-    public static void agregarTitulo(TitulacionEmpresa titulo){
-        
     }
     public static ObservableList<String> nombreEmpresas = FXCollections.observableArrayList();
     public static ObservableList<String> titulos = FXCollections.observableArrayList();

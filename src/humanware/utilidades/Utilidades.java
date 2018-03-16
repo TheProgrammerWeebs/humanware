@@ -3,21 +3,15 @@ package humanware.utilidades;
 import humanware.login.ControladorUsuario;
 import humanware.login.Usuario;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -59,16 +53,16 @@ public class Utilidades
         st.showAndWait();
     }
 
-    public static ArrayList<String> split(String linea, String separador) {
+    public static ListaEnlazada<String> split(String linea, String separador) {
         short principio = 0;
-        ArrayList<String> campos = new ArrayList();
+        ListaEnlazada<String> campos = new ListaEnlazada();
         for (int i = 0; i < linea.length(); i++) {
             if (linea.substring(i, i + 1).equals(separador)) {
-                campos.add(linea.substring(principio, i));
+                campos.addFinal(linea.substring(principio, i));
                 principio = (short) (i + 1);
             }
         }
-        campos.add(linea.substring(principio));
+        campos.addFinal(linea.substring(principio));
         return campos;
     }
 
@@ -81,14 +75,16 @@ public class Utilidades
         }
         return existe;
     }
+
     public static boolean eliminarLinea(String linea, String ruta) {
+        System.out.println("Linea a eliminar: " + linea);
         File archivo = new File(Utilidades.getRutaAbs(ruta));
         File temporal = new File(archivo.getAbsolutePath() + ".tmp");
         boolean encontrado;
         try (BufferedReader buffer = openFileRead(ruta); PrintWriter pw = Utilidades.openFileWrite(ruta + ".tmp", true)) {
             String line;
             encontrado = false;
-            while (buffer.ready() && !encontrado) {
+            while (buffer.ready()) {
                 line = buffer.readLine();
                 if (!line.equals(linea)) {
                     pw.println(line);
@@ -113,8 +109,8 @@ public class Utilidades
         }
         return false;
     }
-    public static PrintWriter openFileWrite(String ruta, boolean append)
-    {
+
+    public static PrintWriter openFileWrite(String ruta, boolean append) {
         try {
             FileOutputStream fileStream = new FileOutputStream(new File(getRutaAbs(ruta)), append);
             PrintWriter pw = new PrintWriter(new OutputStreamWriter(fileStream, "UTF-8"));
@@ -126,7 +122,7 @@ public class Utilidades
         }
         return null;
     }
-    
+
     public static BufferedReader openFileRead(String ruta) {
         try {
             BufferedReader buffer;
@@ -134,7 +130,7 @@ public class Utilidades
             return buffer;
         } catch (FileNotFoundException ex) {
             System.err.println("No se encontró el archivo");
-        }catch (UnsupportedEncodingException ex) {
+        } catch (UnsupportedEncodingException ex) {
             System.out.println("Codificación no soportada");
         }
         return null;

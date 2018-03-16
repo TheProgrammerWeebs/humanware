@@ -1,7 +1,7 @@
 package humanware;
 
+import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.Utilidades;
-import java.util.ArrayList;
 
 public class TitulacionEmpresa
 {
@@ -13,20 +13,20 @@ public class TitulacionEmpresa
         this.titulacion = titulacion;
         this.importancia = importancia;
     }
-    public static ArrayList<TitulacionEmpresa> convertirATitulaciones(String linea)
+    public static ListaEnlazada<TitulacionEmpresa> convertirATitulaciones(String linea)
     {
-        ArrayList<String> titulaciones = Utilidades.split(linea, ",");
-        ArrayList<TitulacionEmpresa> titulacionFinal = new ArrayList<>();
+        ListaEnlazada<String> titulaciones = Utilidades.split(linea, ",");
+        ListaEnlazada<TitulacionEmpresa> titulacionFinal = new ListaEnlazada<>();
         for (String habilidad : titulaciones)
         {
             String nombre = Utilidades.split(habilidad, "/").get(0);
             int importancia = Integer.parseInt(Utilidades.split(habilidad, "/").get(1));
-            titulacionFinal.add(new TitulacionEmpresa(nombre, importancia));
+            titulacionFinal.addFinal(new TitulacionEmpresa(nombre, importancia));
         }
         return titulacionFinal;
     }
     
-    public static String convertirString(ArrayList<TitulacionEmpresa> lista)
+    public static String convertirString(ListaEnlazada<TitulacionEmpresa> lista)
     {
         String linea = "";
         int i;

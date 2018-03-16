@@ -1,7 +1,5 @@
 package humanware.utilidades;
 
-import java.util.ArrayList;
-
 public class Rango
 {
     public double min;
@@ -29,7 +27,7 @@ public class Rango
     
     public static Rango convertirARango(String linea)
     {
-        ArrayList<String> limites = Utilidades.split(linea, ",");
+        ListaEnlazada<String> limites = Utilidades.split(linea, ",");
         return new Rango(Double.parseDouble(limites.get(0)), Double.parseDouble(limites.get(1)));
     }
 

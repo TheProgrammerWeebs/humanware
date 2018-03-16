@@ -1,11 +1,11 @@
 package humanware.login;
 
+import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.Utilidades;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 
@@ -87,7 +87,7 @@ public class Usuario
             while (buffer.ready())
             {
                 String linea = buffer.readLine();
-                ArrayList<String> campos = Utilidades.split(linea, ";");
+                ListaEnlazada<String> campos = Utilidades.split(linea, ";");
                 if (campos.get(NOMBRE).equals(getNombre()) && campos.get(CONTRASENIA).equals(getContrasenia()))
                 {
                     esValido = true;
@@ -109,7 +109,7 @@ public class Usuario
                     buffer.close();
                     break;
                 }
-                campos.clear();
+                campos.vaciar();
             }
         } catch (FileNotFoundException ex)
         {
@@ -129,12 +129,12 @@ public class Usuario
             while (buffer.ready())
             {
                 String linea = buffer.readLine();
-                ArrayList<String> campos = Utilidades.split(linea, ";");
+                ListaEnlazada<String> campos = Utilidades.split(linea, ";");
                 if (campos.get(posCampo).equals(viejo))
                 {
                     buffer.close();
                     Utilidades.eliminarLinea(linea, ruta);
-                    campos.set(posCampo, nuevo);
+                    campos.set(posCampo, nuevo); 
                     linea = campos.get(NOMBRE) + ";" + campos.get(CONTRASENIA) + ";" + campos.get(TIPO);
                     pw = Utilidades.openFileWrite(ruta, true);
                     pw.println(linea);

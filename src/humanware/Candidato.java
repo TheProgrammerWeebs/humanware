@@ -1,7 +1,7 @@
 package humanware;
 
+import humanware.utilidades.ListaEnlazada;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Candidato
@@ -11,8 +11,8 @@ public class Candidato
     private SimpleStringProperty nombre;
     private String telefono;
     private double retribucion;
-    private ArrayList<String> titulaciones;
-    private ArrayList<Habilidad> habilidades;
+    private ListaEnlazada<String> titulaciones;
+    private ListaEnlazada<Habilidad> habilidades;
     private TipoJornada tipoJornada;
     private final int anioActual = LocalDateTime.now().getYear();
     private static int nCandidatos = 0;
@@ -23,7 +23,7 @@ public class Candidato
         email = new SimpleStringProperty();
         this.codigo = Integer.toString(anioActual) + Integer.toString(nCandidatos++);
     }
-    public Candidato(String nombre, String telefono, String email, ArrayList<String> titulaciones, ArrayList<Habilidad> habilidades, TipoJornada tipoJornada, double retribucion) {
+    public Candidato(String nombre, String telefono, String email, ListaEnlazada<String> titulaciones, ListaEnlazada<Habilidad> habilidades, TipoJornada tipoJornada, double retribucion) {
         this();
         this.nombre.set(nombre);
         this.telefono = telefono;
@@ -65,7 +65,7 @@ public class Candidato
     
     public void addHabilidad(Habilidad h)
     {
-        habilidades.add(h);
+        habilidades.addFinal(h);
     }
     public void removeHabilidad(Habilidad h)
     {
@@ -77,7 +77,7 @@ public class Candidato
     }
     public void addTitulacion(String t)
     {
-        titulaciones.add(t);
+        titulaciones.addFinal(t);
     }
     public String getTitulacion(int pos)
     {

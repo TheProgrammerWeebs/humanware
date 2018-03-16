@@ -8,10 +8,10 @@ import humanware.Candidato;
 import humanware.Habilidad;
 import humanware.Listas;
 import humanware.TipoJornada;
+import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.Utilidades;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -129,21 +129,21 @@ public class FXMLAgregarCandidatoController implements Initializable
             String email = this.tfEmail.getText();
             double retribucion = Double.parseDouble(this.tfRetribucionMinima.getText());
             TipoJornada tipo = rbAmbas.isSelected() ? TipoJornada.AMBAS : rbCompleta.isSelected() ? TipoJornada.COMPLETA : TipoJornada.PARCIAL;
-            ArrayList<String> lineasHabilidades = Utilidades.split(taHabilidades.getText(), "\n");
-            ArrayList<String> lineasTitulaciones = Utilidades.split(taTitulaciones.getText(), "\n");
-            ArrayList<String> titulaciones = new ArrayList();
-            ArrayList<Habilidad> habilidades = new ArrayList();
+            ListaEnlazada<String> lineasHabilidades = Utilidades.split(taHabilidades.getText(), "\n");
+            ListaEnlazada<String> lineasTitulaciones = Utilidades.split(taTitulaciones.getText(), "\n");
+            ListaEnlazada<String> titulaciones = new ListaEnlazada();
+            ListaEnlazada<Habilidad> habilidades = new ListaEnlazada();
             for (String linea : lineasHabilidades) {
                 if (Utilidades.quitarEspacios(linea).equals("")) continue;
-                ArrayList<String> campos = Utilidades.split(linea, "/");
-                habilidades.add(new Habilidad(campos.get(0), Integer.parseInt(campos.get(1))));
+                ListaEnlazada<String> campos = Utilidades.split(linea, "/");
+                habilidades.addFinal(new Habilidad(campos.get(0), Integer.parseInt(campos.get(1))));
             }
             for (String linea : lineasTitulaciones) {
                 if (Utilidades.quitarEspacios(linea).equals("")) continue;
-                titulaciones.add(linea);
+                titulaciones.addFinal(linea);
             }
             Candidato nuevo = new Candidato(nombre, telefono, email, titulaciones, habilidades, tipo, retribucion);
-            Listas.candidatos.add(nuevo);
+            Listas.candidatos.addFinal(nuevo);
             PrintWriter pw = Utilidades.openFileWrite("archivos\\database\\candidatos", true);
             System.out.println("pw = " + pw);
             pw.println(nuevo.convertirAString());

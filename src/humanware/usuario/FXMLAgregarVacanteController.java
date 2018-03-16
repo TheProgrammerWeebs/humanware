@@ -10,13 +10,13 @@ import humanware.Listas;
 import humanware.TipoJornada;
 import humanware.TitulacionEmpresa;
 import humanware.Vacante;
+import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.ObtenerDatos;
 import humanware.utilidades.Rango;
 import humanware.utilidades.Utilidades;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -108,7 +108,7 @@ public class FXMLAgregarVacanteController implements Initializable
     }
 
     private void inicializarNombreEmpresas() {
-        if (!Listas.empresas.isEmpty()) {
+        if (!Listas.empresas.estaVacia()) {
             for (Empresa e : Listas.empresas) {
                 Listas.nombreEmpresas.add(e.getNombre());
             }
@@ -127,10 +127,10 @@ public class FXMLAgregarVacanteController implements Initializable
             lbError.setVisible(true);
         } else {
             if (!opcion.equals("--No aparece en la lista--")) {
-                ArrayList<String> lineas = Utilidades.split(taTitulaciones.getText(), "\n");
+                ListaEnlazada<String> lineas = Utilidades.split(taTitulaciones.getText(), "\n");
                 boolean existe = false;
                 for (String linea : lineas) {
-                    ArrayList<String> campos = Utilidades.split(linea, "/");
+                    ListaEnlazada<String> campos = Utilidades.split(linea, "/");
                     if (campos.get(0).equals(opcion)) {
                         existe = true;
                         break;
@@ -166,10 +166,10 @@ public class FXMLAgregarVacanteController implements Initializable
             lbError.setText("La habilidad no puede signos de puntuación");
             lbError.setVisible(true);
         } else {
-            ArrayList<String> lineas = Utilidades.split(taHabilidades.getText(), "\n");
+            ListaEnlazada<String> lineas = Utilidades.split(taHabilidades.getText(), "\n");
             boolean existe = false;
             for (String linea : lineas) {
-                ArrayList<String> campos = Utilidades.split(linea, "/");
+                ListaEnlazada<String> campos = Utilidades.split(linea, "/");
                 if (campos.get(0).equals(opcion)) {
                     existe = true;
                     break;
@@ -198,13 +198,13 @@ public class FXMLAgregarVacanteController implements Initializable
         } else {
             boolean correcto = true;
             Rango salario = null;
-            ArrayList<Habilidad> habilidades = new ArrayList<>();
-            ArrayList<TitulacionEmpresa> titulaciones = new ArrayList<>();
+            ListaEnlazada<Habilidad> habilidades = new ListaEnlazada<>();
+            ListaEnlazada<TitulacionEmpresa> titulaciones = new ListaEnlazada<>();
             TipoJornada jornada = rbParcial.isSelected() ? TipoJornada.PARCIAL : (rbCompleta.isSelected() ? TipoJornada.COMPLETA : TipoJornada.AMBAS);
             String nombreEmpresa = (String) cbEmpresas.getValue();
             String descripcion = tfDescripcion.getText();
-            ArrayList<String> lineasHabilidades = Utilidades.split(taHabilidades.getText(), "\n");
-            ArrayList<String> lineasTitulaciones = Utilidades.split(taTitulaciones.getText(), "\n");
+            ListaEnlazada<String> lineasHabilidades = Utilidades.split(taHabilidades.getText(), "\n");
+            ListaEnlazada<String> lineasTitulaciones = Utilidades.split(taTitulaciones.getText(), "\n");
             lineasHabilidades.remove(0);
             lineasTitulaciones.remove(0);
             try {
@@ -215,16 +215,16 @@ public class FXMLAgregarVacanteController implements Initializable
                 correcto = false;
             }
             for (String linea : lineasHabilidades) {
-                ArrayList<String> campos = Utilidades.split(linea, "/");
-                habilidades.add(new Habilidad(campos.get(0), Integer.parseInt(campos.get(1))));
+                ListaEnlazada<String> campos = Utilidades.split(linea, "/");
+                habilidades.addFinal(new Habilidad(campos.get(0), Integer.parseInt(campos.get(1))));
             }
             for (String linea : lineasTitulaciones) {
-                ArrayList<String> campos = Utilidades.split(linea, "/");
-                titulaciones.add(new TitulacionEmpresa(campos.get(0), Integer.parseInt(campos.get(1))));
+                ListaEnlazada<String> campos = Utilidades.split(linea, "/");
+                titulaciones.addFinal(new TitulacionEmpresa(campos.get(0), Integer.parseInt(campos.get(1))));
             }
             if (correcto) {
                 Vacante nuevaVacante = new Vacante(salario, jornada, titulaciones, habilidades, nombreEmpresa, descripcion);
-                Listas.vacantes.add(nuevaVacante);
+                Listas.vacantes.addFinal(nuevaVacante);
                 String linea = nuevaVacante.convertirString();
                 String ruta = "archivos\\database\\vacantes";
                 PrintWriter pw = Utilidades.openFileWrite(ruta, true);

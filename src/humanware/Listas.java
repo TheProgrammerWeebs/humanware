@@ -1,5 +1,6 @@
 package humanware;
 
+import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.Utilidades;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -35,10 +36,14 @@ public class Listas
             System.err.println("Error de lectura o escritura al cargar titulos");
         }
     }
+    public final static ListaEnlazada<Empresa> empresas = new ListaEnlazada();
+    public final static ListaEnlazada<Vacante> vacantes = new ListaEnlazada();
+    public final static ListaEnlazada<Candidato> candidatos = new ListaEnlazada();
     public static ObservableList<String> nombreEmpresas = FXCollections.observableArrayList();
     public static ObservableList<String> titulos = FXCollections.observableArrayList();
     public static ObservableList<Integer> niveles = generarNumeros(5);
-    public static ObservableList<Empresa> empresas = FXCollections.observableArrayList();
-    public static ObservableList<Vacante> vacantes = FXCollections.observableArrayList();
-    public static ObservableList<Candidato> candidatos = FXCollections.observableArrayList();
+    public static ObservableList<Empresa> observableEmpresas = empresas.getObservableListAsociada();
+    public static ObservableList<Vacante> observableVacantes = vacantes.getObservableListAsociada();
+    public static ObservableList<Candidato> observableCandidatos = candidatos.getObservableListAsociada();
+    
 }

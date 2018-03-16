@@ -1,8 +1,8 @@
 package humanware;
 
+import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.Rango;
 import humanware.utilidades.Utilidades;
-import java.util.ArrayList;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Vacante
@@ -10,8 +10,8 @@ public class Vacante
     private Empresa empresa;
     private Rango salario;
     private TipoJornada tipoJornada;
-    private ArrayList<TitulacionEmpresa> titulaciones;
-    private ArrayList<Habilidad> habilidades;
+    private ListaEnlazada<TitulacionEmpresa> titulaciones;
+    private ListaEnlazada<Habilidad> habilidades;
     private final SimpleStringProperty nombreEmpresa;
     private final SimpleStringProperty descripcionPuesto;
     public static final int EMPRESA = 0;
@@ -30,11 +30,11 @@ public class Vacante
         descripcionPuesto = new SimpleStringProperty();
         salario = new Rango();
         empresa = new Empresa();
-        titulaciones = new ArrayList();
-        habilidades = new ArrayList();
+        titulaciones = new ListaEnlazada();
+        habilidades = new ListaEnlazada();
         
     }
-    public Vacante(Rango salario, TipoJornada tipoJornada, ArrayList<TitulacionEmpresa> titulaciones, ArrayList<Habilidad> habilidades, String nombreEmpresa, String descripcionPuesto) {
+    public Vacante(Rango salario, TipoJornada tipoJornada, ListaEnlazada<TitulacionEmpresa> titulaciones, ListaEnlazada<Habilidad> habilidades, String nombreEmpresa, String descripcionPuesto) {
         this.salario = salario;
         this.tipoJornada = tipoJornada;
         this.titulaciones = titulaciones;
@@ -80,16 +80,16 @@ public class Vacante
     public void setTipoJornada(TipoJornada tipoJornada) {
         this.tipoJornada = tipoJornada;
     }
-    public ArrayList<TitulacionEmpresa> getTitulaciones() {
+    public ListaEnlazada<TitulacionEmpresa> getTitulaciones() {
         return titulaciones;
     }
-    public void setTitulaciones(ArrayList<TitulacionEmpresa> titulaciones) {
+    public void setTitulaciones(ListaEnlazada<TitulacionEmpresa> titulaciones) {
         this.titulaciones = titulaciones;
     }
-    public ArrayList<Habilidad> getHabilidades() {
+    public ListaEnlazada<Habilidad> getHabilidades() {
         return habilidades;
     }
-    public void setHabilidades(ArrayList<Habilidad> habilidades) {
+    public void setHabilidades(ListaEnlazada<Habilidad> habilidades) {
         this.habilidades = habilidades;
     }
     
@@ -100,12 +100,12 @@ public class Vacante
                 + salario.mostrar() + ";" 
                 + this.getTipoJornada() + ";"
                 + TitulacionEmpresa.convertirString(titulaciones) + ";"
-                + (!habilidades.isEmpty() ? Habilidad.convertirString(habilidades) : "");
+                + (!habilidades.estaVacia() ? Habilidad.convertirString(habilidades) : "");
     }
     public static Vacante convertirVacante(String linea)
     {
         Vacante v = new Vacante();
-        ArrayList<String> campos = Utilidades.split(linea, ";");
+        ListaEnlazada<String> campos = Utilidades.split(linea, ";");
         v.setDescripcion(campos.get(Vacante.DESCRIPCION));
         v.setNombreEmpresa(campos.get(Vacante.EMPRESA));
         v.setHabilidades(Habilidad.convertirAHabilidades(campos.get(Vacante.HABILIDADES)));

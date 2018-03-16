@@ -1,0 +1,217 @@
+package humanware.utilidades;
+
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javax.swing.JOptionPane;
+
+public class ListaEnlazada<T> implements Iterable<T>
+{
+
+    @Override
+    public Iterator<T> iterator() {
+        return new IteradorLista();
+    }
+
+    //<editor-fold defaultstate="collapsed" desc="Implementación de Iterator">
+    private class IteradorLista implements Iterator<T>
+    {
+
+        int actual = 0;
+
+        @Override
+        public boolean hasNext() {
+            if (actual < ListaEnlazada.this.size) {
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            return get(actual++);
+        }
+    }
+
+    //</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Clase Nodo">
+    public class Nodo<T>
+    {
+
+        private T informacion;
+        private Nodo link;
+
+        public Nodo(T informacion) {
+            this.informacion = informacion;
+            this.link = null;
+        }
+
+        public T getInformacion() {
+            return informacion;
+        }
+
+        public void setInformacion(T informacion) {
+            this.informacion = informacion;
+        }
+    }
+    //</editor-fold>
+    private Nodo<T> ultimoNodo;
+    private Nodo<T> primerNodo;
+    private int size;
+    private ObservableList<T> observableListAsociada;
+
+    public ListaEnlazada() {
+        size = 0;
+        primerNodo = null;
+        ultimoNodo = null;
+        observableListAsociada = FXCollections.observableArrayList();
+    }
+
+    public int size() {
+        return size;
+    }
+
+    /**
+     * Añade un nodo con determinada información a la lista, de forma ordenada
+     *
+     * @param info la información que se va a añadir
+     * @param comparador instancia de una clase que implemente a ComparadorNodos
+     */
+    public void addOrdenado(T info, ComparadorNodos comparador) {
+        observableListAsociada.add(info);
+        Nodo nuevo = new Nodo(comparador);
+        for (int i = 0; i < size; i++) {
+            if (comparador.compararCon(this.get(i), this.get(i + 1)) > 0) {
+                return; //La lista no está ordenada; no se añade nada
+            }
+        }
+        if (primerNodo == null) {
+            primerNodo = nuevo;
+        } else {
+            Nodo<T> anterior = null;
+            Nodo<T> actual = primerNodo;
+            while (comparador.compararCon(actual.informacion, info) < 0 && actual.link != null) {
+                actual = actual.link;
+                anterior = actual;
+            }
+            if (comparador.compararCon(info, actual.informacion) == 0) {
+                JOptionPane.showMessageDialog(null, "No se aceptan datos repetidos");
+            } else {
+                if (comparador.compararCon(actual.informacion, info) > 0) {
+                    if (comparador.compararCon(actual.informacion, info) == 0) {
+                        nuevo.link = primerNodo;
+                        primerNodo = nuevo;
+                    } else if (anterior != null) {
+                        anterior.link = nuevo;
+                        nuevo.link = actual;
+                    }
+                } else {
+                    actual.link = nuevo;
+                    nuevo.link = null;
+                }
+            }
+        }
+
+        size++;
+    }
+
+    public void addFinal(T informacion) {
+        observableListAsociada.add(informacion);
+        Nodo<T> p = new Nodo(informacion);
+        if (primerNodo == null) {
+            primerNodo = p;
+        } else {
+            ultimoNodo.link = p;
+        }
+        ultimoNodo = p;
+        size++;
+    }
+
+    public void addPrincipio(T informacion) {
+        observableListAsociada.add(informacion);
+        Nodo<T> p = new Nodo(informacion);
+        if (primerNodo == null) {
+            ultimoNodo = p;
+        } else {
+            p.link = primerNodo;
+        }
+        primerNodo = p;
+        size++;
+    }
+
+    public boolean remove(T info) {
+        observableListAsociada.remove(info);
+        if (primerNodo.getInformacion().getClass().equals(info)) {
+            primerNodo = primerNodo.link;
+        } else {
+            Nodo anterior = primerNodo;
+            Nodo actual = anterior.link;
+            while (!actual.informacion.getClass().equals(info)) {
+                anterior = anterior.link;
+                actual = actual.link;
+                if (actual == null) {
+                    return false;
+                }
+            }
+            anterior.link = actual.link;
+            size--;
+        }
+        return true;
+    }
+
+    public boolean remove(int index) {
+        observableListAsociada.remove(getNodo(index).getInformacion());
+        Nodo<T> actual = getNodo(index);
+        if (actual == null) {
+            return false;
+        }
+        if (index == 0) {
+            primerNodo = primerNodo.link;
+        } else {
+            Nodo anterior = getNodo(index - 1);
+            anterior.link = actual.link;
+            size--;
+            return true;
+        }
+        return false;
+    }
+
+    public Nodo<T> getNodo(int index) {
+        Nodo<T> p = primerNodo;
+        for (int i = 0; i < index; i++) {
+            p = p.link;
+        }
+        return p;
+    }
+
+    public T get(int index) {
+        return getNodo(index).getInformacion();
+    }
+
+    public boolean estaVacia() {
+        if (primerNodo == null) {
+            return true;
+        }
+        return false;
+    }
+
+    public void vaciar() {
+        primerNodo = null;
+        observableListAsociada.clear();
+    }
+
+    public ObservableList<T> getObservableListAsociada() {
+        return observableListAsociada;
+    }
+
+    public void set(int index, T info) {
+        if (index >= size) {
+            throw new IndexOutOfBoundsException("Índice fuera de los límites. Índice: " + index + ", Tamaño: " + size);
+        }
+        getNodo(index).informacion = info;
+    }
+}

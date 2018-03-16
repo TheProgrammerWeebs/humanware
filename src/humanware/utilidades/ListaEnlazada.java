@@ -58,7 +58,23 @@ public class ListaEnlazada<T> implements Iterable<T>
             this.informacion = informacion;
         }
     }
+
     //</editor-fold>
+    //<editor-fold defaultstate="collapsed" desc="Interface comparador nodos">
+    public interface ComparadorNodos<T>
+    {
+
+        /**
+         * Compara dos elementos
+         *
+         * @param a el primer elemento
+         * @param b el segundo elemento
+         * @return un número mayor a 0, si a > b. Un número menor a 0, si a menor que b. 0, si a = b
+         */
+        int compararCon(T a, T b);
+    }
+    //</editor-fold>
+
     private Nodo<T> ultimoNodo;
     private Nodo<T> primerNodo;
     private int size;
@@ -204,14 +220,18 @@ public class ListaEnlazada<T> implements Iterable<T>
         observableListAsociada.clear();
     }
 
-    public ObservableList<T> getObservableListAsociada() {
-        return observableListAsociada;
-    }
-
     public void set(int index, T info) {
         if (index >= size) {
             throw new IndexOutOfBoundsException("Índice fuera de los límites. Índice: " + index + ", Tamaño: " + size);
         }
         getNodo(index).informacion = info;
+    }
+
+    public void setObservableListAsociada(ObservableList<T> observableListAsociada) {
+        this.observableListAsociada = observableListAsociada;
+    }
+
+    public ObservableList<T> getObservableListAsociada() {
+        return observableListAsociada;
     }
 }

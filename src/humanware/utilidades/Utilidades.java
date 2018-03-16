@@ -77,7 +77,6 @@ public class Utilidades
     }
 
     public static boolean eliminarLinea(String linea, String ruta) {
-        System.out.println("Linea a eliminar: " + linea);
         File archivo = new File(Utilidades.getRutaAbs(ruta));
         File temporal = new File(archivo.getAbsolutePath() + ".tmp");
         boolean encontrado;

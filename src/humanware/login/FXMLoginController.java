@@ -87,7 +87,6 @@ public class FXMLoginController implements Initializable
                 } catch (IOException ex)
                 {
                     System.err.println("Error de lectura o escritura en login");
-                    ex.printStackTrace();
                 }
             } else
             {

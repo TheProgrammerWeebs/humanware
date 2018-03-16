@@ -32,9 +32,11 @@ public class Habilidad
     {
         String linea = "";
         int i;
-        for (i = 0; i < lista.size() - 1; i++) {
-            linea += lista.get(i).habilidad + "/" + lista.get(i).nivel + ",";
+        for (i = 0; i < lista.size(); i++) {
+            if (i == lista.size() - 1) linea += lista.get(i).habilidad + "/" + lista.get(i).nivel;
+            else linea += lista.get(i).habilidad + "/" + lista.get(i).nivel + ",";
         }
-        return linea += lista.get(lista.size() - 1).habilidad + "/" + lista.get(lista.size() - 1).nivel;
+        
+        return linea;
     }
 }

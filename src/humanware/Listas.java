@@ -42,8 +42,5 @@ public class Listas
     public static ObservableList<String> nombreEmpresas = FXCollections.observableArrayList();
     public static ObservableList<String> titulos = FXCollections.observableArrayList();
     public static ObservableList<Integer> niveles = generarNumeros(5);
-    public static ObservableList<Empresa> observableEmpresas = empresas.getObservableListAsociada();
-    public static ObservableList<Vacante> observableVacantes = vacantes.getObservableListAsociada();
-    public static ObservableList<Candidato> observableCandidatos = candidatos.getObservableListAsociada();
     
 }

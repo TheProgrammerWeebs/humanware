@@ -87,22 +87,33 @@ public class FXMLAgregarCandidatoController implements Initializable
 
     public void agregarHabilidad() {
         lbError.setVisible(false);
+        boolean existe = Utilidades.split(taHabilidades.getText(), "\n").existe(tfHabilidad.getText());
         if (Utilidades.quitarEspacios(tfHabilidad.getText()).equals("") || this.cbHabilidadNivel.getValue() == null) {
             lbError.setText("Debe ingresar una habilidad");
+            lbError.setVisible(true);
+        } else if (existe) {
+            lbError.setText("Esa habilidad ya existe");
             lbError.setVisible(true);
         } else {
             taHabilidades.setText(taHabilidades.getText()
                     + tfHabilidad.getText() + "/" + cbHabilidadNivel.getValue() + "\n");
+            tfHabilidad.setText("");
+            tfHabilidad.requestFocus();
         }
     }
 
     public void agregarTitulacion() {
         lbError.setVisible(false);
+        boolean existe = Utilidades.split(taTitulaciones.getText(), "\n").existe((String) this.cbTitulos.getValue());
         if (this.cbTitulos.getValue() == null) {
             lbError.setText("Debe ingresar una titulación");
             lbError.setVisible(true);
+            cbTitulos.getSelectionModel().select(null);
+        } else if (existe) {
+            lbError.setText("Ya existe");
+            lbError.setVisible(true);
         } else {
-            taTitulaciones.setText(taTitulaciones.getText() + cbTitulos.getValue()+ "\n" );
+            taTitulaciones.setText(taTitulaciones.getText() + cbTitulos.getValue() + "\n");
         }
     }
 
@@ -110,7 +121,8 @@ public class FXMLAgregarCandidatoController implements Initializable
         lbError.setVisible(false);
         String telefono = Utilidades.formatearTelefono(tfTelefono.getText());
         if ((!rbParcial.isSelected() && !rbAmbas.isSelected() && !rbCompleta.isSelected())
-                || Utilidades.quitarEspacios(this.tfHabilidad.getText()).equals("")
+                || Utilidades.quitarEspacios(this.taHabilidades.getText()).equals("")
+                || Utilidades.quitarEspacios(this.taTitulaciones.getText()).equals("")
                 || Utilidades.quitarEspacios(this.tfNombreCandidato.getText()).equals("")
                 || Utilidades.quitarEspacios(this.tfRetribucionMinima.getText()).equals("")) {
             lbError.setText("Debe ingresar todos los campos");
@@ -134,12 +146,16 @@ public class FXMLAgregarCandidatoController implements Initializable
             ListaEnlazada<String> titulaciones = new ListaEnlazada();
             ListaEnlazada<Habilidad> habilidades = new ListaEnlazada();
             for (String linea : lineasHabilidades) {
-                if (Utilidades.quitarEspacios(linea).equals("")) continue;
+                if (Utilidades.quitarEspacios(linea).equals("")) {
+                    continue;
+                }
                 ListaEnlazada<String> campos = Utilidades.split(linea, "/");
                 habilidades.addFinal(new Habilidad(campos.get(0), Integer.parseInt(campos.get(1))));
             }
             for (String linea : lineasTitulaciones) {
-                if (Utilidades.quitarEspacios(linea).equals("")) continue;
+                if (Utilidades.quitarEspacios(linea).equals("")) {
+                    continue;
+                }
                 titulaciones.addFinal(linea);
             }
             Candidato nuevo = new Candidato(nombre, telefono, email, titulaciones, habilidades, tipo, retribucion);
@@ -148,7 +164,6 @@ public class FXMLAgregarCandidatoController implements Initializable
             System.out.println("pw = " + pw);
             pw.println(nuevo.convertirAString());
             pw.close();
-            
             this.agregarCandidatoPane.getScene().getWindow().hide();
         }
     }

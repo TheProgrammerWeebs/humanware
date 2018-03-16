@@ -18,9 +18,7 @@ import humanware.Listas;
 import humanware.TipoJornada;
 import humanware.TitulacionEmpresa;
 import humanware.utilidades.Rango;
-import java.util.ArrayList;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import humanware.utilidades.ListaEnlazada;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -58,9 +56,9 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
     @FXML
     private TableView<Candidato> tbCandidatos;
     @FXML
-    private TableColumn<Candidato, String> tbcCandidatoNombre;
+    private TableColumn<Candidato, String> tbcNombreCandidato;
     @FXML
-    private TableColumn<Candidato, String> tbcCandidatoEmail;
+    private TableColumn<Candidato, String> tbcEmailCandidato;
     @FXML
     private JFXTextField tfNombre;
     @FXML
@@ -147,7 +145,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         btAgregarEmpresa.setDefaultButton(true);
         tbcNombreEmpresa.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tbcTelefonoEmpresa.setCellValueFactory(new PropertyValueFactory<>("numeroTelefono"));
-        tbEmpresas.setItems(Listas.empresas);
+        tbEmpresas.setItems(Listas.observableEmpresas);
         tbEmpresas.getSelectionModel().selectedItemProperty().addListener((obs, viejo, nuevo) -> {
             if (nuevo != null) {
                 btEliminarEmpresa.setDisable(false);
@@ -174,7 +172,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
             try (PrintWriter pw = Utilidades.openFileWrite(ruta, true)) {
                 pw.println(tfNombre.getText() + ";" + Utilidades.quitarEspacios(Utilidades.formatearTelefono(tfTelefono.getText())));
             }
-            Listas.empresas.add(new Empresa(tfNombre.getText(), tfTelefono.getText()));
+            Listas.empresas.addFinal(new Empresa(tfNombre.getText(), tfTelefono.getText()));
             tfNombre.setText("");
             tfTelefono.setText("");
         }
@@ -199,9 +197,9 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
             while (lector.ready()) {
                 String linea = lector.readLine();
                 boolean encontrado = false;
-                ArrayList<String> campos = Utilidades.split(linea, ";");
+                ListaEnlazada<String> campos = Utilidades.split(linea, ";");
                 if (!Utilidades.quitarEspacios(linea).equals("")) {
-                    Listas.empresas.add(new Empresa(campos.get(0), campos.get(1)));
+                    Listas.empresas.addFinal(new Empresa(campos.get(0), campos.get(1)));
                 }
             }
         } catch (IOException ex) {
@@ -215,7 +213,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         tbVacantes.setEditable(false);
         tbcNombreVacante.setCellValueFactory(new PropertyValueFactory<>("descripcionPuesto"));
         tbcEmpresaVacante.setCellValueFactory(new PropertyValueFactory<>("nombreEmpresa"));
-        tbVacantes.setItems(Listas.vacantes);
+        tbVacantes.setItems(Listas.observableVacantes);
         tbVacantes.getSelectionModel().selectedItemProperty().addListener((obs, viejo, nuevo) -> {
             if (nuevo != null) {
                 btEliminarVacante.setDisable(false);
@@ -224,7 +222,6 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         });
         cargarVacantes();
     }
-
     public void agregarVacante() {
         try {
             Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarVacante.fxml");
@@ -232,7 +229,6 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
             System.err.println("Error de lectuta o escritura al abrir agregar vacante");
         }
     }
-
     public void eliminarVacante() {
         Vacante v = tbVacantes.getSelectionModel().getSelectedItem();
         Listas.vacantes.remove(v);
@@ -241,7 +237,6 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         btEliminarVacante.setDisable(true);
         tbVacantes.getSelectionModel().select(null);
     }
-
     public void cargarVacantes() {
         String ruta = "archivos\\database\\vacantes";
         try (BufferedReader lector = Utilidades.openFileRead(ruta)) {
@@ -249,7 +244,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
                 String linea = lector.readLine();
                 boolean encontrado = false;
                 if (!Utilidades.quitarEspacios(linea).equals("")) {
-                    ArrayList<String> campos = Utilidades.split(linea, ";");
+                    ListaEnlazada<String> campos = Utilidades.split(linea, ";");
                     Vacante vaca = new Vacante();
                     vaca.setDescripcion(campos.get(Vacante.DESCRIPCION));
                     vaca.setTipoJornada(TipoJornada.convertirAJornada(campos.get(Vacante.JORNADA)));
@@ -259,7 +254,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
                     if (campos.size() > 5) {
                         vaca.setHabilidades(Habilidad.convertirAHabilidades(campos.get(Vacante.HABILIDADES))); //Si tiene habilidades
                     }
-                    Listas.vacantes.add(vaca);
+                    Listas.vacantes.addFinal(vaca);
                 }
             }
         } catch (IOException ex) {
@@ -284,7 +279,15 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
     // </editor-fold>    
     //<editor-fold defaultstate="collapsed" desc="lógica de candidatos">
     private void inicializarCandidatos() {
-        
+        tbCandidatos.setEditable(false);
+        this.tbcNombreCandidato.setCellValueFactory(new PropertyValueFactory<>("nombre"));
+        this.tbcEmailCandidato.setCellValueFactory(new PropertyValueFactory<>("email"));
+        this.tbCandidatos.setItems(Listas.observableCandidatos);
+        tbCandidatos.getSelectionModel().selectedItemProperty().addListener((obs, viejo, nuevo) -> {
+            if (nuevo != null) {
+                btEliminarCandidato.setDisable(false);
+            }
+        });
     }
     public void abrirAgregarCandidato() throws IOException
     {

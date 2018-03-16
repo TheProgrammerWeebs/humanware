@@ -56,15 +56,15 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-pane">
                      <children>
-                        <TableView fx:id="tbCandidatos" layoutX="14.0" layoutY="14.0" prefHeight="377.0" prefWidth="565.0">
-                           <columns>
-                              <TableColumn fx:id="tbcCandidatoNombre" prefWidth="287.0" text="Nombre candidato" />
-                              <TableColumn fx:id="tbcCandidatoEmail" prefWidth="277.0" text="e-mail" />
-                           </columns>
-                        </TableView>
                         <JFXButton layoutX="603.0" layoutY="14.0" onAction="#abrirAgregarCandidato" prefHeight="36.0" prefWidth="164.0" style="-fx-background-color: #474B4F;" text="AGREGAR CANDIDATO" textFill="#aabbb8" />
                         <JFXButton disable="true" layoutX="603.0" layoutY="60.0" prefHeight="36.0" prefWidth="164.0" style="-fx-background-color: #474B4F;" text="VER CANDIDATO" textFill="#aabbb8" />
-                        <JFXButton disable="true" layoutX="603.0" layoutY="105.0" prefHeight="36.0" prefWidth="164.0" style="-fx-background-color: #F44336;" text="ELIMINAR CANDIDATO" textFill="WHITE" />
+                        <JFXButton fx:id="btEliminarCandidato" disable="true" layoutX="603.0" layoutY="105.0" prefHeight="36.0" prefWidth="164.0" style="-fx-background-color: #F44336;" text="ELIMINAR CANDIDATO" textFill="WHITE" />
+                        <TableView fx:id="tbCandidatos" layoutX="14.0" layoutY="14.0" prefHeight="361.0" prefWidth="562.0">
+                           <columns>
+                              <TableColumn fx:id="tbcNombreCandidato" prefWidth="288.0" text="Nombre" />
+                              <TableColumn fx:id="tbcEmailCandidato" prefWidth="273.0" text="e-mail" />
+                           </columns>
+                        </TableView>
                      </children></AnchorPane>
             </content>
           </Tab>

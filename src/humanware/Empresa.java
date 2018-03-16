@@ -1,6 +1,6 @@
 package humanware;
 
-import java.util.ArrayList;
+import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.Utilidades;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -10,14 +10,14 @@ import javafx.beans.property.SimpleStringProperty;
 public class Empresa
 {
 
-    private ArrayList<Vacante> vacantes;
+    private ListaEnlazada<Vacante> vacantes;
     private final SimpleStringProperty nombre;
     private final SimpleStringProperty numeroTelefono;
 
     Empresa() {
         nombre = new SimpleStringProperty();
         numeroTelefono = new SimpleStringProperty();
-        vacantes = new ArrayList<>();
+        vacantes = new ListaEnlazada<>();
     }
 
     public Empresa(String nombre, String numeroTelefono) {
@@ -35,13 +35,13 @@ public class Empresa
         BufferedReader buffer = Utilidades.openFileRead(ruta);
         while (buffer.ready()) {
             String linea = buffer.readLine();
-            ArrayList<String> campos = Utilidades.split(linea, ";");
+            ListaEnlazada<String> campos = Utilidades.split(linea, ";");
             String nombre = campos.get(Vacante.EMPRESA);
             if (!Utilidades.quitarEspacios(linea).equals("")) {
                 if (nombre.equals(this.getNombre())) {
                     Vacante v = Vacante.convertirVacante(linea);
                     System.out.println("Vacante: " + v.convertirString());
-                    vacantes.add(v);
+                    vacantes.addFinal(v);
                 }
             }
         }
@@ -52,7 +52,7 @@ public class Empresa
         return numeroTelefono;
     }
 
-    public ArrayList<Vacante> getVacantes() {
+    public ListaEnlazada<Vacante> getVacantes() {
         return vacantes;
     }
 
@@ -88,7 +88,7 @@ public class Empresa
     }
 
     public void addVacante(Vacante vacante) {
-        vacantes.add(vacante);
+        vacantes.addFinal(vacante);
     }
 
     public void eliminarVacante(Vacante vacante) {

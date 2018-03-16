@@ -1,46 +1,71 @@
 package humanware;
 
+import humanware.utilidades.ListaEnlazada;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import javafx.beans.property.SimpleStringProperty;
 
 public class Candidato
 {
     private final String codigo;
-    private String nombre;
+    private SimpleStringProperty email;
+    private SimpleStringProperty nombre;
     private String telefono;
-    private String email;
-    private ArrayList<String> titulaciones;
-    private ArrayList<Habilidad> habilidades;
+    private double retribucion;
+    private ListaEnlazada<String> titulaciones;
+    private ListaEnlazada<Habilidad> habilidades;
     private TipoJornada tipoJornada;
     private final int anioActual = LocalDateTime.now().getYear();
     private static int nCandidatos = 0;
-    
-    public Candidato(String nombre)
+
+    public Candidato()
     {
-        this.nombre = nombre;
+        nombre = new SimpleStringProperty();
+        email = new SimpleStringProperty();
         this.codigo = Integer.toString(anioActual) + Integer.toString(nCandidatos++);
     }
-    
+    public Candidato(String nombre, String telefono, String email, ListaEnlazada<String> titulaciones, ListaEnlazada<Habilidad> habilidades, TipoJornada tipoJornada, double retribucion) {
+        this();
+        this.nombre.set(nombre);
+        this.telefono = telefono;
+        this.email.set(email);
+        this.titulaciones = titulaciones;
+        this.habilidades = habilidades;
+        this.tipoJornada = tipoJornada;
+        this.retribucion = retribucion;
+    }
+    public SimpleStringProperty nombreProperty()
+    {
+        return nombre;
+    }
+    public SimpleStringProperty emailProperty()
+    {
+        return email;
+    }
+    public String convertirAString()
+    {
+        String linea = "";
+        linea += nombre + ";";
+        linea += email + ";";
+        linea += retribucion + ";";
+        linea += tipoJornada.toString() + ";";
+        for (int i = 0; i < titulaciones.size() - 1; i++) {
+            linea += titulaciones.get(i) + ",";
+        }
+        linea += titulaciones.get(titulaciones.size() - 1) + ";";
+        for (int i = 0; i < habilidades.size() - 1; i++) {
+            linea += habilidades.get(i).habilidad  + "/" + habilidades.get(i).nivel + ",";
+        }
+        linea += habilidades.get(habilidades.size() - 1).habilidad  + "/" + habilidades.get(habilidades.size() - 1).nivel;
+        return linea;
+    }
     public String getCodigo()
     {
         return codigo;
     }
     
-    public Candidato(String nombre, String telefono)
-    {
-        this(nombre);
-        this.telefono = telefono;
-    }
-    
-    public Candidato(String nombre, String telefono, String email)
-    {
-        this(nombre, telefono);
-        this.email = email;
-    }
-    
     public void addHabilidad(Habilidad h)
     {
-        habilidades.add(h);
+        habilidades.addFinal(h);
     }
     public void removeHabilidad(Habilidad h)
     {
@@ -52,7 +77,7 @@ public class Candidato
     }
     public void addTitulacion(String t)
     {
-        titulaciones.add(t);
+        titulaciones.addFinal(t);
     }
     public String getTitulacion(int pos)
     {
@@ -65,12 +90,12 @@ public class Candidato
     
     public String getNombre()
     {
-        return nombre;
+        return this.nombre.get();
     }
 
     public void setNombre(String nombre)
     {
-        this.nombre = nombre;
+        this.nombre.set(nombre);
     }
 
     public String getTelefono()
@@ -85,12 +110,12 @@ public class Candidato
 
     public String getEmail()
     {
-        return email;
+        return email.get();
     }
 
     public void setEmail(String email)
     {
-        this.email = email;
+        this.email.set(email);
     }
 
     public TipoJornada getTipoJornada()

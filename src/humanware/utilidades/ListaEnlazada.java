@@ -239,21 +239,16 @@ public class ListaEnlazada<T> implements Iterable<T>
         }
         getNodo(index).informacion = info;
     }
-<<<<<<< HEAD
 
-    public void setObservableListAsociada(ObservableList<T> observableListAsociada) {
-        this.observableListAsociada = observableListAsociada;
-    }
 
     public ObservableList<T> getObservableListAsociada() {
         return observableListAsociada;
-=======
+    }
     public void imprimir()
     {
         for (T t : this) {
             System.out.print(t + " ");
         }
         System.out.println();
->>>>>>> candidato
     }
 }

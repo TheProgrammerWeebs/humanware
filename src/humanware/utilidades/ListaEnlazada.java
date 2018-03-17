@@ -59,7 +59,7 @@ public class ListaEnlazada<T> implements Iterable<T>
         }
     }
 
-<<<<<<< HEAD
+
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Interface comparador nodos">
     public interface ComparadorNodos<T>
@@ -75,13 +75,6 @@ public class ListaEnlazada<T> implements Iterable<T>
         int compararCon(T a, T b);
     }
     //</editor-fold>
-
-=======
-    //</editor-fold>
-    public interface ComparadorNodos<T> {
-        int compararCon(T a, T b);
-    }
->>>>>>> candidato
     private Nodo<T> ultimoNodo;
     private Nodo<T> primerNodo;
     private int size;

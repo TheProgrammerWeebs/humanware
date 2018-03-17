@@ -229,7 +229,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
 
     public void agregarVacante() {
         try {
-            Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarVacante.fxml");
+            Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarVacante.fxml", "Agregar vacante");
         } catch (IOException ex) {
             System.err.println("Error de lectuta o escritura al abrir agregar vacante");
         }
@@ -277,6 +277,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         controlador.setVacante(v);
         Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.setScene(new Scene(pane));
+        stage.setTitle("Ver vacante: " + v.getDescripcion());
         stage.getIcons().add(new Image(humanware.HumanWare.class.getResourceAsStream("/humanware/resources/logoFondo.png")));
         stage.centerOnScreen();
         stage.show();
@@ -304,7 +305,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         });
     }
     public void abrirAgregarCandidato() throws IOException {
-        Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarCandidato.fxml");
+        Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarCandidato.fxml", "Agregar candidato");
     }
     public void eliminarCandidatos()
     {

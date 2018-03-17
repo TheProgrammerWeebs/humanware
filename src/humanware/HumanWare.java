@@ -1,6 +1,5 @@
 package humanware;
 
-import humanware.utilidades.ObtenerDatos;
 import javafx.application.Application;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;

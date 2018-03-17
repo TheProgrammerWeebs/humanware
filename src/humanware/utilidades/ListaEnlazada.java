@@ -59,6 +59,7 @@ public class ListaEnlazada<T> implements Iterable<T>
         }
     }
 
+<<<<<<< HEAD
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Interface comparador nodos">
     public interface ComparadorNodos<T>
@@ -75,6 +76,12 @@ public class ListaEnlazada<T> implements Iterable<T>
     }
     //</editor-fold>
 
+=======
+    //</editor-fold>
+    public interface ComparadorNodos<T> {
+        int compararCon(T a, T b);
+    }
+>>>>>>> candidato
     private Nodo<T> ultimoNodo;
     private Nodo<T> primerNodo;
     private int size;
@@ -89,6 +96,10 @@ public class ListaEnlazada<T> implements Iterable<T>
 
     public int size() {
         return size;
+    }
+
+    public void setObservableListAsociada(ObservableList<T> observableListAsociada) {
+        this.observableListAsociada = observableListAsociada;
     }
 
     /**
@@ -133,6 +144,15 @@ public class ListaEnlazada<T> implements Iterable<T>
         }
 
         size++;
+    }
+
+    public boolean existe(T informacion) {
+        for (T elemento : this) {
+            if (elemento.equals(informacion)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void addFinal(T informacion) {
@@ -197,6 +217,9 @@ public class ListaEnlazada<T> implements Iterable<T>
     }
 
     public Nodo<T> getNodo(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException("Index: " + index + ". Size: " + size);
+        }
         Nodo<T> p = primerNodo;
         for (int i = 0; i < index; i++) {
             p = p.link;
@@ -209,10 +232,7 @@ public class ListaEnlazada<T> implements Iterable<T>
     }
 
     public boolean estaVacia() {
-        if (primerNodo == null) {
-            return true;
-        }
-        return false;
+        return primerNodo == null;
     }
 
     public void vaciar() {
@@ -226,6 +246,7 @@ public class ListaEnlazada<T> implements Iterable<T>
         }
         getNodo(index).informacion = info;
     }
+<<<<<<< HEAD
 
     public void setObservableListAsociada(ObservableList<T> observableListAsociada) {
         this.observableListAsociada = observableListAsociada;
@@ -233,5 +254,13 @@ public class ListaEnlazada<T> implements Iterable<T>
 
     public ObservableList<T> getObservableListAsociada() {
         return observableListAsociada;
+=======
+    public void imprimir()
+    {
+        for (T t : this) {
+            System.out.print(t + " ");
+        }
+        System.out.println();
+>>>>>>> candidato
     }
 }

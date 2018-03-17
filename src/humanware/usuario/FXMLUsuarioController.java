@@ -35,11 +35,10 @@ import javafx.scene.image.Image;
 public class FXMLUsuarioController implements Initializable, ControladorUsuario
 {
 
-    
     private double xOffset;
     private double yOffset;
     private Usuario usuario;
-    
+
     // <editor-fold defaultstate="collapsed" desc="Variables FXML">
     @FXML
     private TableView<Empresa> tbEmpresas;
@@ -89,10 +88,14 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        inicializarComponentes();
+        try {
+            inicializarComponentes();
+        } catch (IOException ex) {
+            System.out.println("Error al inicializar componentes de usuario");
+        }
     }
 
-    public void inicializarComponentes() {
+    public void inicializarComponentes() throws IOException {
         usuarioPane.setOnMousePressed(event
                 -> {
             xOffset = event.getSceneX();
@@ -145,7 +148,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         btAgregarEmpresa.setDefaultButton(true);
         tbcNombreEmpresa.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tbcTelefonoEmpresa.setCellValueFactory(new PropertyValueFactory<>("numeroTelefono"));
-        tbEmpresas.setItems(Listas.observableEmpresas);
+        tbEmpresas.setItems(Listas.empresas.getObservableListAsociada());
         tbEmpresas.getSelectionModel().selectedItemProperty().addListener((obs, viejo, nuevo) -> {
             if (nuevo != null) {
                 btEliminarEmpresa.setDisable(false);
@@ -177,6 +180,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
             tfTelefono.setText("");
         }
     }
+
     public void eliminarEmpresa() throws IOException {
         String ruta = "archivos\\database\\empresas";
         Empresa e = tbEmpresas.getSelectionModel().getSelectedItem();
@@ -213,7 +217,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         tbVacantes.setEditable(false);
         tbcNombreVacante.setCellValueFactory(new PropertyValueFactory<>("descripcionPuesto"));
         tbcEmpresaVacante.setCellValueFactory(new PropertyValueFactory<>("nombreEmpresa"));
-        tbVacantes.setItems(Listas.observableVacantes);
+        tbVacantes.setItems(Listas.vacantes.getObservableListAsociada());
         tbVacantes.getSelectionModel().selectedItemProperty().addListener((obs, viejo, nuevo) -> {
             if (nuevo != null) {
                 btEliminarVacante.setDisable(false);
@@ -222,13 +226,15 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         });
         cargarVacantes();
     }
+
     public void agregarVacante() {
         try {
-            Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarVacante.fxml");
+            Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarVacante.fxml", "Agregar vacante");
         } catch (IOException ex) {
             System.err.println("Error de lectuta o escritura al abrir agregar vacante");
         }
     }
+
     public void eliminarVacante() {
         Vacante v = tbVacantes.getSelectionModel().getSelectedItem();
         Listas.vacantes.remove(v);
@@ -237,6 +243,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         btEliminarVacante.setDisable(true);
         tbVacantes.getSelectionModel().select(null);
     }
+
     public void cargarVacantes() {
         String ruta = "archivos\\database\\vacantes";
         try (BufferedReader lector = Utilidades.openFileRead(ruta)) {
@@ -270,6 +277,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         controlador.setVacante(v);
         Stage stage = new Stage(StageStyle.UNDECORATED);
         stage.setScene(new Scene(pane));
+        stage.setTitle("Ver vacante: " + v.getDescripcion());
         stage.getIcons().add(new Image(humanware.HumanWare.class.getResourceAsStream("/humanware/resources/logoFondo.png")));
         stage.centerOnScreen();
         stage.show();
@@ -278,20 +286,40 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
 
     // </editor-fold>    
     //<editor-fold defaultstate="collapsed" desc="lógica de candidatos">
-    private void inicializarCandidatos() {
+    private void inicializarCandidatos() throws IOException {
         tbCandidatos.setEditable(false);
         this.tbcNombreCandidato.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         this.tbcEmailCandidato.setCellValueFactory(new PropertyValueFactory<>("email"));
-        this.tbCandidatos.setItems(Listas.observableCandidatos);
+        this.tbCandidatos.setItems(Listas.candidatos.getObservableListAsociada());
+        BufferedReader buffer = Utilidades.openFileRead("archivos\\database\\candidatos");
+        String linea;
+        while (buffer.ready()) {
+            linea = buffer.readLine();
+            Listas.candidatos.addFinal(Candidato.parseCandidato(linea));
+        }
         tbCandidatos.getSelectionModel().selectedItemProperty().addListener((obs, viejo, nuevo) -> {
             if (nuevo != null) {
                 btEliminarCandidato.setDisable(false);
+                btVerCandidato.setDisable(false);
             }
         });
     }
-    public void abrirAgregarCandidato() throws IOException
-    {
-        Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarCandidato.fxml");
+    public void abrirAgregarCandidato() throws IOException {
+        Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarCandidato.fxml", "Agregar candidato");
     }
+    public void eliminarCandidatos()
+    {
+        Candidato c = tbCandidatos.getSelectionModel().getSelectedItem();
+        Listas.candidatos.remove(c);
+        String linea = c.convertirAString();
+        Utilidades.eliminarLinea(linea, "archivos\\database\\candidatos");
+        tbCandidatos.getSelectionModel().select(null);
+    }
+    
+    public void mostrarCandidato()
+    {
+        
+    }
+
     //</editor-fold>
 }

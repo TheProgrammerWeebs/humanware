@@ -48,6 +48,7 @@ public class Utilidades
         Stage st = new Stage(StageStyle.UNDECORATED);
         st.setScene(new Scene(pane));
         st.setResizable(false);
+        st.setTitle("Configuración: " + usuario.getNombre());
         st.initModality(Modality.APPLICATION_MODAL);
         st.getIcons().add(new Image(humanware.HumanWare.class.getResourceAsStream("/humanware/resources/logoFondo.png")));
         st.showAndWait();
@@ -77,7 +78,6 @@ public class Utilidades
     }
 
     public static boolean eliminarLinea(String linea, String ruta) {
-        System.out.println("Linea a eliminar: " + linea);
         File archivo = new File(Utilidades.getRutaAbs(ruta));
         File temporal = new File(archivo.getAbsolutePath() + ".tmp");
         boolean encontrado;
@@ -182,12 +182,13 @@ public class Utilidades
         return false;
     }
 
-    public static void abrirVentanaUsuario(String ruta) throws IOException {
+    public static void abrirVentanaUsuario(String ruta, String titulo) throws IOException {
         FXMLLoader cargador = new FXMLLoader(humanware.HumanWare.class.getResource(ruta));
         AnchorPane usuarioPane = cargador.load();
         Stage stage = new Stage();
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(new Scene(usuarioPane));
+        stage.setTitle(titulo);
         stage.show();
         stage.getIcons().add(new Image(humanware.HumanWare.class.getResourceAsStream("/humanware/resources/logoFondo.png")));
         stage.centerOnScreen();

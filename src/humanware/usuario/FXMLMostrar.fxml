@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="mostrarPane" prefHeight="421.0" prefWidth="620.0" style="-fx-background-color: #212121;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuario.FXMLMostrarController">
+   <children>
+      <JFXTextField fx:id="tfDescripcionVer" disable="true" editable="false" layoutX="13.0" layoutY="34.0" prefHeight="25.0" prefWidth="583.0" style="-fx-text-fill: white;" />
+      <JFXTextField fx:id="tfEmpresaVer" disable="true" editable="false" layoutX="13.0" layoutY="91.0" prefHeight="25.0" prefWidth="583.0" style="-fx-text-fill: white;" />
+      <JFXTextField fx:id="tfMinSalarioVer" disable="true" editable="false" layoutX="14.0" layoutY="154.0" prefHeight="25.0" prefWidth="92.0" style="-fx-text-fill: white;" />
+      <JFXTextField fx:id="tfMaxSalarioVer" disable="true" editable="false" layoutX="145.0" layoutY="155.0" prefHeight="25.0" prefWidth="92.0" style="-fx-text-fill: white;" />
+      <Label layoutX="117.0" layoutY="157.0" text="—" textFill="WHITE">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXRadioButton fx:id="rbParcialVer" disable="true" layoutX="292.0" layoutY="168.0" style="-fx-text-fill: white;" text="Parcial" />
+      <JFXRadioButton fx:id="rbCompletaVer" disable="true" layoutX="388.0" layoutY="168.0" style="-fx-text-fill: white;" styleClass="fxmlagregarvacante.css" text="Completa" />
+      <JFXRadioButton fx:id="rbAmbasVer" disable="true" layoutX="497.0" layoutY="169.0" style="-fx-text-fill: white;" text="Ambas" />
+      <JFXTextArea fx:id="taTitulacionesVer" disable="true" editable="false" layoutX="13.0" layoutY="228.0" prefHeight="67.0" prefWidth="337.0" style="-fx-text-fill: white;" />
+      <JFXTextArea fx:id="taHabilidadesVer" disable="true" editable="false" layoutX="13.0" layoutY="333.0" prefHeight="67.0" prefWidth="337.0" style="-fx-text-fill: white;" />
+      <Label layoutX="13.0" layoutY="14.0" text="Descripción" textFill="WHITE" />
+      <Label layoutX="13.0" layoutY="74.0" text="Empresa" textFill="WHITE" />
+      <Label layoutX="13.0" layoutY="137.0" text="Rango salarial" textFill="WHITE" />
+      <Label layoutX="308.0" layoutY="137.0" text="Tipo de Jornada" textFill="WHITE" />
+      <Label layoutX="13.0" layoutY="211.0" text="Titulaciones" textFill="WHITE" />
+      <Label layoutX="19.0" layoutY="316.0" text="Habilidades" textFill="WHITE" />
+      <Button id="cerrar" layoutX="366.0" layoutY="360.0" mnemonicParsing="false" onAction="#cerrar" prefHeight="47.0" prefWidth="239.0" style="-fx-background-color: #F44336; -fx-text-fill: white;" text="CERRAR" />
+      <Button layoutX="366.0" layoutY="278.0" mnemonicParsing="false" prefHeight="47.0" prefWidth="239.0" style="-fx-background-color: #4196b2;" text="EDITAR" textFill="WHITE" />
+   </children>
+</AnchorPane>

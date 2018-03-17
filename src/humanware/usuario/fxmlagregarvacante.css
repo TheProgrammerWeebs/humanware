@@ -1,0 +1,37 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+.mainFxmlClass {
+    -fx-background-color: #212121;
+}
+
+.combo-box .cell:selected {
+    -fx-text-fill: white;
+}
+
+
+.text-field, .text-area
+{
+    -fx-text-inner-color: white;
+}
+
+.radio-button
+{
+    -fx-text-fill:white;
+}
+
+
+
+.button
+{
+    -fx-background-color: #464866;
+    -fx-text-fill: #AABBB8;
+}
+
+/*.agregar
+{
+    -fx-background-color: #8BC34A;
+    -fx-text-fill: white;
+}
+*/

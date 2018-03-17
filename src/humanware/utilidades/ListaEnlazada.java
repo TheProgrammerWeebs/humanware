@@ -66,10 +66,10 @@ public class ListaEnlazada<T> implements Iterable<T>
     {
 
         /**
-         * Compara dos elementos
+         * Compara dos nodos
          *
-         * @param a el primer elemento
-         * @param b el segundo elemento
+         * @param a el primer nodo
+         * @param b el segundo nodo
          * @return un número mayor a 0, si a > b. Un número menor a 0, si a menor que b. 0, si a = b
          */
         int compararCon(T a, T b);

@@ -2,36 +2,28 @@
  * Empty Stylesheet file.
  */
 
-.mainFxmlClass {
-    -fx-background-color: #212121;
+.mainFxmlClass {    
+    -fx-background-color: #F2EFEA; 
 }
 
 .combo-box .cell:selected {
-    -fx-text-fill: white;
+    -fx-text-fill: #403D58;
 }
 
 
 .text-field, .text-area
 {
-    -fx-text-inner-color: white;
+    -fx-text-inner-color: black;
+    -fx-prompt-text-fill: #6E7271;
 }
 
 .radio-button
 {
-    -fx-text-fill:white;
+    -fx-text-fill:black;
 }
-
-
 
 .button
 {
-    -fx-background-color: #464866;
-    -fx-text-fill: #AABBB8;
+    -fx-background-color: #2A93D5;
+    -fx-text-fill: #EDFAFD;
 }
-
-/*.agregar
-{
-    -fx-background-color: #8BC34A;
-    -fx-text-fill: white;
-}
-*/

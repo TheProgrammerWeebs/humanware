@@ -179,6 +179,8 @@ public class FXMLAgregarVacanteController implements Initializable
                 int nivel = (int) cbNivel.getValue();
                 taHabilidades.setText(taHabilidades.getText() + "\n"
                         + opcion + "/" + nivel);
+                tfHabilidad.setText("");
+                tfHabilidad.requestFocus();
             } else {
                 lbError.setText("La habilidad ya está agregada");
                 lbError.setVisible(true);

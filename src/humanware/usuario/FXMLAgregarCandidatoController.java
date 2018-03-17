@@ -87,21 +87,35 @@ public class FXMLAgregarCandidatoController implements Initializable
 
     public void agregarHabilidad() {
         lbError.setVisible(false);
-        boolean existe = Utilidades.split(taHabilidades.getText(), "\n").existe(tfHabilidad.getText());
-        if (Utilidades.quitarEspacios(tfHabilidad.getText()).equals("") || this.cbHabilidadNivel.getValue() == null) {
-            lbError.setText("Debe ingresar una habilidad");
+        String opcion = (String) tfHabilidad.getText();
+        if (opcion == null || cbHabilidadNivel.getValue() == null) {
+            lbError.setText("Debe rellenar todos los campos");
             lbError.setVisible(true);
-        } else if (existe) {
-            lbError.setText("Esa habilidad ya existe");
+        } else if (Utilidades.containsCharacter(opcion, ";") || Utilidades.containsCharacter(opcion, ",") || Utilidades.containsCharacter(opcion, ".")) {
+            lbError.setText("La habilidad no puede signos de puntuación");
             lbError.setVisible(true);
         } else {
-            taHabilidades.setText(taHabilidades.getText()
-                    + tfHabilidad.getText() + "/" + cbHabilidadNivel.getValue() + "\n");
-            tfHabilidad.setText("");
-            tfHabilidad.requestFocus();
+            ListaEnlazada<String> lineas = Utilidades.split(taHabilidades.getText(), "\n");
+            boolean existe = false;
+            for (String linea : lineas) {
+                ListaEnlazada<String> campos = Utilidades.split(linea, "/");
+                if (campos.get(0).equals(opcion)) {
+                    existe = true;
+                    break;
+                }
+            }
+            if (!existe) {
+                int nivel = (int) cbHabilidadNivel.getValue();
+                taHabilidades.setText(taHabilidades.getText() + "\n"
+                        + opcion + "/" + nivel);
+                tfHabilidad.setText("");
+                tfHabilidad.requestFocus();
+            } else {
+                lbError.setText("La habilidad ya está agregada");
+                lbError.setVisible(true);
+            }
         }
     }
-
     public void agregarTitulacion() {
         lbError.setVisible(false);
         boolean existe = Utilidades.split(taTitulaciones.getText(), "\n").existe((String) this.cbTitulos.getValue());
@@ -116,7 +130,6 @@ public class FXMLAgregarCandidatoController implements Initializable
             taTitulaciones.setText(taTitulaciones.getText() + cbTitulos.getValue() + "\n");
         }
     }
-
     public void agregarCandidato() {
         lbError.setVisible(false);
         String telefono = Utilidades.formatearTelefono(tfTelefono.getText());

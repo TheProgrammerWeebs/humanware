@@ -94,6 +94,7 @@ public class FXMLAgregarVacanteController implements Initializable
             }
         });
     }
+
     private void inicializarMover() {
         vacantePane.setOnMousePressed(event
                 -> {
@@ -207,8 +208,6 @@ public class FXMLAgregarVacanteController implements Initializable
             String descripcion = tfDescripcion.getText();
             ListaEnlazada<String> lineasHabilidades = Utilidades.split(taHabilidades.getText(), "\n");
             ListaEnlazada<String> lineasTitulaciones = Utilidades.split(taTitulaciones.getText(), "\n");
-            lineasHabilidades.remove(0);
-            lineasTitulaciones.remove(0);
             try {
                 salario = new Rango(Double.parseDouble(tfMinSalario.getText()), Double.parseDouble(tfMaxSalario.getText()));
             } catch (NumberFormatException e) {
@@ -217,10 +216,12 @@ public class FXMLAgregarVacanteController implements Initializable
                 correcto = false;
             }
             for (String linea : lineasHabilidades) {
+                if (Utilidades.quitarEspacios(linea).equals("")) continue;
                 ListaEnlazada<String> campos = Utilidades.split(linea, "/");
                 habilidades.addFinal(new Habilidad(campos.get(0), Integer.parseInt(campos.get(1))));
             }
             for (String linea : lineasTitulaciones) {
+                if (Utilidades.quitarEspacios(linea).equals("")) continue;
                 ListaEnlazada<String> campos = Utilidades.split(linea, "/");
                 titulaciones.addFinal(new TitulacionEmpresa(campos.get(0), Integer.parseInt(campos.get(1))));
             }

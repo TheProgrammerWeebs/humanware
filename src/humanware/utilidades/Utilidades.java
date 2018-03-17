@@ -186,6 +186,7 @@ public class Utilidades
         FXMLLoader cargador = new FXMLLoader(humanware.HumanWare.class.getResource(ruta));
         AnchorPane usuarioPane = cargador.load();
         Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(new Scene(usuarioPane));
         stage.setTitle(titulo);

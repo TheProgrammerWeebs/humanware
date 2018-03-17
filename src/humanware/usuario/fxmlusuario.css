@@ -1,5 +1,11 @@
 .mainFxmlClass {
+    -fx-background-color: #FCFBF7;
+    -fx-border-color: #403D58 
+}
 
+.button{
+    -fx-background-color: #135589;
+    -fx-text-fill: white;
 }
 
 .tab-pane .tab-header-area .tab-header-background {
@@ -9,29 +15,30 @@
 .tab-pane .tab
 {
     -fx-focus-color: none;
-    -fx-background-color: #212121;
+    -fx-background-color: #403D58;
+
 }
 
 .tab-pane
 {
-    -fx-background-color: #212121;
+    -fx-background-color: #FCFBF7;
 }
 
 .tab-pane .tab:selected
 {
-    -fx-background-color: #3c3c3c;
+    -fx-background-color: #6E7271;
 }
 
 .tab-label { 
     -fx-alignment: CENTER;
-    -fx-text-fill: #828282;
+    -fx-text-fill: white;
     -fx-font-size: 12px;
     -fx-font-weight: bold;
 }
 
 .tab:selected .tab-label { 
     -fx-alignment: CENTER;
-    -fx-text-fill: #AAABB8;
+    -fx-text-fill: white;
 }
 
 /*-----Tablas------*/

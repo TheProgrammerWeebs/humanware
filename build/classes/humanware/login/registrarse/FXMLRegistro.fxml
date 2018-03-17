@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="454.0" prefWidth="557.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.login.registrarse.FXMLRegistroController">
+<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="454.0" prefWidth="557.0" style="-fx-border-color: #F14665;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.login.registrarse.FXMLRegistroController">
     <stylesheets>
         <URL value="@fxmlregistro.css" />
     </stylesheets>

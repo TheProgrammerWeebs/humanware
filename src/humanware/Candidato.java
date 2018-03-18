@@ -7,7 +7,6 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Candidato
 {
-
     private final String codigo;
     private SimpleStringProperty email;
     private SimpleStringProperty nombre;
@@ -18,6 +17,7 @@ public class Candidato
     private TipoJornada tipoJornada;
     private final int anioActual = LocalDateTime.now().getYear();
     private static int nCandidatos = 0;
+    private int puntuacion;
 
     public static final int NOMBRE = 0;
     public static final int TELEFONO = 1;
@@ -74,6 +74,15 @@ public class Candidato
         return linea;
     }
 
+    public int getPuntuacion() {
+        return puntuacion;
+    }
+
+    public void setPuntuacion(int puesto) {
+        this.puntuacion = puesto;
+    }
+
+    
     public String getCodigo() {
         return codigo;
     }

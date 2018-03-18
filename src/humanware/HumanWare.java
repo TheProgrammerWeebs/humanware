@@ -1,6 +1,5 @@
 package humanware;
 
-import humanware.utilidades.ObtenerDatos;
 import javafx.application.Application;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
@@ -24,6 +23,7 @@ public class HumanWare extends Application
     
     public void inicializarComponentes(Stage stage)
     {
+        Listas.cargarListas();
         try
         {
             AnchorPane pane = FXMLLoader.load(humanware.HumanWare.class.getResource("/humanware/login/FXMLLogin.fxml"));

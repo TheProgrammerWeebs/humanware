@@ -17,9 +17,7 @@ public class ListaEnlazada<T> implements Iterable<T>
     //<editor-fold defaultstate="collapsed" desc="Implementación de Iterator">
     private class IteradorLista implements Iterator<T>
     {
-
         int actual = 0;
-
         @Override
         public boolean hasNext() {
             if (actual < ListaEnlazada.this.size) {

@@ -28,7 +28,7 @@
       <JFXButton fx:id="btCambiar" layoutX="280.0" layoutY="305.0" onAction="#cambiarContrasenia" prefHeight="33.0" prefWidth="111.0" text="CAMBIAR" />
       <ImageView fitHeight="25.0" fitWidth="28.0" layoutX="396.0" layoutY="14.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/close.png" />
+            <Image url="@../resources/close_white.png" />
          </image>
       </ImageView>
       <Label fx:id="lbError" layoutX="14.0" layoutY="347.0" prefHeight="17.0" prefWidth="236.0" styleClass="error" textFill="RED" />

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="384.0" prefWidth="620.0" style="-fx-background-color: #F2EFEA;" stylesheets="@fxmlusuario.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.FXMLMostrarController">
+   <children>
+      <JFXButton layoutX="19.0" layoutY="328.0" onAction="#cerrar" prefHeight="37.0" prefWidth="139.0" text="CERRAR" />
+      <JFXTextField fx:id="tfDescripcionVer" editable="false" layoutX="19.0" layoutY="34.0" prefHeight="25.0" prefWidth="583.0" />
+      <JFXTextField fx:id="tfEmpresaVer" editable="false" layoutX="19.0" layoutY="91.0" prefHeight="25.0" prefWidth="583.0" />
+      <JFXTextField fx:id="tfMinSalarioVer" editable="false" layoutX="20.0" layoutY="154.0" prefHeight="25.0" prefWidth="92.0" />
+      <JFXTextField fx:id="tfMaxSalarioVer" editable="false" layoutX="151.0" layoutY="155.0" prefHeight="25.0" prefWidth="92.0" />
+      <Label layoutX="117.0" layoutY="157.0" text="—" textFill="#403d58">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <JFXRadioButton fx:id="rbParcialVer" disable="true" layoutX="298.0" layoutY="168.0" text="Parcial" textFill="#403d58" />
+      <JFXRadioButton fx:id="rbCompletaVer" disable="true" layoutX="394.0" layoutY="168.0" styleClass="fxmlagregarvacante.css" text="Completa" textFill="#403d58" />
+      <JFXRadioButton fx:id="rbAmbasVer" disable="true" layoutX="503.0" layoutY="169.0" text="Ambas" textFill="#403d58" />
+      <JFXTextArea fx:id="taTitulacionesVer" editable="false" layoutX="19.0" layoutY="228.0" prefHeight="67.0" prefWidth="266.0" />
+      <JFXTextArea fx:id="taHabilidadesVer" editable="false" layoutX="328.0" layoutY="228.0" prefHeight="67.0" prefWidth="266.0" />
+      <Label layoutX="19.0" layoutY="14.0" text="Descripción" textFill="#403d58" />
+      <Label layoutX="19.0" layoutY="74.0" text="Empresa" textFill="#403d58" />
+      <Label layoutX="19.0" layoutY="137.0" text="Rango salarial" textFill="#403d58" />
+      <Label layoutX="314.0" layoutY="137.0" text="Tipo de Jornada" textFill="#403d58" />
+      <Label layoutX="19.0" layoutY="211.0" text="Titulaciones" textFill="#403d58" />
+      <Label layoutX="328.0" layoutY="211.0" text="Habilidades" textFill="#403d58" />
+   </children>
+</AnchorPane>

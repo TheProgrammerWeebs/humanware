@@ -8,7 +8,11 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+<<<<<<< HEAD
     <jar href="HumanWare_VictorGuevara_SebastianMolano.jar" size="288567" download="eager" />
+=======
+    <jar href="HumanWare_VictorGuevara_SebastianMolano.jar" size="294105" download="eager" />
+>>>>>>> e81f78de0c55904d518b060ef3a05f73f8e23ff4
     <jar href="lib\jfoenix-8.0.1.jar" size="2405715" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="HumanWare_VictorGuevara_SebastianMolano" >

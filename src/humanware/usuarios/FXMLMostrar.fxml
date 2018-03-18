@@ -9,9 +9,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="384.0" prefWidth="620.0" style="-fx-background-color: #F2EFEA;" stylesheets="@fxmlusuario.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.FXMLMostrarController">
+<AnchorPane id="AnchorPane" prefHeight="384.0" prefWidth="620.0" style="-fx-background-color: #fefeff;" stylesheets="@fxmlusuario.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.FXMLMostrarController">
    <children>
-      <JFXButton layoutX="19.0" layoutY="328.0" onAction="#cerrar" prefHeight="37.0" prefWidth="139.0" text="CERRAR" />
+      <JFXButton layoutX="19.0" layoutY="328.0" onAction="#cerrar" prefHeight="37.0" prefWidth="139.0" style="-fx-background-color: #a92f10;" text="CERRAR" textFill="WHITE" />
       <JFXTextField fx:id="tfDescripcionVer" editable="false" layoutX="19.0" layoutY="34.0" prefHeight="25.0" prefWidth="583.0" />
       <JFXTextField fx:id="tfEmpresaVer" editable="false" layoutX="19.0" layoutY="91.0" prefHeight="25.0" prefWidth="583.0" />
       <JFXTextField fx:id="tfMinSalarioVer" editable="false" layoutX="20.0" layoutY="154.0" prefHeight="25.0" prefWidth="92.0" />

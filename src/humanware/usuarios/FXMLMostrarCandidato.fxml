@@ -8,10 +8,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="403.0" prefWidth="641.0" style="-fx-background-color: #F2EFEA; -fx-border-color: #403D58;" stylesheets="@usuario/fxmlagregarvacante.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.FXMLMostrarCandidatoController">
+<AnchorPane id="AnchorPane" prefHeight="403.0" prefWidth="641.0" style="-fx-background-color: #fefeff; -fx-border-color: #403D58;" stylesheets="@usuario/fxmlagregarvacante.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.FXMLMostrarCandidatoController">
    <children>
-      <JFXButton layoutX="527.0" layoutY="355.0" onAction="#cerrar" prefHeight="34.0" prefWidth="104.0" text="CERRAR" />
+      <JFXButton layoutX="527.0" layoutY="355.0" onAction="#cerrar" prefHeight="34.0" prefWidth="104.0" style="-fx-background-color: #097eab;" text="CERRAR" />
       <JFXTextField fx:id="tfRetribucionMinima" editable="false" layoutX="24.0" layoutY="341.0" prefHeight="25.0" prefWidth="243.0" />
       <JFXTextArea fx:id="taHabilidades" editable="false" layoutX="340.0" layoutY="222.0" prefHeight="77.0" prefWidth="278.0" />
       <JFXTextArea fx:id="taTitulaciones" editable="false" layoutX="24.0" layoutY="222.0" prefHeight="77.0" prefWidth="278.0" />

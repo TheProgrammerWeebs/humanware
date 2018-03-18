@@ -74,7 +74,6 @@ public class FXMLMostrarCandidatoController implements Initializable
             pane = cargador.load();
         } catch (IOException ex) {
             System.err.println("Error de lectura o escritura abriendo mostrarCandidato");
-            ex.printStackTrace();
         }
         FXMLMostrarCandidatoController controlador = cargador.getController();
         controlador.setCandidato(c);

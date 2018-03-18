@@ -4,7 +4,6 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
-import humanware.Empresa;
 import humanware.Habilidad;
 import humanware.Listas;
 import humanware.TipoJornada;

@@ -7,20 +7,14 @@ import humanware.Empresa;
 import humanware.Vacante;
 import humanware.login.Usuario;
 import humanware.utilidades.Utilidades;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import humanware.Habilidad;
 import humanware.Listas;
-import humanware.TipoJornada;
-import humanware.TitulacionEmpresa;
 import humanware.usuarios.FXMLMostrarCandidatoController;
-import humanware.utilidades.Rango;
-import humanware.utilidades.ListaEnlazada;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,7 +26,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 
 public class FXMLUsuarioController implements Initializable, ControladorUsuario
 {
@@ -90,14 +83,11 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        try {
-            inicializarComponentes();
-        } catch (IOException ex) {
-            System.out.println("Error al inicializar componentes de usuario");
-        }
+        
     }
-
-    public void inicializarComponentes() throws IOException {
+    
+    @Override
+    public void inicializarComponentes() {
         usuarioPane.setOnMousePressed(event
                 -> {
             xOffset = event.getSceneX();
@@ -110,7 +100,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         });
         inicializarEmpresas();
         inicializarVacantes();
-        inicializarCandidatos();
+        try {inicializarCandidatos();} catch(IOException ex){System.err.println("Error al inicializar candidato");}
     }
 
     public void cerrar() {
@@ -145,7 +135,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="lógica de empresas">
-    public void inicializarEmpresas() {
+    private void inicializarEmpresas() {
         tbEmpresas.setEditable(false);
         btAgregarEmpresa.setDefaultButton(true);
         tbcNombreEmpresa.setCellValueFactory(new PropertyValueFactory<>("nombre"));
@@ -186,21 +176,17 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         String ruta = "archivos\\database\\empresas";
         Empresa e = tbEmpresas.getSelectionModel().getSelectedItem();
         e.cargarVacantes();
-        for (Vacante v : e.getVacantes()) {
+        for (Vacante v : e.getVacantes()) 
             Utilidades.eliminarLinea(v.convertirString(), "archivos\\database\\vacantes");
-        }
         String empresa = e.getNombre() + ";" + e.getTelefonoSinEspacios();
         Utilidades.eliminarLinea(empresa, ruta);
         Listas.empresas.remove(e);
         btEliminarEmpresa.setDisable(true);
         tbEmpresas.getSelectionModel().select(null);
     }
-
-    
-
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="lógica de vacantes">
-    public void inicializarVacantes() {
+    private void inicializarVacantes() { 
         tbVacantes.setEditable(false);
         tbcNombreVacante.setCellValueFactory(new PropertyValueFactory<>("descripcionPuesto"));
         tbcEmpresaVacante.setCellValueFactory(new PropertyValueFactory<>("nombreEmpresa"));
@@ -212,7 +198,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
             }
         });
     }
-
+    
     public void agregarVacante() {
         try {
             Utilidades.abrirVentanaUsuario("/humanware/usuarios/usuario/FXMLAgregarVacante.fxml", "Agregar vacante");

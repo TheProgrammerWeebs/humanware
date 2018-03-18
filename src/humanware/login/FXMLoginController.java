@@ -76,7 +76,7 @@ public class FXMLoginController implements Initializable
                             JOptionPane.showMessageDialog(null, "Aún no hemos implementado esa opción :) lanzaré una excepción");
                             break;
                         case USUARIO:
-                            ruta = "/humanware/usuario/FXMLUsuario.fxml";
+                            ruta = "/humanware/usuarios/usuario/FXMLUsuario.fxml";
                             break;
                         case EVALUADOR:
                             JOptionPane.showMessageDialog(null, "Aún no hemos implementado esa opción :) lanzaré una excepción");
@@ -87,6 +87,7 @@ public class FXMLoginController implements Initializable
                 } catch (IOException ex)
                 {
                     System.err.println("Error de lectura o escritura en login");
+                    ex.printStackTrace();
                 }
             } else
             {
@@ -134,7 +135,6 @@ public class FXMLoginController implements Initializable
         stage.showAndWait();
         stage.getIcons().add(new Image(humanware.HumanWare.class.getResourceAsStream("/humanware/resources/logoFondo.png")));
         stage.centerOnScreen();
-        
     }
    
     private void actualizarCookies() throws IOException

@@ -1,5 +1,6 @@
-package humanware.usuario;
+package humanware.usuarios.usuario;
 
+import humanware.usuarios.FXMLMostrarController;
 import humanware.login.ControladorUsuario;
 import humanware.Candidato;
 import humanware.Empresa;
@@ -229,7 +230,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
 
     public void agregarVacante() {
         try {
-            Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarVacante.fxml", "Agregar vacante");
+            Utilidades.abrirVentanaUsuario("/humanware/usuarios/usuario/FXMLAgregarVacante.fxml", "Agregar vacante");
         } catch (IOException ex) {
             System.err.println("Error de lectuta o escritura al abrir agregar vacante");
         }
@@ -270,7 +271,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
     }
 
     public void verVacante() throws IOException {
-        FXMLLoader cargador = new FXMLLoader(humanware.HumanWare.class.getResource("/humanware/usuario/FXMLMostrar.fxml"));
+        FXMLLoader cargador = new FXMLLoader(humanware.HumanWare.class.getResource("/humanware/usuarios/FXMLMostrar.fxml"));
         AnchorPane pane = cargador.load();
         FXMLMostrarController controlador = cargador.getController();
         Vacante v = tbVacantes.getSelectionModel().getSelectedItem();
@@ -282,6 +283,8 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         stage.centerOnScreen();
         stage.show();
         tbVacantes.getSelectionModel().select(null);
+        btVerVacante.setDisable(true);
+        btEliminarVacante.setDisable(true);
     }
 
     // </editor-fold>    
@@ -305,7 +308,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         });
     }
     public void abrirAgregarCandidato() throws IOException {
-        Utilidades.abrirVentanaUsuario("/humanware/usuario/FXMLAgregarCandidato.fxml", "Agregar candidato");
+        Utilidades.abrirVentanaUsuario("/humanware/usuarios/usuario/FXMLAgregarCandidato.fxml", "Agregar candidato");
     }
     public void eliminarCandidatos()
     {

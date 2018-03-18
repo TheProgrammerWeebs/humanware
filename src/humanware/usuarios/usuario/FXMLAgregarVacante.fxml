@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="vacantePane" prefHeight="553.0" prefWidth="684.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuario.FXMLAgregarVacanteController">
+<AnchorPane id="AnchorPane" fx:id="vacantePane" prefHeight="553.0" prefWidth="684.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.usuario.FXMLAgregarVacanteController">
     <stylesheets>
         <URL value="@fxmlagregarvacante.css" />
     </stylesheets>

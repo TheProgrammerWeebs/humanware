@@ -3,6 +3,12 @@
     -fx-border-color: #403D58 
 }
 
+
+.text-field{
+    -fx-text-fill: black;
+    -fx-prompt-text-fill: #6E7271;
+}
+
 .button{
     -fx-background-color: #135589;
     -fx-text-fill: white;

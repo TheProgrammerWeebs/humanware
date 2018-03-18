@@ -1,4 +1,4 @@
-package humanware.usuario;
+package humanware.usuarios.usuario;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;

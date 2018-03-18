@@ -11,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="usuarioPane" prefHeight="515.0" prefWidth="808.0" style="-fx-background-color: #FCFBF7;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuario.FXMLUsuarioController">
+<AnchorPane id="AnchorPane" fx:id="usuarioPane" prefHeight="515.0" prefWidth="808.0" style="-fx-background-color: #FCFBF7;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.usuario.FXMLUsuarioController">
     <stylesheets>
         <URL value="@fxmlusuario.css" />
     </stylesheets>
@@ -29,8 +29,8 @@
                           </columns>
                         </TableView>
                         <JFXButton fx:id="btEliminarEmpresa" disable="true" layoutX="533.0" layoutY="370.0" onAction="#eliminarEmpresa" prefHeight="39.0" prefWidth="232.0" style="-fx-background-color: #474B4F;" text="ELIMINAR" textFill="#aabbb8" />
-                        <JFXTextField fx:id="tfNombre" layoutX="531.0" layoutY="34.0" prefHeight="25.0" prefWidth="236.0" promptText="Ingrese el nombre de la empresa" style="-fx-text-inner-color: white;" />
-                        <JFXTextField fx:id="tfTelefono" layoutX="531.0" layoutY="81.0" prefHeight="25.0" prefWidth="236.0" promptText="Ingrese el teléfono" style="-fx-text-inner-color: white;" />
+                        <JFXTextField fx:id="tfNombre" layoutX="531.0" layoutY="34.0" prefHeight="25.0" prefWidth="236.0" promptText="Ingrese el nombre de la empresa" />
+                        <JFXTextField fx:id="tfTelefono" layoutX="531.0" layoutY="81.0" prefHeight="25.0" prefWidth="236.0" promptText="Ingrese el teléfono" />
                         <JFXButton fx:id="btAgregarEmpresa" layoutX="641.0" layoutY="122.0" onAction="#agregarEmpresa" prefHeight="29.0" prefWidth="126.0" text="AGREGAR" textFill="#aabbb8" />
                         <Label fx:id="lbErrorEmpresas" layoutX="533.0" layoutY="158.0" textFill="RED" visible="false" wrapText="true" />
                      </children></AnchorPane>
@@ -72,17 +72,17 @@
       </TabPane>
       <ImageView fx:id="imgCerrar" fitHeight="29.0" fitWidth="29.0" layoutX="765.0" layoutY="14.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/close.png" />
+            <Image url="@../../resources/close.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#abrirConfiguracion" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/settings.png" />
+            <Image url="@../../resources/settings.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="56.0" layoutY="14.0" onMouseClicked="#cambiarDeUsuario" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/change.png" />
+            <Image url="@../../resources/change.png" />
          </image>
       </ImageView>
    </children>

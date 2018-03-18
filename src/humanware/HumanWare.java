@@ -23,6 +23,7 @@ public class HumanWare extends Application
     
     public void inicializarComponentes(Stage stage)
     {
+        Listas.cargarListas();
         try
         {
             AnchorPane pane = FXMLLoader.load(humanware.HumanWare.class.getResource("/humanware/login/FXMLLogin.fxml"));

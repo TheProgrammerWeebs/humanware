@@ -5,12 +5,20 @@ import com.jfoenix.controls.JFXTextField;
 import humanware.Habilidad;
 import humanware.TitulacionEmpresa;
 import humanware.Vacante;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 public class FXMLMostrarController implements Initializable
 {
     @FXML private JFXTextField tfDescripcionVer;
@@ -22,7 +30,8 @@ public class FXMLMostrarController implements Initializable
     @FXML private JFXRadioButton rbAmbasVer;
     @FXML private JFXTextArea taTitulacionesVer;
     @FXML private JFXTextArea taHabilidadesVer;
-    @FXML private AnchorPane mostrarPane;
+    private AnchorPane mostrarPane;
+    
     private Vacante vacante;
     private double xOffset;
     private double yOffset;
@@ -32,7 +41,7 @@ public class FXMLMostrarController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb) 
     {
-        inicializarComponentes();
+        
     }    
     
     public void inicializarComponentes()
@@ -44,7 +53,28 @@ public class FXMLMostrarController implements Initializable
         rbCompletaVer.setToggleGroup(grupo);
     }
     
-    public void inicializarMover()
+    public static void mostrarVacante(Vacante v)
+    {
+        FXMLLoader cargador = new FXMLLoader(humanware.HumanWare.class.getResource("/humanware/usuarios/FXMLMostrar.fxml"));
+        AnchorPane pane = null;
+        try {
+            pane = cargador.load();
+        } catch (IOException ex) {
+            System.err.println("Error al mostrar vacante");
+        }
+        FXMLMostrarController controlador = cargador.getController();        
+        controlador.mostrarPane = pane;
+        controlador.inicializarComponentes();
+        controlador.setVacante(v);  
+        Stage stage = new Stage(StageStyle.UNDECORATED);
+        stage.setScene(new Scene(pane));
+        stage.setTitle("Ver vacante: " + v.getDescripcion());
+        stage.getIcons().add(new Image(humanware.HumanWare.class.getResourceAsStream("/humanware/resources/logoFondo.png")));
+        stage.centerOnScreen();
+        stage.show();
+    }
+    
+    private void inicializarMover()
     {
         mostrarPane.setOnMousePressed(event ->
         {
@@ -63,8 +93,8 @@ public class FXMLMostrarController implements Initializable
         this.vacante = vacante;
         tfDescripcionVer.setText(vacante.getDescripcion());
         tfEmpresaVer.setText(vacante.getNombreEmpresa());
-        tfMinSalarioVer.setText(Double.toString(vacante.getSalario().min));
-        tfMaxSalarioVer.setText(Double.toString(vacante.getSalario().max));
+        tfMinSalarioVer.setText(Double.toString(vacante.getSalario().min) + " COP");
+        tfMaxSalarioVer.setText(Double.toString(vacante.getSalario().max) + " COP");
         switch (vacante.getTipoJornada()) {
             case PARCIAL:
                 rbParcialVer.setSelected(true);

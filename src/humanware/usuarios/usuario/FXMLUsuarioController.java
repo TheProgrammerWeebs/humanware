@@ -18,6 +18,7 @@ import humanware.Habilidad;
 import humanware.Listas;
 import humanware.TipoJornada;
 import humanware.TitulacionEmpresa;
+import humanware.usuarios.FXMLMostrarCandidatoController;
 import humanware.utilidades.Rango;
 import humanware.utilidades.ListaEnlazada;
 import javafx.fxml.FXML;
@@ -155,7 +156,6 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
                 btEliminarEmpresa.setDisable(false);
             }
         });
-        cargarEmpresas();
     }
 
     public void agregarEmpresa() {
@@ -196,21 +196,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         tbEmpresas.getSelectionModel().select(null);
     }
 
-    public void cargarEmpresas() {
-        String ruta = "archivos\\database\\empresas";
-        try (BufferedReader lector = Utilidades.openFileRead(ruta)) {
-            while (lector.ready()) {
-                String linea = lector.readLine();
-                boolean encontrado = false;
-                ListaEnlazada<String> campos = Utilidades.split(linea, ";");
-                if (!Utilidades.quitarEspacios(linea).equals("")) {
-                    Listas.empresas.addFinal(new Empresa(campos.get(0), campos.get(1)));
-                }
-            }
-        } catch (IOException ex) {
-            System.err.println("Error de lectura o escritura");
-        }
-    }
+    
 
     // </editor-fold>
     // <editor-fold defaultstate="collapsed" desc="lógica de vacantes">
@@ -225,7 +211,6 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
                 btVerVacante.setDisable(false);
             }
         });
-        cargarVacantes();
     }
 
     public void agregarVacante() {
@@ -245,46 +230,13 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         tbVacantes.getSelectionModel().select(null);
     }
 
-    public void cargarVacantes() {
-        String ruta = "archivos\\database\\vacantes";
-        try (BufferedReader lector = Utilidades.openFileRead(ruta)) {
-            while (lector.ready()) {
-                String linea = lector.readLine();
-                boolean encontrado = false;
-                if (!Utilidades.quitarEspacios(linea).equals("")) {
-                    ListaEnlazada<String> campos = Utilidades.split(linea, ";");
-                    Vacante vaca = new Vacante();
-                    vaca.setDescripcion(campos.get(Vacante.DESCRIPCION));
-                    vaca.setTipoJornada(TipoJornada.convertirAJornada(campos.get(Vacante.JORNADA)));
-                    vaca.setNombreEmpresa(campos.get(Vacante.EMPRESA));
-                    vaca.setSalario(Rango.convertirARango(campos.get(Vacante.SALARIO)));
-                    vaca.setTitulaciones(TitulacionEmpresa.convertirATitulaciones(campos.get(Vacante.TITULACIONES)));
-                    if (campos.size() > 5) {
-                        vaca.setHabilidades(Habilidad.convertirAHabilidades(campos.get(Vacante.HABILIDADES))); //Si tiene habilidades
-                    }
-                    Listas.vacantes.addFinal(vaca);
-                }
-            }
-        } catch (IOException ex) {
-            System.err.println("Error de lectura o escritura");
-        }
-    }
-
+   
     public void verVacante() throws IOException {
-        FXMLLoader cargador = new FXMLLoader(humanware.HumanWare.class.getResource("/humanware/usuarios/FXMLMostrar.fxml"));
-        AnchorPane pane = cargador.load();
-        FXMLMostrarController controlador = cargador.getController();
-        Vacante v = tbVacantes.getSelectionModel().getSelectedItem();
-        controlador.setVacante(v);
-        Stage stage = new Stage(StageStyle.UNDECORATED);
-        stage.setScene(new Scene(pane));
-        stage.setTitle("Ver vacante: " + v.getDescripcion());
-        stage.getIcons().add(new Image(humanware.HumanWare.class.getResourceAsStream("/humanware/resources/logoFondo.png")));
-        stage.centerOnScreen();
-        stage.show();
+        
+        FXMLMostrarController.mostrarVacante(tbVacantes.getSelectionModel().getSelectedItem());
         tbVacantes.getSelectionModel().select(null);
         btVerVacante.setDisable(true);
-        btEliminarVacante.setDisable(true);
+        this.btEliminarVacante.setDisable(true);
     }
 
     // </editor-fold>    
@@ -294,12 +246,6 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         this.tbcNombreCandidato.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         this.tbcEmailCandidato.setCellValueFactory(new PropertyValueFactory<>("email"));
         this.tbCandidatos.setItems(Listas.candidatos.getObservableListAsociada());
-        BufferedReader buffer = Utilidades.openFileRead("archivos\\database\\candidatos");
-        String linea;
-        while (buffer.ready()) {
-            linea = buffer.readLine();
-            Listas.candidatos.addFinal(Candidato.parseCandidato(linea));
-        }
         tbCandidatos.getSelectionModel().selectedItemProperty().addListener((obs, viejo, nuevo) -> {
             if (nuevo != null) {
                 btEliminarCandidato.setDisable(false);
@@ -321,7 +267,10 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
     
     public void mostrarCandidato()
     {
-        
+        FXMLMostrarCandidatoController.mostrarCandidato(tbCandidatos.getSelectionModel().getSelectedItem());
+        btVerCandidato.setDisable(true);
+        btEliminarCandidato.setDisable(true);
+        tbCandidatos.getSelectionModel().select(null);
     }
 
     //</editor-fold>

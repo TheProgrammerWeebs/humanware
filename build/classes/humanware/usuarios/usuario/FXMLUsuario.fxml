@@ -57,7 +57,7 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="tab-pane">
                      <children>
                         <JFXButton layoutX="603.0" layoutY="14.0" onAction="#abrirAgregarCandidato" prefHeight="36.0" prefWidth="164.0" text="AGREGAR CANDIDATO" textFill="#aabbb8" />
-                        <JFXButton fx:id="btVerCandidato" disable="true" layoutX="603.0" layoutY="60.0" prefHeight="36.0" prefWidth="164.0" text="VER CANDIDATO" textFill="#aabbb8" />
+                        <JFXButton fx:id="btVerCandidato" disable="true" layoutX="603.0" layoutY="60.0" onAction="#mostrarCandidato" prefHeight="36.0" prefWidth="164.0" text="VER CANDIDATO" textFill="#aabbb8" />
                         <JFXButton fx:id="btEliminarCandidato" disable="true" layoutX="603.0" layoutY="105.0" onAction="#eliminarCandidatos" prefHeight="36.0" prefWidth="164.0" style="-fx-background-color: #F44336;" text="ELIMINAR CANDIDATO" textFill="WHITE" />
                         <TableView fx:id="tbCandidatos" layoutX="14.0" layoutY="14.0" prefHeight="361.0" prefWidth="562.0">
                            <columns>

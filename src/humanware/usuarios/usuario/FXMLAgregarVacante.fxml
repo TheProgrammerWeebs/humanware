@@ -37,7 +37,7 @@
       <JFXButton layoutX="449.0" layoutY="498.0" onAction="#agregarVacante" prefHeight="41.0" prefWidth="221.0" style="-fx-background-color: #8BC34A; -fx-text-fill: white;" styleClass="agregar" text="AGREGAR VACANTE" />
       <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="634.0" layoutY="13.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../resources/close.png" />
+            <Image url="@../../resources/close.png" />
          </image>
       </ImageView>
       <JFXComboBox fx:id="cbNivel" layoutX="535.0" layoutY="372.0" prefHeight="25.0" prefWidth="113.0" promptText="Nivel" />

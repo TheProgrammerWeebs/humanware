@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -7,6 +9,28 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="411.0" prefWidth="576.0" stylesheets="@fxmlusuario.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="humanware.usuarios.FXMLMostrarCandidatoController">
-    
+<AnchorPane id="AnchorPane" prefHeight="403.0" prefWidth="641.0" style="-fx-background-color: #F2EFEA; -fx-border-color: #403D58;" stylesheets="@usuario/fxmlagregarvacante.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.FXMLMostrarCandidatoController">
+   <children>
+      <JFXButton layoutX="527.0" layoutY="355.0" onAction="#cerrar" prefHeight="34.0" prefWidth="104.0" text="CERRAR" />
+      <JFXTextField fx:id="tfRetribucionMinima" editable="false" layoutX="24.0" layoutY="341.0" prefHeight="25.0" prefWidth="243.0" />
+      <JFXTextArea fx:id="taHabilidades" editable="false" layoutX="340.0" layoutY="222.0" prefHeight="77.0" prefWidth="278.0" />
+      <JFXTextArea fx:id="taTitulaciones" editable="false" layoutX="24.0" layoutY="222.0" prefHeight="77.0" prefWidth="278.0" />
+      <JFXRadioButton fx:id="rbCompleta" disable="true" layoutX="378.0" layoutY="157.0" text="Completa" />
+      <JFXRadioButton fx:id="rbAmbas" disable="true" layoutX="489.0" layoutY="157.0" text="Ambas" />
+      <JFXRadioButton fx:id="rbParcial" disable="true" layoutX="279.0" layoutY="157.0" text="Parcial" />
+      <JFXTextField fx:id="tfEmail" editable="false" layoutX="24.0" layoutY="153.0" prefHeight="25.0" prefWidth="243.0" />
+      <JFXTextField fx:id="tfTelefono" editable="false" layoutX="412.0" layoutY="90.0" prefHeight="25.0" prefWidth="188.0" />
+      <JFXTextField fx:id="tfNombreCandidato" editable="false" layoutX="24.0" layoutY="90.0" prefHeight="25.0" prefWidth="353.0" />
+      <Label layoutX="24.0" layoutY="24.0" text="Ver candidatos" textFill="#135589">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="70.0" text="Nombre" />
+      <Label layoutX="412.0" layoutY="70.0" text="Número de telefono" />
+      <Label layoutX="24.0" layoutY="136.0" text="Correo electrónico" />
+      <Label layoutX="24.0" layoutY="201.0" text="Titulaciones" />
+      <Label layoutX="345.0" layoutY="201.0" text="Habilidades" />
+      <Label layoutX="24.0" layoutY="324.0" text="Retribucion mínima" />
+   </children>
 </AnchorPane>

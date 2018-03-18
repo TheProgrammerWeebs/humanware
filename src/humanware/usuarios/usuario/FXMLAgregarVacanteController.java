@@ -71,8 +71,6 @@ public class FXMLAgregarVacanteController implements Initializable
     }
 
     private void inicializarComponentes() {
-        inicializarNombreEmpresas();
-        Listas.inicializarTitulos();
         inicializarMover();
         grupo = new ToggleGroup();
         rbCompleta.setToggleGroup(grupo);
@@ -86,7 +84,6 @@ public class FXMLAgregarVacanteController implements Initializable
             if (!cbTitulos.getItems().isEmpty() && nuevo != null && nuevo.equals("--No aparece en la lista--")) {
                 try {
                     agregarTitulacionBaseDatos(ObtenerDatos.mostrarVentana("Ingrese el nombre de la titulación", "Agregar titulación"));
-                    Listas.inicializarTitulos();
                     cbTitulos.setItems(Listas.titulos);
                 } catch (IOException ex) {
                     System.out.println("Error de lectura o escritura al abrir obtener datos");
@@ -106,14 +103,6 @@ public class FXMLAgregarVacanteController implements Initializable
             vacantePane.getScene().getWindow().setX(event.getScreenX() - xOffset);
             vacantePane.getScene().getWindow().setY(event.getScreenY() - yOffset);
         });
-    }
-
-    private void inicializarNombreEmpresas() {
-        if (!Listas.empresas.estaVacia()) {
-            for (Empresa e : Listas.empresas) {
-                Listas.nombreEmpresas.add(e.getNombre());
-            }
-        }
     }
 
     public void cerrar() {
@@ -154,7 +143,7 @@ public class FXMLAgregarVacanteController implements Initializable
         PrintWriter pw = Utilidades.openFileWrite(ruta, true);
         pw.println(titulacion);
         pw.close();
-        Listas.inicializarTitulos();
+        Listas.cargarTitulos();
     }
 
     public void agregarHabilidad() {

@@ -63,7 +63,6 @@ public class FXMLAgregarCandidatoController implements Initializable
 
     public void inicializarComponentes() {
         inicializarMover();
-        Listas.inicializarTitulos();
         grupo = new ToggleGroup();
         rbAmbas.setToggleGroup(grupo);
         rbParcial.setToggleGroup(grupo);

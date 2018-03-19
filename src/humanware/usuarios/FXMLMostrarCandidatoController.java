@@ -94,6 +94,7 @@ public class FXMLMostrarCandidatoController implements Initializable
 
     private void inicializarCandidato() {
         tfNombreCandidato.setText(candidato.getNombre());
+        tfTelefono.setText(candidato.getTelefono());
         tfEmail.setText(candidato.getEmail());
         tfRetribucionMinima.setText(Double.toString(candidato.getRetribucion()) + " COP");
         switch (candidato.getTipoJornada()) {

@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 public class ListaEnlazada<T> implements Iterable<T>
 {
+
     @Override
     public Iterator<T> iterator() {
         return new IteradorLista();
@@ -16,7 +17,9 @@ public class ListaEnlazada<T> implements Iterable<T>
     //<editor-fold defaultstate="collapsed" desc="Implementación de Iterator">
     private class IteradorLista implements Iterator<T>
     {
+
         int actual = 0;
+
         @Override
         public boolean hasNext() {
             if (actual < ListaEnlazada.this.size) {
@@ -55,7 +58,6 @@ public class ListaEnlazada<T> implements Iterable<T>
             this.informacion = informacion;
         }
     }
-
 
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Interface comparador nodos">
@@ -101,39 +103,53 @@ public class ListaEnlazada<T> implements Iterable<T>
     public void addOrdenado(T info, ComparadorNodos comparador) {
         observableListAsociada.add(info);
         Nodo nuevo = new Nodo(info);
-        for (int i = 0; i < size; i++) {
-            if (comparador.compararCon(this.get(i), this.get(i + 1)) > 0) {
-                System.out.println("Lista no ordenada");
-                return; //La lista no está ordenada; no se añade nada
-            }
-        }
-        if (primerNodo == null) {
-            primerNodo = nuevo;
+//        System.out.println("Añadiendo: " + info);
+        System.out.println("ultimoNodo = " + ultimoNodo);
+//        System.out.println("nuevo = " + nuevo);
+        System.out.println("------------------");        
+        this.imprimir();
+        System.out.println("------------------");
+        if (ultimoNodo != null && ultimoNodo.informacion.equals(nuevo.informacion)) {
+            ultimoNodo.link = nuevo;
+            ultimoNodo = nuevo;
         } else {
-            Nodo<T> anterior = null;
-            Nodo<T> actual = primerNodo;
-            while (comparador.compararCon(actual.informacion, info) < 0 && actual.link != null) {
-                actual = actual.link;
-                anterior = actual;
-            }
-            if (comparador.compararCon(info, actual.informacion) == 0) {
-                JOptionPane.showMessageDialog(null, "No se aceptan datos repetidos");
-            } else {
-                if (comparador.compararCon(actual.informacion, info) > 0) {
-                    if (comparador.compararCon(actual.informacion, info) == 0) {
-                        nuevo.link = primerNodo;
-                        primerNodo = nuevo;
-                    } else if (anterior != null) {
-                        anterior.link = nuevo;
-                        nuevo.link = actual;
+            for (int i = 0; i < size; i++) {
+                if (i+1 < size())
+                {
+                    if(comparador.compararCon(this.get(i), this.get(i + 1)) > 0) {
+                        System.out.println("Lista no ordenada");
+                        return; //La lista no está ordenada; no se añade nada
                     }
+                }
+            }
+            if (primerNodo == null) {
+                primerNodo = nuevo;
+                ultimoNodo = nuevo;
+            } else {
+                Nodo<T> anterior = null;
+                Nodo<T> actual = primerNodo;
+                while (comparador.compararCon(actual.informacion, info) < 0 && actual.link != null) {
+                    actual = actual.link;
+                    anterior = actual;
+                }
+                if (comparador.compararCon(info, actual.informacion) == 0) {
+                    JOptionPane.showMessageDialog(null, "No se aceptan datos repetidos");
                 } else {
-                    actual.link = nuevo;
-                    nuevo.link = null;
+                    if (comparador.compararCon(actual.informacion, info) > 0) {
+                        if (comparador.compararCon(actual.informacion, info) == 0) {
+                            nuevo.link = primerNodo;
+                            primerNodo = nuevo;
+                        } else if (anterior != null) {
+                            anterior.link = nuevo;
+                            nuevo.link = actual;
+                        }
+                    } else {
+                        actual.link = nuevo;
+                        nuevo.link = null;
+                    }
                 }
             }
         }
-
         size++;
     }
 
@@ -240,12 +256,11 @@ public class ListaEnlazada<T> implements Iterable<T>
         getNodo(index).informacion = info;
     }
 
-
     public ObservableList<T> getObservableListAsociada() {
         return observableListAsociada;
     }
-    public void imprimir()
-    {
+
+    public void imprimir() {
         for (T t : this) {
             System.out.print(t + " ");
         }

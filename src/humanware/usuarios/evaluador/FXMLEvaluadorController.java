@@ -29,21 +29,23 @@ import javafx.stage.StageStyle;
 
 public class FXMLEvaluadorController implements Initializable, ControladorUsuario
 {
-
     @FXML
-    TableView<Vacante> tbVacantes;
+    private TableView<Vacante> tbVacantes;
     @FXML
-    TableColumn<Vacante, String> tbcDescripcion;
+    private TableColumn<Vacante, String> tbcDescripcion;
     @FXML
-    TableColumn<Vacante, String> tbcEmpresa;
+    private TableColumn<Vacante, String> tbcEmpresa;
     @FXML
-    JFXButton btEvaluar;
+    private JFXButton btEvaluar;
     @FXML
-    AnchorPane evaluadorPane;
+    private JFXButton btMarcar;
+    @FXML
+    private AnchorPane evaluadorPane;
 
     private double xOffset;
     private double yOffset;
     private Usuario usuario;
+    private ListaEnlazada<Vacante> vacantesEvaluar;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -51,12 +53,17 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
     }
 
     private void inicializarVacantes() {
+        vacantesEvaluar = new ListaEnlazada<>();
+        for (Vacante c: Listas.vacantes) {
+            if (!c.estaEvaluada()) vacantesEvaluar.addFinal(c);
+        }
         tbcEmpresa.setCellValueFactory(new PropertyValueFactory<>("nombreEmpresa"));
         tbcDescripcion.setCellValueFactory(new PropertyValueFactory<>("descripcionPuesto"));
-        tbVacantes.setItems(Listas.vacantes.getObservableListAsociada());
+        tbVacantes.setItems(this.vacantesEvaluar.getObservableListAsociada());
         tbVacantes.getSelectionModel().selectedIndexProperty().addListener((valor, viejo, nuevo) -> {
             if (nuevo != null) {
                 btEvaluar.setDisable(false);
+                btMarcar.setDisable(false);
             }
         });
     }
@@ -91,31 +98,32 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
         FXMLLoader cargador = new FXMLLoader(humanware.HumanWare.class.getResource("/humanware/usuarios/evaluador/FXMLEvaluarVacante.fxml"));        
         Vacante v = tbVacantes.getSelectionModel().getSelectedItem();
         ListaEnlazada<Candidato> aptos = obtenerAptos(v);
+        tbVacantes.getSelectionModel().select(null);
+        btEvaluar.setDisable(true);
+        btMarcar.setDisable(true);
         AnchorPane pane;
         try{pane = cargador.load();}
         catch(IOException ex){System.err.println("Error al abrir evaluar"); pane=null;ex.printStackTrace();}
         FXMLEvaluarVacanteController controlador = cargador.getController();
-        controlador.setAptos(aptos);
+        controlador.setAptos(aptos, v);
         Stage st = new Stage(StageStyle.UNDECORATED);
         st.setScene(new Scene(pane));
         st.initModality(Modality.APPLICATION_MODAL);
         st.setTitle("Evaluando " + v.getDescripcion());
         st.getIcons().add(new Image(humanware.HumanWare.class.getResourceAsStream("/humanware/resources/logoFondo.png")));
         st.showAndWait();
-        btEvaluar.setDisable(true);
-        tbVacantes.getSelectionModel().select(null);
     }
 
     private ListaEnlazada<Candidato> obtenerAptos(Vacante v) {
         ListaEnlazada<Candidato> aptos = new ListaEnlazada<>();
         for (Candidato c : Listas.candidatos) {
-            System.out.println("c = " + c);
             boolean apto = false;
             for (TitulacionEmpresa titulacion : v.getTitulaciones()) {
                 for (String titulacionCandidato : c.getTitulaciones()) {
                     if (titulacion.titulacion.equals(titulacionCandidato)) {
                         c.setPuntuacion(c.getPuntuacion() + titulacion.importancia);
-                        apto = true;
+                        apto = v.getAptos().estaVacia() ? true : !v.getAptos().existe(c);
+                        System.out.println("apto = " + apto);
                     }
                 }
             }
@@ -126,6 +134,8 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
                         if (hCandidato.habilidad.equals(h.habilidad))
                             c.setPuntuacion(c.getPuntuacion() + h.nivel);
                 }
+                if (c.getRetribucion() < v.getSalario().min) c.setPuntuacion(c.getPuntuacion() + 2);
+                if (c.getRetribucion() < v.getSalario().max) c.setPuntuacion(c.getPuntuacion() + 1);
                 aptos.addOrdenado(c, (ComparadorNodos<Candidato>) (Candidato a, Candidato b) -> a.getPuntuacion() - b.getPuntuacion());
             }
         }

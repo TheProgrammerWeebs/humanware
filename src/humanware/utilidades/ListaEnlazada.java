@@ -8,7 +8,6 @@ import javax.swing.JOptionPane;
 
 public class ListaEnlazada<T> implements Iterable<T>
 {
-
     @Override
     public Iterator<T> iterator() {
         return new IteradorLista();
@@ -173,11 +172,13 @@ public class ListaEnlazada<T> implements Iterable<T>
 
     public boolean remove(T info) {
         observableListAsociada.remove(info);
-        if (primerNodo.getInformacion().getClass().equals(info)) {
+        System.out.println("primerNodo.getInformacion() = " + primerNodo.getInformacion());
+        if (primerNodo.getInformacion().equals(info)) {
             primerNodo = primerNodo.link;
         } else {
             Nodo anterior = primerNodo;
             Nodo actual = anterior.link;
+            System.out.println("actual = " + actual);
             while (!actual.informacion.getClass().equals(info)) {
                 anterior = anterior.link;
                 actual = actual.link;

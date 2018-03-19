@@ -137,7 +137,7 @@ public class FXMLAgregarVacanteController implements Initializable
         }
     }
 
-    public void agregarTitulacionBaseDatos(String titulacion) throws IOException {
+    public static void agregarTitulacionBaseDatos(String titulacion) throws IOException {
         String ruta = "archivos\\database\\titulos";
         PrintWriter pw = Utilidades.openFileWrite(ruta, true);
         pw.println(titulacion);

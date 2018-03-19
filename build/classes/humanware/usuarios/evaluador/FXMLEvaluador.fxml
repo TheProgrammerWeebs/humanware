@@ -8,14 +8,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="evaluadorPane" prefHeight="504.0" prefWidth="815.0" style="-fx-background-color: #FCFBF7; -fx-border-color: #403D58;" stylesheets="@../fxmlusuario.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.evaluador.FXMLEvaluadorController">
+<AnchorPane id="AnchorPane" fx:id="evaluadorPane" prefHeight="421.0" prefWidth="815.0" style="-fx-background-color: #FCFBF7; -fx-border-color: #403D58;" stylesheets="@../fxmlusuario.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.evaluador.FXMLEvaluadorController">
    <children>
-      <TableView fx:id="tbVacantes" layoutX="14.0" layoutY="69.0" prefHeight="419.0" prefWidth="538.0">
-        <columns>
-          <TableColumn fx:id="tbcDescripcion" editable="false" prefWidth="276.0" sortable="false" text="Descripcion" />
-            <TableColumn fx:id="tbcEmpresa" editable="false" prefWidth="261.0" sortable="false" text="Empresa" />
-        </columns>
-      </TableView>
       <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="14.0" layoutY="14.0" onMouseClicked="#abrirConfiguracion" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/settings.png" />
@@ -26,11 +20,18 @@
             <Image url="@../../resources/change.png" />
          </image>
       </ImageView>
-      <JFXButton fx:id="btEvaluar" disable="true" layoutX="577.0" layoutY="69.0" onAction="#evaluar" prefHeight="44.0" prefWidth="216.0" text="EVALUAR CANDIDATOS" />
       <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="764.0" layoutY="14.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/close.png" />
          </image>
       </ImageView>
+      <TableView fx:id="tbVacantes" layoutX="22.0" layoutY="70.0" prefHeight="328.0" prefWidth="538.0">
+         <columns>
+            <TableColumn fx:id="tbcDescripcion" editable="false" prefWidth="276.0" sortable="false" text="Descripcion" />
+            <TableColumn fx:id="tbcEmpresa" editable="false" prefWidth="261.0" sortable="false" text="Empresa" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="btEvaluar" disable="true" layoutX="578.0" layoutY="70.0" onAction="#evaluar" prefHeight="44.0" prefWidth="216.0" text="EVALUAR CANDIDATOS" />
+      <JFXButton fx:id="btMarcar" disable="true" layoutX="578.0" layoutY="126.0" prefHeight="44.0" prefWidth="216.0" text="MARCAR COMO EVALUADA" />
    </children>
 </AnchorPane>

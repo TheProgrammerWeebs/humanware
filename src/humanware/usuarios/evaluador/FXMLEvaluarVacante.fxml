@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="paneEvaluar" prefHeight="387.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../fxmlusuario.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.evaluador.FXMLEvaluarVacanteController">
+<AnchorPane id="AnchorPane" fx:id="paneEvaluar" prefHeight="403.0" prefWidth="600.0" styleClass="mainFxmlClass" stylesheets="@../fxmlusuario.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.evaluador.FXMLEvaluarVacanteController">
     <children>
         <TableView fx:id="tbCandidatos" layoutX="14.0" layoutY="48.0" prefHeight="311.0" prefWidth="432.0">
             <columns>
@@ -19,9 +19,8 @@
                 </TableColumn>
             </columns>
         </TableView>
-        <JFXButton layoutX="459.0" layoutY="46.0" prefHeight="29.0" prefWidth="128.0" text="CONTRATAR" />
-        <JFXButton layoutX="459.0" layoutY="83.0" prefHeight="29.0" prefWidth="128.0" text="DETALLES" />
-        <JFXButton layoutX="459.0" layoutY="120.0" prefHeight="29.0" prefWidth="128.0" style="-fx-background-color: #FF1B1C;" text="RECHAZAR" />
+        <JFXButton fx:id="btSeleccionar" disable="true" layoutX="459.0" layoutY="46.0" onAction="#seleccionar" prefHeight="29.0" prefWidth="128.0" text="SELECCIONAR" />
+        <JFXButton fx:id="btDetalles" disable="true" layoutX="459.0" layoutY="83.0" onAction="#detalles" prefHeight="29.0" prefWidth="128.0" text="DETALLES" />
         <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="558.0" layoutY="8.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../resources/close.png" />

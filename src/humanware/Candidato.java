@@ -3,22 +3,23 @@ package humanware;
 import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.Utilidades;
 import java.time.LocalDateTime;
+import java.util.UUID;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Candidato
 {
+    private double retribucion;
     private final String codigo;
+    private SimpleIntegerProperty puntuacion;
     private SimpleStringProperty email;
     private SimpleStringProperty nombre;
     private String telefono;
-    private double retribucion;
+    private TipoJornada tipoJornada;
     private ListaEnlazada<String> titulaciones;
     private ListaEnlazada<Habilidad> habilidades;
-    private TipoJornada tipoJornada;
-    private final int anioActual = LocalDateTime.now().getYear();
-    private static int nCandidatos = 0;
-    private SimpleIntegerProperty puntuacion;
+    private ListaEnlazada<Vacante> vacantes;
+
 
     public static final int NOMBRE = 0;
     public static final int TELEFONO = 1;
@@ -29,10 +30,11 @@ public class Candidato
     public static final int HABILIDADES = 6;
 
     public Candidato() {
+        vacantes = new ListaEnlazada<>();
         nombre = new SimpleStringProperty();
         email = new SimpleStringProperty();
         puntuacion = new SimpleIntegerProperty();
-        this.codigo = Integer.toString(anioActual) + Integer.toString(nCandidatos++);
+        this.codigo = UUID.randomUUID().toString();
     }
 
     public Candidato(String nombre, String telefono, String email, ListaEnlazada<String> titulaciones, ListaEnlazada<Habilidad> habilidades, TipoJornada tipoJornada, double retribucion) {
@@ -74,9 +76,7 @@ public class Candidato
                 linea += titulaciones.get(i) + ",";
             }
         }
-        //System.out.println("HABILIDADES");
         habilidades.imprimir();
-        //System.out.println("Habilidad.convertirString(habilidades) = " + Habilidad.convertirString(habilidades));
         linea += Habilidad.convertirString(habilidades);
         return linea;
     }
@@ -134,6 +134,7 @@ public class Candidato
         ListaEnlazada<String> campos = Utilidades.split(linea, ";");
         ListaEnlazada<String> titulaciones = Utilidades.split(campos.get(Candidato.TITULACIONES), ",");
         ListaEnlazada<Habilidad> habilidades = Habilidad.convertirAHabilidades(campos.get(Candidato.HABILIDADES));
+        ListaEnlazada<Vacante> vacantes = new ListaEnlazada<>();
         Candidato candidato = new Candidato();
         candidato.setNombre(campos.get(Candidato.NOMBRE));
         candidato.setEmail(campos.get(Candidato.EMAIL));
@@ -163,6 +164,16 @@ public class Candidato
 
     public void addTitulacion(String t) {
         titulaciones.addFinal(t);
+    }
+    
+    public void addVacante(Vacante v)
+    {
+        vacantes.addFinal(v);
+    }
+    
+    public Vacante getVacante(int index)
+    {
+        return vacantes.get(index);
     }
 
     public String getTitulacion(int pos) {

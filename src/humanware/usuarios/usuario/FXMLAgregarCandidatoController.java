@@ -9,7 +9,9 @@ import humanware.Habilidad;
 import humanware.Listas;
 import humanware.TipoJornada;
 import humanware.utilidades.ListaEnlazada;
+import humanware.utilidades.ObtenerDatos;
 import humanware.utilidades.Utilidades;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -69,6 +71,16 @@ public class FXMLAgregarCandidatoController implements Initializable
         rbCompleta.setToggleGroup(grupo);
         cbHabilidadNivel.setItems(Listas.niveles);
         cbTitulos.setItems(Listas.titulos);
+        cbTitulos.valueProperty().addListener((value, viejo, nuevo) -> {
+            if (!cbTitulos.getItems().isEmpty() && nuevo != null && nuevo.equals("--No aparece en la lista--")) {
+                try {
+                    FXMLAgregarVacanteController.agregarTitulacionBaseDatos(ObtenerDatos.mostrarVentana("Ingrese el nombre de la titulación", "Agregar titulación"));
+                    cbTitulos.setItems(Listas.titulos);
+                } catch (IOException ex) {
+                    System.out.println("Error de lectura o escritura al abrir obtener datos");
+                }
+            }
+        });
     }
 
     private void inicializarMover() {
@@ -125,7 +137,7 @@ public class FXMLAgregarCandidatoController implements Initializable
         } else if (existe) {
             lbError.setText("Ya existe");
             lbError.setVisible(true);
-        } else {
+        } else if (!cbTitulos.getValue().equals("--No aparece en la lista--")){
             taTitulaciones.setText(taTitulaciones.getText() + cbTitulos.getValue() + "\n");
         }
     }

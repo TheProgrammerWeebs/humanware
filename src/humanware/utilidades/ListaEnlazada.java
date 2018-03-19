@@ -101,9 +101,10 @@ public class ListaEnlazada<T> implements Iterable<T>
      */
     public void addOrdenado(T info, ComparadorNodos comparador) {
         observableListAsociada.add(info);
-        Nodo nuevo = new Nodo(comparador);
+        Nodo nuevo = new Nodo(info);
         for (int i = 0; i < size; i++) {
             if (comparador.compararCon(this.get(i), this.get(i + 1)) > 0) {
+                System.out.println("Lista no ordenada");
                 return; //La lista no está ordenada; no se añade nada
             }
         }

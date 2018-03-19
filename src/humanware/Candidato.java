@@ -3,6 +3,7 @@ package humanware;
 import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.Utilidades;
 import java.time.LocalDateTime;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Candidato
@@ -17,7 +18,7 @@ public class Candidato
     private TipoJornada tipoJornada;
     private final int anioActual = LocalDateTime.now().getYear();
     private static int nCandidatos = 0;
-    private int puntuacion;
+    private SimpleIntegerProperty puntuacion;
 
     public static final int NOMBRE = 0;
     public static final int TELEFONO = 1;
@@ -30,6 +31,7 @@ public class Candidato
     public Candidato() {
         nombre = new SimpleStringProperty();
         email = new SimpleStringProperty();
+        puntuacion = new SimpleIntegerProperty();
         this.codigo = Integer.toString(anioActual) + Integer.toString(nCandidatos++);
     }
 
@@ -50,6 +52,11 @@ public class Candidato
 
     public SimpleStringProperty emailProperty() {
         return email;
+    }
+    
+    public SimpleIntegerProperty puntuacionProperty()
+    {
+        return puntuacion;
     }
 
     public String convertirAString() {
@@ -75,11 +82,11 @@ public class Candidato
     }
 
     public int getPuntuacion() {
-        return puntuacion;
+        return puntuacion.get();
     }
 
     public void setPuntuacion(int puesto) {
-        this.puntuacion = puesto;
+        this.puntuacion.set(puesto);
     }
 
     

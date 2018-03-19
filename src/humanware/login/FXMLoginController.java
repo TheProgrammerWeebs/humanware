@@ -17,7 +17,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javax.swing.JOptionPane;
 
@@ -43,7 +42,12 @@ public class FXMLoginController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarCookies();
+        activarMover();
         btIngresar.setDefaultButton(true);
+    }
+    
+    public void activarMover()
+    {
         loginPane.setOnMousePressed(event
                 -> {
             xOffset = event.getSceneX();
@@ -137,7 +141,6 @@ public class FXMLoginController implements Initializable
     }
 
     private void actualizarCookies() {
-
         String ruta = "archivos\\database\\cookies";
         PrintWriter pw;
         pw = Utilidades.openFileWrite(ruta, false);
@@ -148,7 +151,6 @@ public class FXMLoginController implements Initializable
             pw.println("false");
         }
         pw.close();
-        System.err.println("Error al actualizar cookies");
     }
 
     private void cargarCookies() {

@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="vacantePane" prefHeight="553.0" prefWidth="684.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.usuario.FXMLAgregarVacanteController">
+<AnchorPane id="AnchorPane" fx:id="vacantePane" prefHeight="553.0" prefWidth="684.0" style="-fx-background-color: #fefeff;" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="humanware.usuarios.usuario.FXMLAgregarVacanteController">
     <stylesheets>
         <URL value="@fxmlagregarvacante.css" />
     </stylesheets>
@@ -29,12 +29,12 @@
       <JFXRadioButton fx:id="rbParcial" layoutX="441.0" layoutY="152.0" text="Parcial" />
       <JFXRadioButton fx:id="rbAmbas" layoutX="531.0" layoutY="152.0" text="Ambas" />
       <JFXTextArea fx:id="taTitulaciones" editable="false" layoutX="16.0" layoutY="228.0" prefHeight="58.0" prefWidth="335.0" />
-      <JFXButton layoutX="376.0" layoutY="270.0" onAction="#agregarTitulo" prefHeight="32.0" prefWidth="132.0" text="Agregar titulación" />
+      <JFXButton layoutX="376.0" layoutY="270.0" onAction="#agregarTitulo" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #097eab;" text="Agregar titulación" />
       <Label layoutX="16.0" layoutY="213.0" text="Titulaciones:" />
       <Label layoutX="20.0" layoutY="312.0" text="Habilidades:" />
-      <JFXButton layoutX="376.0" layoutY="359.0" onAction="#agregarHabilidad" prefHeight="32.0" prefWidth="132.0" text="Agregar habilidad" />
+      <JFXButton layoutX="376.0" layoutY="359.0" onAction="#agregarHabilidad" prefHeight="32.0" prefWidth="132.0" style="-fx-background-color: #097eab;" text="Agregar habilidad" />
       <JFXTextArea fx:id="taHabilidades" editable="false" layoutX="20.0" layoutY="327.0" prefHeight="58.0" prefWidth="335.0" />
-      <JFXButton layoutX="449.0" layoutY="498.0" onAction="#agregarVacante" prefHeight="41.0" prefWidth="221.0" style="-fx-background-color: #8BC34A; -fx-text-fill: white;" styleClass="agregar" text="AGREGAR VACANTE" />
+      <JFXButton layoutX="449.0" layoutY="498.0" onAction="#agregarVacante" prefHeight="41.0" prefWidth="221.0" style="-fx-background-color: #1da91f; -fx-text-fill: white;" styleClass="agregar" text="AGREGAR VACANTE" />
       <ImageView fitHeight="29.0" fitWidth="29.0" layoutX="634.0" layoutY="13.0" onMouseClicked="#cerrar" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/close.png" />

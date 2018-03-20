@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.UUID;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -214,20 +215,22 @@ public class FXMLAgregarVacanteController implements Initializable
                 titulaciones.addFinal(new TitulacionEmpresa(campos.get(0), Integer.parseInt(campos.get(1))));
             }
             if (correcto) {
-                Vacante nuevaVacante = new Vacante(salario, jornada, titulaciones, habilidades, nombreEmpresa, descripcion);
-                Listas.vacantes.addFinal(nuevaVacante);
+                String codigo = UUID.randomUUID().toString();
+                Vacante nuevaVacante = new Vacante(salario, jornada, titulaciones, habilidades, nombreEmpresa, descripcion, codigo);
                 String linea = nuevaVacante.convertirString();
+                linea += codigo;
+                Listas.vacantes.addFinal(nuevaVacante);
                 String ruta = "archivos\\database\\vacantes";
                 PrintWriter pw = Utilidades.openFileWrite(ruta, true);
                 pw.println(linea);
                 pw.close();
                 Utilidades.formatearArchivo(ruta);
-                this.lbError.getScene().getWindow().hide();
-                this.tfMaxSalario.setText("");
-                this.tfMinSalario.setText("");
-                this.rbAmbas.setSelected(false);
-                this.rbCompleta.setSelected(false);
-                this.rbParcial.setSelected(false);
+                lbError.getScene().getWindow().hide();
+                tfMaxSalario.setText("");
+                tfMinSalario.setText("");
+                rbAmbas.setSelected(false);
+                rbCompleta.setSelected(false);
+                rbParcial.setSelected(false);
             }
         }
     }

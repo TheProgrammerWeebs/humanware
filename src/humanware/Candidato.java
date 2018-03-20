@@ -2,7 +2,6 @@ package humanware;
 
 import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.Utilidades;
-import java.time.LocalDateTime;
 import java.util.UUID;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;

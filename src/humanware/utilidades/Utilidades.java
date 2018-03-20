@@ -81,6 +81,7 @@ public class Utilidades
         File archivo = new File(Utilidades.getRutaAbs(ruta));
         File temporal = new File(archivo.getAbsolutePath() + ".tmp");
         boolean encontrado;
+        System.out.println("Línea a eliminar: " + linea);
         try (BufferedReader buffer = openFileRead(ruta); PrintWriter pw = Utilidades.openFileWrite(ruta + ".tmp", true)) {
             String line;
             encontrado = false;

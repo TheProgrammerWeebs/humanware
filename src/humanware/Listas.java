@@ -21,15 +21,16 @@ public class Listas
     private Listas() {
     }
 
-    public final static ListaEnlazada<Empresa> empresas = new ListaEnlazada();
-    public final static ListaEnlazada<Vacante> vacantes = new ListaEnlazada();
-    public final static ListaEnlazada<Candidato> candidatos = new ListaEnlazada();
-    public static ObservableList<String> nombreEmpresas = FXCollections.observableArrayList();
-    public static ObservableList<String> titulos = FXCollections.observableArrayList();
-    public static ObservableList<Integer> niveles = cargarNumeros(5);
+    public static ListaEnlazada<Empresa> empresas;
+    public static ListaEnlazada<Vacante> vacantes;
+    public static ListaEnlazada<Candidato> candidatos;
+    public static ObservableList<String> nombreEmpresas;
+    public static ObservableList<String> titulos;
+    public static ObservableList<Integer> niveles;
 
     public static void cargarListas()
     {
+        cargarNiveles(5);
         cargarTitulos();
         cargarEmpresas();
         cargarNombreEmpresas();
@@ -37,17 +38,15 @@ public class Listas
         cargarCandidatos();
     }
     
-    private static ObservableList<Integer> cargarNumeros(int limite) {
-        ObservableList<Integer> numeros = FXCollections.observableArrayList();
+    private static void cargarNiveles(int limite) {
+        niveles = FXCollections.observableArrayList();
         for (int i = 1; i <= limite; i++) {
-            numeros.add(i);
+            niveles.add(i);
         }
-        return numeros;
     }
     public static void cargarTitulos() {
+        titulos = FXCollections.observableArrayList();
         try {
-            //titulos.clear();
-            titulos = FXCollections.observableArrayList();
             String ruta = "archivos\\database\\titulos";
             BufferedReader buffer = Utilidades.openFileRead(ruta);
             while (buffer.ready()) {
@@ -61,6 +60,7 @@ public class Listas
         }
     }
     private static void cargarEmpresas() {
+        empresas = new ListaEnlazada<>();
         String ruta = "archivos\\database\\empresas";
         try (BufferedReader lector = Utilidades.openFileRead(ruta)) {
             while (lector.ready()) {
@@ -76,6 +76,7 @@ public class Listas
         }
     }
     private static void cargarVacantes() {
+        vacantes = new ListaEnlazada<>();
         String ruta = "archivos\\database\\vacantes";
         try (BufferedReader lector = Utilidades.openFileRead(ruta)) {
             while (lector.ready()) {
@@ -83,7 +84,7 @@ public class Listas
                 boolean encontrado = false;
                 if (!Utilidades.quitarEspacios(linea).equals("")) {
                     ListaEnlazada<String> campos = Utilidades.split(linea, ";");
-                    Vacante vaca = new Vacante();
+                    Vacante vaca = new Vacante(campos.get(Vacante.CODIGO));
                     vaca.setDescripcion(campos.get(Vacante.DESCRIPCION));
                     vaca.setTipoJornada(TipoJornada.convertirAJornada(campos.get(Vacante.JORNADA)));
                     vaca.setNombreEmpresa(campos.get(Vacante.EMPRESA));
@@ -100,6 +101,7 @@ public class Listas
         }
     }
     private static void cargarNombreEmpresas() {
+        nombreEmpresas = FXCollections.observableArrayList();
         if (!Listas.empresas.estaVacia()) {
             for (Empresa e : Listas.empresas) {
                 Listas.nombreEmpresas.add(e.getNombre());
@@ -107,6 +109,7 @@ public class Listas
         }
     }
     private static void cargarCandidatos() {
+        candidatos = new ListaEnlazada<>();
         try {
             BufferedReader buffer = Utilidades.openFileRead("archivos\\database\\candidatos");
             String linea;

@@ -23,7 +23,6 @@ public class HumanWare extends Application
     }
 
     public void inicializarComponentes(Stage stage) {
-        Listas.cargarListas();
         mostrarVentana(stage);
     }
 

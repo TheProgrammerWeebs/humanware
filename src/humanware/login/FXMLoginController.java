@@ -3,6 +3,7 @@ package humanware.login;
 import java.net.URL;
 import java.util.ResourceBundle;
 import com.jfoenix.controls.*;
+import humanware.Listas;
 import humanware.utilidades.Utilidades;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -86,6 +87,7 @@ public class FXMLoginController implements Initializable
                         ruta = "/humanware/usuarios/evaluador/FXMLEvaluador.fxml";
                         break;
                 }
+                Listas.cargarListas();
                 abrirVentanaUsuario(ruta, usuario, false);
             } else {
                 lbIncorrecto.setText("Usuario o contraseña incorrectos");

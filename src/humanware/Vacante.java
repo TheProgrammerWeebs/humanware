@@ -24,11 +24,9 @@ public class Vacante
     public static final int TITULACIONES = 4;
     public static final int HABILIDADES = 5;
     public static final int ESTA_EVALUADA = 6;
+    public static final int CODIGO = 7;
 
-    public Vacante(String descripcion, Empresa empresa) {
-        this();
-        this.empresa = empresa;
-    }
+    
 
     public Vacante() {
         evaluada = false;
@@ -40,8 +38,17 @@ public class Vacante
         habilidades = new ListaEnlazada();
         aptos = new ListaEnlazada();
     }
+    public Vacante(String descripcion, Empresa empresa) {
+        this();
+        this.empresa = empresa;
+    }
+    public Vacante(String codigo)
+    {
+        this();
+        this.codigo = codigo;
+    }
 
-    public Vacante(Rango salario, TipoJornada tipoJornada, ListaEnlazada<TitulacionEmpresa> titulaciones, ListaEnlazada<Habilidad> habilidades, String nombreEmpresa, String descripcionPuesto) {
+    public Vacante(Rango salario, TipoJornada tipoJornada, ListaEnlazada<TitulacionEmpresa> titulaciones, ListaEnlazada<Habilidad> habilidades, String nombreEmpresa, String descripcionPuesto, String codigo) {
         this.salario = salario;
         this.tipoJornada = tipoJornada;
         this.titulaciones = titulaciones;
@@ -124,7 +131,19 @@ public class Vacante
                 + this.getTipoJornada() + ";"
                 + TitulacionEmpresa.convertirString(titulaciones) + ";"
                 + (!habilidades.estaVacia() ? Habilidad.convertirString(habilidades) : "") + ";"
-                + estaEvaluada();
+                + estaEvaluada() + ";";
+    }
+    
+    public String convertirStringCodigo()
+    {
+        return nombreEmpresa.get() + ";"
+                + getDescripcion() + ";"
+                + salario.mostrar() + ";"
+                + this.getTipoJornada() + ";"
+                + TitulacionEmpresa.convertirString(titulaciones) + ";"
+                + (!habilidades.estaVacia() ? Habilidad.convertirString(habilidades) : "") + ";"
+                + estaEvaluada() + ";" 
+                + getCodigo();
     }
 
     public static Vacante convertirVacante(String linea) {
@@ -137,7 +156,18 @@ public class Vacante
         v.setTipoJornada(TipoJornada.convertirAJornada(campos.get(Vacante.JORNADA)));
         v.setTitulaciones(TitulacionEmpresa.convertirATitulaciones(campos.get(Vacante.TITULACIONES)));
         v.setEvaluada(Boolean.parseBoolean(campos.get(Vacante.ESTA_EVALUADA)));
+        System.out.println("campos.get(Vacante.CODIGO) = " + campos.get(Vacante.CODIGO));
+        v.setCodigo(campos.get(Vacante.CODIGO));
         return v;
+    }
+    
+    public String getCodigo() {
+        return codigo;
+    }
+    
+    private void setCodigo(String codigo)
+    {
+        this.codigo = codigo;
     }
 
     public void setAptos(ListaEnlazada<Candidato> aptos) {

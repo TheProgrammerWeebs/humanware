@@ -116,14 +116,22 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
 
     private ListaEnlazada<Candidato> obtenerAptos(Vacante v) {
         ListaEnlazada<Candidato> aptos = new ListaEnlazada<>();
+        
         for (Candidato c : Listas.candidatos) {
+            System.out.println("candidato = " + c);
             boolean apto = false;
             for (TitulacionEmpresa titulacion : v.getTitulaciones()) {
+                
                 for (String titulacionCandidato : c.getTitulaciones()) {
+                    
                     if (titulacion.titulacion.equals(titulacionCandidato)) {
+                        //System.out.println("¿Qué podría ser null?");
+                        //System.out.println("v = " + v);
+                        //System.out.println("titulacion = " + titulacion);
+                        //System.out.println("titulacionCandidato = " + titulacionCandidato);
+                        System.out.println("v.getAptos() = " + v.getAptos());
                         c.setPuntuacion(c.getPuntuacion() + titulacion.importancia);
                         apto = v.getAptos().estaVacia() ? true : !v.getAptos().existe(c);
-                        System.out.println("apto = " + apto);
                     }
                 }
             }

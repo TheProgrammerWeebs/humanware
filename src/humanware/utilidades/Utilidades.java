@@ -87,21 +87,15 @@ public class Utilidades
             encontrado = false;
             while (buffer.ready()) {
                 line = buffer.readLine();
-                if (!line.equals(linea)) {
-                    pw.println(line);
-                    pw.flush();
-                } else {
-                    encontrado = true;
-                }
+                if (!line.equals(linea)) pw.println(line);
+                else encontrado = true;
             }
             pw.close();
             buffer.close();
-            if (!archivo.delete()) {
+            if (!archivo.delete())
                 System.err.println("No se pudo eliminar el archivo de entrada");
-            }
-            if (!temporal.renameTo(archivo)) {
+            if (!temporal.renameTo(archivo))
                 System.err.println("No se pudo renombrar el archivo temporal");
-            }
             return encontrado;
         } catch (FileNotFoundException ex) {
             System.err.println("Archivo no encontrado");

@@ -3,6 +3,8 @@ package humanware;
 import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.Rango;
 import humanware.utilidades.Utilidades;
+import java.io.BufferedReader;
+import java.io.IOException;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Vacante
@@ -26,8 +28,6 @@ public class Vacante
     public static final int ESTA_EVALUADA = 6;
     public static final int CODIGO = 7;
 
-    
-
     public Vacante() {
         evaluada = false;
         nombreEmpresa = new SimpleStringProperty();
@@ -49,12 +49,11 @@ public class Vacante
     }
 
     public Vacante(Rango salario, TipoJornada tipoJornada, ListaEnlazada<TitulacionEmpresa> titulaciones, ListaEnlazada<Habilidad> habilidades, String nombreEmpresa, String descripcionPuesto, String codigo) {
+        this();
         this.salario = salario;
         this.tipoJornada = tipoJornada;
         this.titulaciones = titulaciones;
         this.habilidades = habilidades;
-        this.nombreEmpresa = new SimpleStringProperty(nombreEmpresa);
-        this.descripcionPuesto = new SimpleStringProperty(descripcionPuesto);
     }
 
     public SimpleStringProperty nombreEmpresaProperty() {
@@ -88,6 +87,7 @@ public class Vacante
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
+        System.out.println("empresa = " + empresa);
         this.nombreEmpresa.set(empresa.getNombre());
     }
 
@@ -161,6 +161,45 @@ public class Vacante
         return v;
     }
     
+    public static ListaEnlazada<Vacante> convertirCodigosAVacantes(String linea)
+    {
+        ListaEnlazada<Vacante> vacantes = new ListaEnlazada<>();
+        ListaEnlazada<String> codigos = Utilidades.split(linea, ",");
+        for(String codigo : codigos)
+            vacantes.addFinal(convertirCodigoAVacante(codigo));
+        return vacantes;
+    }
+    
+    public static Vacante convertirCodigoAVacante(String codigo)
+    {
+        BufferedReader buffer = Utilidades.openFileRead("archivos\\database\\vacantes");
+        boolean existe = false;
+        try{
+            while(buffer.ready())
+            {
+                String linea = buffer.readLine();
+                ListaEnlazada<String> campos = Utilidades.split(linea, ";");
+                if (campos.get(Vacante.CODIGO).equals(codigo))
+                {
+                    Vacante v = new Vacante();
+                    v.setCodigo(codigo);
+                    v.setDescripcion(campos.get(CODIGO));
+                    v.setEmpresa(Empresa.convertirAEmpresa(campos.get(Vacante.EMPRESA)));
+                    v.setEvaluada(Boolean.parseBoolean(campos.get(Vacante.ESTA_EVALUADA)));
+                    v.setHabilidades(Habilidad.convertirAHabilidades(campos.get(Vacante.HABILIDADES)));
+                    v.setSalario(Rango.convertirARango(campos.get(Vacante.SALARIO)));
+                    v.setTipoJornada(TipoJornada.convertirAJornada(campos.get(Vacante.JORNADA)));
+                    v.setTitulaciones(TitulacionEmpresa.convertirATitulaciones(campos.get(Vacante.TITULACIONES)));
+                    return v;
+                }
+            }
+        }catch(IOException e)
+        {
+            System.err.println("Error al convertir codigo a vacante");
+        }
+        return null;
+    }
+            
     public String getCodigo() {
         return codigo;
     }

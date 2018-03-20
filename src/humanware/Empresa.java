@@ -102,6 +102,7 @@ public class Empresa
             while (lector.ready()) {
                 String linea = lector.readLine();
                 for (int i = 0; i < linea.length(); i++) {
+                    System.out.println(linea.substring(i, i + 1));
                     if (linea.substring(i, i + 1).equals(";")) {
                         if (linea.substring(0, i).equals(nombreEmpresa)) {
                             lector.close();
@@ -109,8 +110,8 @@ public class Empresa
                         }
                     }
                 }
-                lector.close();
             }
+            lector.close();
         } catch (FileNotFoundException ex) {
             System.err.println("Archivo empresas no encontrado");
         } catch (IOException ex) {

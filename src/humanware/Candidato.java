@@ -2,14 +2,12 @@ package humanware;
 
 import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.Utilidades;
-import java.util.UUID;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Candidato
 {
     private double retribucion;
-    private final String codigo;
     private SimpleIntegerProperty puntuacion;
     private SimpleStringProperty email;
     private SimpleStringProperty nombre;
@@ -19,7 +17,6 @@ public class Candidato
     private ListaEnlazada<Habilidad> habilidades;
     private ListaEnlazada<Vacante> vacantes;
 
-
     public static final int NOMBRE = 0;
     public static final int TELEFONO = 1;
     public static final int EMAIL = 2;
@@ -27,13 +24,13 @@ public class Candidato
     public static final int JORNADA = 4;
     public static final int TITULACIONES = 5;
     public static final int HABILIDADES = 6;
+    public static final int VACANTES = 7;
 
     public Candidato() {
         vacantes = new ListaEnlazada<>();
         nombre = new SimpleStringProperty();
         email = new SimpleStringProperty();
         puntuacion = new SimpleIntegerProperty();
-        this.codigo = UUID.randomUUID().toString();
     }
 
     public Candidato(String nombre, String telefono, String email, ListaEnlazada<String> titulaciones, ListaEnlazada<Habilidad> habilidades, TipoJornada tipoJornada, double retribucion) {
@@ -68,15 +65,13 @@ public class Candidato
         linea += retribucion + ";";
         linea += tipoJornada + ";";
         titulaciones.imprimir();
-        for (int i = 0; i < titulaciones.size(); i++) {
-            if (i == titulaciones.size() - 1) {
-                linea += titulaciones.get(i) + ";";
-            } else {
-                linea += titulaciones.get(i) + ",";
-            }
-        }
-        habilidades.imprimir();
-        linea += Habilidad.convertirString(habilidades);
+        for (int i = 0; i < titulaciones.size(); i++) 
+            if (i == titulaciones.size() - 1) linea += titulaciones.get(i) + ";";
+            else linea += titulaciones.get(i) + ",";
+        linea += Habilidad.convertirString(habilidades) + ";";
+        for (int i = 0; i < vacantes.size(); i++)
+            if (i == vacantes.size() - 1) linea += vacantes.get(i);
+            else linea += vacantes.get(i) + ",";
         return linea;
     }
 
@@ -88,17 +83,11 @@ public class Candidato
         this.puntuacion.set(puesto);
     }
 
-    
-    public String getCodigo() {
-        return codigo;
-    }
-
     public double getRetribucion() {
         return retribucion;
     }
 
     public void imprimir() {
-        System.out.println("Código: " + codigo);
         System.out.println("Nombre: " + nombre.get());
         System.out.println("Email: " + email.get());
         System.out.println("Telefono: " + telefono);
@@ -142,11 +131,16 @@ public class Candidato
         candidato.setHabilidades(habilidades);
         candidato.setTipoJornada(TipoJornada.convertirAJornada(campos.get(Candidato.JORNADA)));
         candidato.setRetribucion(Double.parseDouble(campos.get(Candidato.RETRIBUCION)));
+        candidato.setVacantes(Vacante.convertirCodigosAVacantes(campos.get(Candidato.VACANTES)));
         return candidato;
     }
 
     public void setHabilidades(ListaEnlazada<Habilidad> habilidades) {
         this.habilidades = habilidades;
+    }
+    
+    public void setVacantes(ListaEnlazada<Vacante> vacantes) {
+        this.vacantes = vacantes;
     }
 
     public void addHabilidad(Habilidad h) {

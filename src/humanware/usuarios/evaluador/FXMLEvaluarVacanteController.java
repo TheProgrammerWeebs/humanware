@@ -5,6 +5,10 @@ import humanware.Candidato;
 import humanware.Vacante;
 import humanware.usuarios.FXMLMostrarCandidatoController;
 import humanware.utilidades.ListaEnlazada;
+import humanware.utilidades.Utilidades;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -17,6 +21,7 @@ import javax.swing.JOptionPane;
 
 public class FXMLEvaluarVacanteController implements Initializable
 {
+
     @FXML
     private AnchorPane paneEvaluar;
     @FXML
@@ -51,53 +56,69 @@ public class FXMLEvaluarVacanteController implements Initializable
         if (seguro == JOptionPane.OK_OPTION) {
             Candidato c = tbCandidatos.getSelectionModel().getSelectedItem();
             c.addVacante(vacante);
+                agregarVacante(c, vacante.getCodigo());
             vacante.addApto(c);
             seleccionados.addFinal(c);
+            System.out.println("aptos = " + aptos);
             aptos.remove(c);
         }
         reiniciarBotones();
     }
-   
+    public void agregarVacante(Candidato c, String codigo) {
+        String ruta = "archivos\\database\\candidatos";
+        BufferedReader buffer = Utilidades.openFileRead(ruta);
+        try {
+            while (buffer.ready()) {
+                String linea = buffer.readLine();
+                if (Utilidades.split(linea, ";").get(Candidato.NOMBRE).equals(c.getNombre()))
+                {
+                    String codigos = Utilidades.split(linea, ";").get(Candidato.VACANTES);
+                    buffer.close();
+                    Utilidades.eliminarLinea(linea, ruta);
+                    linea += (codigos.length() == 0 ? "" : ",") + codigo;
+                    PrintWriter pw = Utilidades.openFileWrite(ruta, true);
+                    pw.println(linea);
+                    pw.close();
+                    break;
+                }
+            }
+        } catch (IOException ex) {
+            System.err.println("Error de lectura o escritura al agregar vacante");
+        }
+    }
     public void rechazar() {
         Candidato c = tbCandidatos.getSelectionModel().getSelectedItem();
         aptos.remove(c);
         reiniciarBotones();
     }
-    
-    public void detalles()
-    {
+
+    public void detalles() {
         FXMLMostrarCandidatoController.mostrarCandidato(tbCandidatos.getSelectionModel().getSelectedItem());
         reiniciarBotones();
     }
-    
-    private void reiniciarBotones()
-    {
+
+    private void reiniciarBotones() {
         this.tbCandidatos.getSelectionModel().select(null);
         this.btDetalles.setDisable(true);
         this.btSeleccionar.setDisable(true);
     }
-    
+
     public void cerrar() {
         reiniciarPuntuacionCandidatos();
         paneEvaluar.getScene().getWindow().hide();
     }
-    
-    private void reiniciarPuntuacionCandidatos()
-    {
-        if (!aptos.estaVacia())
-            for (int i = 0; i < aptos.size(); i++) {
-                System.out.println("aptos = " + aptos);
-            }
-            /*for (Candidato c : aptos)
-            {
-                System.out.println("c = " + c);
-                //c.setPuntuacion(0);
-            }*/
-                
-                
-        if (!seleccionados.estaVacia())
-            for (Candidato c : seleccionados)
+
+    private void reiniciarPuntuacionCandidatos() {
+        if (!aptos.estaVacia()) {
+            for (Candidato c : aptos) {
                 c.setPuntuacion(0);
+            }
+        }
+        if (!seleccionados.estaVacia()) {
+            for (Candidato c : seleccionados) {
+                c.setPuntuacion(0);
+            }
+        }
     }
 
     public void inicializarComponentes() {

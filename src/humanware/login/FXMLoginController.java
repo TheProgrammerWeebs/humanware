@@ -47,8 +47,7 @@ public class FXMLoginController implements Initializable
         btIngresar.setDefaultButton(true);
     }
     
-    public void activarMover()
-    {
+    public void activarMover() {
         loginPane.setOnMousePressed(event
                 -> {
             xOffset = event.getSceneX();
@@ -60,7 +59,7 @@ public class FXMLoginController implements Initializable
             loginPane.getScene().getWindow().setY(event.getScreenY() - yOffset);
         });
     }
-
+    
     public void cerrar() {
         System.exit(0);
     }

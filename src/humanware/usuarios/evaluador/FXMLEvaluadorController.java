@@ -103,7 +103,7 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
         btMarcar.setDisable(true);
         AnchorPane pane;
         try{pane = cargador.load();}
-        catch(IOException ex){System.err.println("Error al abrir evaluar"); pane=null;ex.printStackTrace();}
+        catch(IOException ex){System.err.println("Error al abrir evaluar"); pane = null;}
         FXMLEvaluarVacanteController controlador = cargador.getController();
         controlador.setAptos(aptos, v);
         Stage st = new Stage(StageStyle.UNDECORATED);
@@ -125,11 +125,6 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
                 for (String titulacionCandidato : c.getTitulaciones()) {
                     
                     if (titulacion.titulacion.equals(titulacionCandidato)) {
-                        //System.out.println("¿Qué podría ser null?");
-                        //System.out.println("v = " + v);
-                        //System.out.println("titulacion = " + titulacion);
-                        //System.out.println("titulacionCandidato = " + titulacionCandidato);
-                        System.out.println("v.getAptos() = " + v.getAptos());
                         c.setPuntuacion(c.getPuntuacion() + titulacion.importancia);
                         apto = v.getAptos().estaVacia() ? true : !v.getAptos().existe(c);
                     }
@@ -142,8 +137,8 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
                         if (hCandidato.habilidad.equals(h.habilidad))
                             c.setPuntuacion(c.getPuntuacion() + h.nivel);
                 }
-                if (c.getRetribucion() < v.getSalario().min) c.setPuntuacion(c.getPuntuacion() + 2);
-                if (c.getRetribucion() < v.getSalario().max) c.setPuntuacion(c.getPuntuacion() + 1);
+                if (c.getRetribucion() <= v.getSalario().min) c.setPuntuacion(c.getPuntuacion() + 2);
+                if (c.getRetribucion() <= v.getSalario().max) c.setPuntuacion(c.getPuntuacion() + 1);
                 aptos.addOrdenado(c, (ComparadorNodos<Candidato>) (Candidato a, Candidato b) -> a.getPuntuacion() - b.getPuntuacion());
             }
         }

@@ -189,12 +189,12 @@ public class ListaEnlazada<T> implements Iterable<T>
     public boolean remove(T info) {
         observableListAsociada.remove(info);
         System.out.println("primerNodo.getInformacion() = " + primerNodo.getInformacion());
-        if (primerNodo.getInformacion().equals(info)) {
+        if (primerNodo.getInformacion().equals(info) && primerNodo.informacion == null) {
             primerNodo = primerNodo.link;
         } else {
             Nodo anterior = primerNodo;
             Nodo actual = anterior.link;
-            System.out.println("actual = " + actual);
+            this.imprimir();
             while (!actual.informacion.getClass().equals(info)) {
                 anterior = anterior.link;
                 actual = actual.link;

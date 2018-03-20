@@ -34,8 +34,8 @@ public class Listas
         cargarTitulos();
         cargarEmpresas();
         cargarNombreEmpresas();
-        cargarVacantes();
         cargarCandidatos();
+        cargarVacantes();
     }
     
     private static void cargarNiveles(int limite) {

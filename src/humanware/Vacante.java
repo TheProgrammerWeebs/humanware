@@ -87,7 +87,6 @@ public class Vacante
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
-        System.out.println("empresa = " + empresa);
         this.nombreEmpresa.set(empresa.getNombre());
     }
 
@@ -156,7 +155,6 @@ public class Vacante
         v.setTipoJornada(TipoJornada.convertirAJornada(campos.get(Vacante.JORNADA)));
         v.setTitulaciones(TitulacionEmpresa.convertirATitulaciones(campos.get(Vacante.TITULACIONES)));
         v.setEvaluada(Boolean.parseBoolean(campos.get(Vacante.ESTA_EVALUADA)));
-        System.out.println("campos.get(Vacante.CODIGO) = " + campos.get(Vacante.CODIGO));
         v.setCodigo(campos.get(Vacante.CODIGO));
         return v;
     }

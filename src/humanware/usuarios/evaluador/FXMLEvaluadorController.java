@@ -116,24 +116,30 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
 
     private ListaEnlazada<Candidato> obtenerAptos(Vacante v) {
         ListaEnlazada<Candidato> aptos = new ListaEnlazada<>();
-        
         for (Candidato c : Listas.candidatos) {
-            System.out.println("candidato = " + c);
             boolean apto = false;
             for (TitulacionEmpresa titulacion : v.getTitulaciones()) {
-                
                 for (String titulacionCandidato : c.getTitulaciones()) {
-                    
                     if (titulacion.titulacion.equals(titulacionCandidato)) {
                         c.setPuntuacion(c.getPuntuacion() + titulacion.importancia);
                         apto = v.getAptos().estaVacia() ? true : !v.getAptos().existe(c);
+                        if (c.getVacantes().get(0) != null)
+                            for (Vacante vaca : c.getVacantes()) {
+                                System.out.println("vaca = " + vaca);
+                                System.out.println("vaca.getCodigo() = " + vaca.getCodigo());
+                                System.out.println("v = " + v);
+                                System.out.println("v.getCodigo = " + v.getCodigo());
+                                if (vaca.getCodigo().equals(v.getCodigo()))
+                                    apto = false;   
+                            }
                     }
                 }
             }
             if (apto) {
                 if (v.getTipoJornada() == c.getTipoJornada()) c.setPuntuacion(c.getPuntuacion() + 1);
+                
                 for (Habilidad h : v.getHabilidades()) {
-                    for(Habilidad hCandidato: c.getHabilidades())    
+                        for(Habilidad hCandidato: c.getHabilidades())    
                         if (hCandidato.habilidad.equals(h.habilidad))
                             c.setPuntuacion(c.getPuntuacion() + h.nivel);
                 }

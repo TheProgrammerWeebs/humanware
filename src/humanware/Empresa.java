@@ -98,20 +98,21 @@ public class Empresa
     public static Empresa convertirAEmpresa(String nombreEmpresa) {
         String ruta = "archivos\\database\\empresas";
         try {
-            BufferedReader lector = Utilidades.openFileRead(ruta);
-            while (lector.ready()) {
-                String linea = lector.readLine();
-                for (int i = 0; i < linea.length(); i++) {
-                    System.out.println(linea.substring(i, i + 1));
-                    if (linea.substring(i, i + 1).equals(";")) {
-                        if (linea.substring(0, i).equals(nombreEmpresa)) {
-                            lector.close();
-                            return new Empresa(linea.substring(0, i), linea.substring(i + 1, linea.length()));
+            try (BufferedReader lector = Utilidades.openFileRead(ruta)) {
+                while (lector.ready()) {
+                    String linea = lector.readLine();
+                    for (int i = 0; i < linea.length(); i++) {
+                        System.out.println(linea.substring(i, i + 1));
+                        if (linea.substring(i, i + 1).equals(";")) {
+                            if (linea.substring(0, i).equals(nombreEmpresa)) {
+                                lector.close();
+                                return new Empresa(linea.substring(0, i), linea.substring(i + 1, linea.length()));
+                            }
                         }
                     }
                 }
+                lector.close();
             }
-            lector.close();
         } catch (FileNotFoundException ex) {
             System.err.println("Archivo empresas no encontrado");
         } catch (IOException ex) {

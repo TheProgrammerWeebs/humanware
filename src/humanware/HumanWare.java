@@ -1,13 +1,11 @@
 package humanware;
 
-import humanware.login.FXMLoginController;
 import javafx.application.Application;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 

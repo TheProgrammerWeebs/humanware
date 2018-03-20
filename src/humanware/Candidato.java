@@ -204,4 +204,9 @@ public class Candidato
     public TipoJornada getTipoJornada() {
         return tipoJornada;
     }
+    
+    public ListaEnlazada<Vacante> getVacantes()
+    {
+        return vacantes;
+    }
 }

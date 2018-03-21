@@ -52,6 +52,14 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
 
     }
 
+    public  void obtenerInforme()
+    {
+        FXMLInformeController.verInforme(tbVacantes.getSelectionModel().getSelectedItem());
+        tbVacantes.getSelectionModel().select(null);
+        btEvaluar.setDisable(true);
+        btMarcar.setDisable(true);
+    }
+    
     private void inicializarVacantes() {
         vacantesEvaluar = new ListaEnlazada<>();
         for (Vacante c: Listas.vacantes) {
@@ -130,11 +138,8 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
                                     apto = false;   
                             }
                         }
-                            
                         if (apto) 
-                        {
                             break;
-                        }
                     }                 
                 }
             }

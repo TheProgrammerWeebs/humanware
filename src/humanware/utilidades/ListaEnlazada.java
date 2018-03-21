@@ -94,59 +94,6 @@ public class ListaEnlazada<T> implements Iterable<T>
         this.observableListAsociada = observableListAsociada;
     }
 
-    /**
-     * Añade un nodo con determinada información a la lista, de forma ordenada
-     *
-     * @param info la información que se va a añadir
-     * @param comparador instancia de una clase que implemente a ComparadorNodos
-     */
-    /*public void addOrdenado(T info, ComparadorNodos comparador) {
-        observableListAsociada.add(info);
-        Nodo nuevo = new Nodo(info);
-        if (ultimoNodo != null && ultimoNodo.informacion.equals(nuevo.informacion)) {
-            ultimoNodo.link = nuevo;
-            ultimoNodo = nuevo;
-        } else {
-            for (int i = 0; i < size; i++) {
-                if (i+1 < size())
-                {
-                    if(comparador.compararCon(this.get(i), this.get(i + 1)) > 0) {
-                        System.out.println("Lista no ordenada");
-                        return; //La lista no está ordenada; no se añade nada
-                    }
-                }
-            }
-            if (primerNodo == null) {
-                primerNodo = nuevo;
-                ultimoNodo = nuevo;
-            } else {
-                Nodo<T> anterior = null;
-                Nodo<T> actual = primerNodo;
-                while (comparador.compararCon(actual.informacion, info) < 0 && actual.link != null) {
-                    actual = actual.link;
-                    anterior = actual;
-                }
-                if (comparador.compararCon(info, actual.informacion) == 0) {
-                    JOptionPane.showMessageDialog(null, "No se aceptan datos repetidos");
-                } else {
-                    if (comparador.compararCon(actual.informacion, info) > 0) {
-                        if (comparador.compararCon(actual.informacion, info) == 0) {
-                            nuevo.link = primerNodo;
-                            primerNodo = nuevo;
-                        } else if (anterior != null) {
-                            anterior.link = nuevo;
-                            nuevo.link = actual;
-                        }
-                    } else {
-                        actual.link = nuevo;
-                        nuevo.link = null;
-                    }
-                }
-            }
-        }
-        size++;
-    }*/
-    
     public void bubbleSort(ComparadorNodos<T> comparador)
     {
         boolean swap = true;
@@ -169,7 +116,10 @@ public class ListaEnlazada<T> implements Iterable<T>
     }
 
     public boolean existe(T informacion) {
+        System.out.println("informacion = " + informacion);
+        System.out.println("size() = " + size());
         for (T elemento : this) {
+            System.out.println("elemento = " + elemento);
             if (elemento.equals(informacion)) {
                 return true;
             }

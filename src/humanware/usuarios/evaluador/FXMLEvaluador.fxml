@@ -32,6 +32,6 @@
          </columns>
       </TableView>
       <JFXButton fx:id="btEvaluar" disable="true" layoutX="578.0" layoutY="70.0" onAction="#evaluar" prefHeight="44.0" prefWidth="216.0" text="EVALUAR CANDIDATOS" />
-      <JFXButton fx:id="btMarcar" disable="true" layoutX="578.0" layoutY="126.0" prefHeight="44.0" prefWidth="216.0" text="MARCAR COMO EVALUADA" />
+      <JFXButton fx:id="btMarcar" disable="true" layoutX="578.0" layoutY="126.0" onAction="#obtenerInforme" prefHeight="44.0" prefWidth="216.0" text="OBTENER INFORME" />
    </children>
 </AnchorPane>

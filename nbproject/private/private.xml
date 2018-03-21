@@ -11,6 +11,7 @@
             <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/humanware/src/humanware/usuarios/usuario/FXMLAgregarVacanteController.java</file>
             <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/humanware/src/humanware/Candidato.java</file>
             <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/humanware/src/humanware/login/FXMLLogin.fxml</file>
+            <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/humanware/src/humanware/usuarios/evaluador/FXMLInformeController.java</file>
             <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/humanware/src/humanware/usuarios/evaluador/FXMLEvaluarVacanteController.java</file>
             <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/humanware/src/humanware/utilidades/ListaEnlazada.java</file>
             <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/humanware/src/humanware/usuarios/FXMLMostrarCandidatoController.java</file>
@@ -19,6 +20,7 @@
             <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/humanware/src/humanware/usuarios/evaluador/FXMLEvaluadorController.java</file>
             <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/humanware/src/humanware/Empresa.java</file>
             <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/humanware/src/humanware/HumanWare.java</file>
+            <file>file:/D:/Libros/NetBeansProjects/HumanWare_VictorGuevara_SebastianMolano/humanware/src/humanware/usuarios/evaluador/FXMLInforme.fxml</file>
         </group>
     </open-files>
 </project-private>

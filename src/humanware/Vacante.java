@@ -181,7 +181,7 @@ public class Vacante
                 {
                     Vacante v = new Vacante();
                     v.setCodigo(codigo);
-                    v.setDescripcion(campos.get(CODIGO));
+                    v.setDescripcion(campos.get(DESCRIPCION));
                     v.setEmpresa(Empresa.convertirAEmpresa(campos.get(Vacante.EMPRESA)));
                     v.setEvaluada(Boolean.parseBoolean(campos.get(Vacante.ESTA_EVALUADA)));
                     v.setHabilidades(Habilidad.convertirAHabilidades(campos.get(Vacante.HABILIDADES)));

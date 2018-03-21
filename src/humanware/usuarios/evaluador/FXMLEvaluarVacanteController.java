@@ -2,6 +2,7 @@ package humanware.usuarios.evaluador;
 
 import com.jfoenix.controls.JFXButton;
 import humanware.Candidato;
+import humanware.Listas;
 import humanware.Vacante;
 import humanware.usuarios.FXMLMostrarCandidatoController;
 import humanware.utilidades.ListaEnlazada;
@@ -59,7 +60,9 @@ public class FXMLEvaluarVacanteController implements Initializable
                 agregarVacante(c, vacante.getCodigo());
             vacante.addApto(c);
             seleccionados.addFinal(c);
-            aptos.remove(c);
+            System.out.println("aptos = " + aptos);
+            System.out.println("c = " + c);
+            try{aptos.remove(c);}catch(Exception ex){}
         }
         reiniciarBotones();
     }
@@ -103,6 +106,7 @@ public class FXMLEvaluarVacanteController implements Initializable
     }
 
     public void cerrar() {
+        Listas.cargarListas();
         reiniciarPuntuacionCandidatos();
         paneEvaluar.getScene().getWindow().hide();
     }
@@ -110,9 +114,7 @@ public class FXMLEvaluarVacanteController implements Initializable
     private void reiniciarPuntuacionCandidatos() {
         int i = 0;
         if (!aptos.estaVacia()) {
-            System.out.println("aptos = " + aptos.get(i++).getNombre());
             for (Candidato c : aptos) {
-                System.out.println("c = " + c);
                 c.setPuntuacion(0);
             }
         }

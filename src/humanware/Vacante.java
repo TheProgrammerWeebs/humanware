@@ -123,7 +123,6 @@ public class Vacante
     }
 
     public String convertirString() {
-        System.out.println("habilidades = " + habilidades);
         return nombreEmpresa.get() + ";"
                 + getDescripcion() + ";"
                 + salario.mostrar() + ";"

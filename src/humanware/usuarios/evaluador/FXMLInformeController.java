@@ -65,7 +65,7 @@ public class FXMLInformeController implements Initializable
         tbcPuntuacion.setCellValueFactory(new PropertyValueFactory<>("puntuacion"));
         tbcNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tbAceptados.getSelectionModel().selectedIndexProperty().addListener((valor, viejo, nuevo) -> {
-            if (nuevo != null) btVerCandidato.setDisable(true);
+            if (nuevo != null) btVerCandidato.setDisable(false);
         });
     }
     
@@ -116,8 +116,11 @@ public class FXMLInformeController implements Initializable
                     if (vaca.getDescripcion().equals(v.getDescripcion())) existe = true;
                 if (existe)
                 {
+                    c.calcularPuntuacion(v);
                     aceptados.addFinal(c);
+                    aceptados.imprimir();
                     aceptados.bubbleSort((ComparadorNodos<Candidato>)(Candidato a, Candidato b) -> a.getPuntuacion() - b.getPuntuacion());
+                    aceptados.imprimir();
                 }
             }
                 

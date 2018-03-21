@@ -7,6 +7,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class Candidato
 {
+
     private double retribucion;
     private SimpleIntegerProperty puntuacion;
     private SimpleStringProperty email;
@@ -51,9 +52,8 @@ public class Candidato
     public SimpleStringProperty emailProperty() {
         return email;
     }
-    
-    public SimpleIntegerProperty puntuacionProperty()
-    {
+
+    public SimpleIntegerProperty puntuacionProperty() {
         return puntuacion;
     }
 
@@ -65,13 +65,21 @@ public class Candidato
         linea += retribucion + ";";
         linea += tipoJornada + ";";
         titulaciones.imprimir();
-        for (int i = 0; i < titulaciones.size(); i++) 
-            if (i == titulaciones.size() - 1) linea += titulaciones.get(i) + ";";
-            else linea += titulaciones.get(i) + ",";
+        for (int i = 0; i < titulaciones.size(); i++) {
+            if (i == titulaciones.size() - 1) {
+                linea += titulaciones.get(i) + ";";
+            } else {
+                linea += titulaciones.get(i) + ",";
+            }
+        }
         linea += Habilidad.convertirString(habilidades) + ";";
-        for (int i = 0; i < vacantes.size(); i++)
-            if (i == vacantes.size() - 1) linea += vacantes.get(i);
-            else linea += vacantes.get(i) + ",";
+        for (int i = 0; i < vacantes.size(); i++) {
+            if (i == vacantes.size() - 1) {
+                linea += vacantes.get(i);
+            } else {
+                linea += vacantes.get(i) + ",";
+            }
+        }
         return linea;
     }
 
@@ -138,7 +146,7 @@ public class Candidato
     public void setHabilidades(ListaEnlazada<Habilidad> habilidades) {
         this.habilidades = habilidades;
     }
-    
+
     public void setVacantes(ListaEnlazada<Vacante> vacantes) {
         this.vacantes = vacantes;
     }
@@ -158,14 +166,12 @@ public class Candidato
     public void addTitulacion(String t) {
         titulaciones.addFinal(t);
     }
-    
-    public void addVacante(Vacante v)
-    {
+
+    public void addVacante(Vacante v) {
         vacantes.addFinal(v);
     }
-    
-    public Vacante getVacante(int index)
-    {
+
+    public Vacante getVacante(int index) {
         return vacantes.get(index);
     }
 
@@ -204,9 +210,34 @@ public class Candidato
     public TipoJornada getTipoJornada() {
         return tipoJornada;
     }
-    
-    public ListaEnlazada<Vacante> getVacantes()
-    {
+
+    public ListaEnlazada<Vacante> getVacantes() {
         return vacantes;
+    }
+
+    public void calcularPuntuacion(Vacante v) {
+        boolean apto = false;
+        for (String s : this.getTitulaciones()) {
+            for (TitulacionEmpresa t : v.getTitulaciones()) {
+                if (s.equals(t.titulacion)) {
+                    apto = true;
+                    setPuntuacion(getPuntuacion() + t.importancia);
+                }
+            }
+        }
+        if (!apto) {
+            setPuntuacion(0);
+        } else {
+            for (Habilidad h : v.getHabilidades()) {
+                for (Habilidad hc : getHabilidades()) {
+                    if (hc.habilidad.equals(h.habilidad)) {
+                        setPuntuacion(getPuntuacion() + h.nivel);
+                    }
+                }
+            }
+            if (v.getTipoJornada() == getTipoJornada() || getTipoJornada() == TipoJornada.AMBAS) setPuntuacion(getPuntuacion() + 1);
+            if (getRetribucion() <= v.getSalario().min) setPuntuacion(getPuntuacion() + 1);
+            if (getRetribucion() <= v.getSalario().max) setPuntuacion(getPuntuacion() + 1);
+        }
     }
 }

@@ -125,7 +125,7 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
     private ListaEnlazada<Candidato> obtenerAptos(Vacante v) {
         ListaEnlazada<Candidato> aptos = new ListaEnlazada<>();
         for (Candidato c : Listas.candidatos) {
-            boolean apto = false;
+            /*boolean apto = false;
             for (TitulacionEmpresa titulacion : v.getTitulaciones()) {
                 for (String titulacionCandidato : c.getTitulaciones()) {
                     if (titulacion.titulacion.equals(titulacionCandidato)) {
@@ -156,6 +156,12 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
                 aptos.addFinal(c);
                 aptos.bubbleSort((ComparadorNodos<Candidato>) (Candidato a, Candidato b) -> a.getPuntuacion() - b.getPuntuacion());
                 aptos.imprimir();
+            }*/
+            c.calcularPuntuacion(v);
+            if (c.getPuntuacion() > 0)
+            {
+                aptos.addFinal(c);
+                aptos.bubbleSort((ComparadorNodos<Candidato>) (Candidato a, Candidato b) -> a.getPuntuacion() - b.getPuntuacion());
             }
         }
         return aptos;

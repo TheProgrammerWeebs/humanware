@@ -116,10 +116,7 @@ public class ListaEnlazada<T> implements Iterable<T>
     }
 
     public boolean existe(T informacion) {
-        System.out.println("informacion = " + informacion);
-        System.out.println("size() = " + size());
         for (T elemento : this) {
-            System.out.println("elemento = " + elemento);
             if (elemento.equals(informacion)) {
                 return true;
             }

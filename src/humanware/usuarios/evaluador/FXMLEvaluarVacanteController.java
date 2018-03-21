@@ -60,8 +60,6 @@ public class FXMLEvaluarVacanteController implements Initializable
                 agregarVacante(c, vacante.getCodigo());
             vacante.addApto(c);
             seleccionados.addFinal(c);
-            System.out.println("aptos = " + aptos);
-            System.out.println("c = " + c);
             try{aptos.remove(c);}catch(Exception ex){}
         }
         reiniciarBotones();

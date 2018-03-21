@@ -100,15 +100,9 @@ public class ListaEnlazada<T> implements Iterable<T>
      * @param info la información que se va a añadir
      * @param comparador instancia de una clase que implemente a ComparadorNodos
      */
-    public void addOrdenado(T info, ComparadorNodos comparador) {
+    /*public void addOrdenado(T info, ComparadorNodos comparador) {
         observableListAsociada.add(info);
         Nodo nuevo = new Nodo(info);
-//        System.out.println("Añadiendo: " + info);
-        System.out.println("ultimoNodo = " + ultimoNodo);
-//        System.out.println("nuevo = " + nuevo);
-        System.out.println("------------------");        
-        this.imprimir();
-        System.out.println("------------------");
         if (ultimoNodo != null && ultimoNodo.informacion.equals(nuevo.informacion)) {
             ultimoNodo.link = nuevo;
             ultimoNodo = nuevo;
@@ -151,6 +145,27 @@ public class ListaEnlazada<T> implements Iterable<T>
             }
         }
         size++;
+    }*/
+    
+    public void bubbleSort(ComparadorNodos<T> comparador)
+    {
+        boolean swap = true;
+        int j = 0;
+        T temp;
+        while(swap)
+        {
+            swap = false;
+            j++;
+            for (int i = 0; i < size() - j; i++) {
+                if (comparador.compararCon(get(i), get(i+1)) > 0)
+                {
+                    temp = get(i);
+                    set(i, get(i+1));
+                    set(i+1, temp);
+                    swap = true;
+                }
+            }
+        }
     }
 
     public boolean existe(T informacion) {
@@ -188,7 +203,6 @@ public class ListaEnlazada<T> implements Iterable<T>
 
     public boolean remove(T info) {
         observableListAsociada.remove(info);
-        System.out.println("primerNodo.getInformacion() = " + primerNodo.getInformacion());
         if (primerNodo.getInformacion().equals(info) && primerNodo.informacion == null) {
             primerNodo = primerNodo.link;
         } else {
@@ -237,7 +251,9 @@ public class ListaEnlazada<T> implements Iterable<T>
     }
 
     public T get(int index) {
-        return getNodo(index).getInformacion();
+        Nodo<T> n = getNodo(index);
+        if (n == null) return null;
+        return n.getInformacion();
     }
 
     public boolean estaVacia() {

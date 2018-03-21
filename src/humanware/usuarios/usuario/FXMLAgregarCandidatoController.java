@@ -77,7 +77,7 @@ public class FXMLAgregarCandidatoController implements Initializable
                     FXMLAgregarVacanteController.agregarTitulacionBaseDatos(ObtenerDatos.mostrarVentana("Ingrese el nombre de la titulación", "Agregar titulación"));
                     cbTitulos.setItems(Listas.titulos);
                 } catch (IOException ex) {
-                    System.out.println("Error de lectura o escritura al abrir obtener datos");
+                    System.err.println("Error de lectura o escritura al abrir obtener datos");
                 }
             }
         });
@@ -185,7 +185,6 @@ public class FXMLAgregarCandidatoController implements Initializable
             Candidato nuevo = new Candidato(nombre, telefono, email, titulaciones, habilidades, tipo, retribucion);
             Listas.candidatos.addFinal(nuevo);
             PrintWriter pw = Utilidades.openFileWrite("archivos\\database\\candidatos", true);
-            System.out.println("pw = " + pw);
             pw.println(nuevo.convertirAString());
             pw.close();
             this.agregarCandidatoPane.getScene().getWindow().hide();

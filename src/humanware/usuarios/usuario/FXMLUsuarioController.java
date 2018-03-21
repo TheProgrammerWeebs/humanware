@@ -210,7 +210,6 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
     public void eliminarVacante() {
         Vacante v = tbVacantes.getSelectionModel().getSelectedItem();
         Listas.vacantes.remove(v);
-        System.out.println(v.convertirString());
         Utilidades.eliminarLinea(v.convertirStringCodigo(), "archivos\\database\\vacantes");
         btEliminarVacante.setDisable(true);
         tbVacantes.getSelectionModel().select(null);

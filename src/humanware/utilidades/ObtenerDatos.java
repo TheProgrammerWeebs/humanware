@@ -26,7 +26,6 @@ public class ObtenerDatos
         pane = new VBox(msj, tfInput, btAceptar);
         btAceptar.setOnAction(e -> {
             if (tfInput.getText() == null || Utilidades.quitarEspacios(tfInput.getText()).equals("")) {
-                System.out.println(informacion==null);
                 tfInput.setText("");
                 tfInput.setPromptText("Debe ingresar un dato");
                 tfInput.setVisible(true);

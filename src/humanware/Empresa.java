@@ -40,7 +40,6 @@ public class Empresa
             if (!Utilidades.quitarEspacios(linea).equals("")) {
                 if (nombre.equals(this.getNombre())) {
                     Vacante v = Vacante.convertirVacante(linea);
-                    System.out.println("Vacante: " + v.convertirString());
                     vacantes.addFinal(v);
                 }
             }
@@ -102,7 +101,6 @@ public class Empresa
                 while (lector.ready()) {
                     String linea = lector.readLine();
                     for (int i = 0; i < linea.length(); i++) {
-                        System.out.println(linea.substring(i, i + 1));
                         if (linea.substring(i, i + 1).equals(";")) {
                             if (linea.substring(0, i).equals(nombreEmpresa)) {
                                 lector.close();

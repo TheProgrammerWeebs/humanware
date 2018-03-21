@@ -86,7 +86,7 @@ public class FXMLAgregarVacanteController implements Initializable
                     agregarTitulacionBaseDatos(ObtenerDatos.mostrarVentana("Ingrese el nombre de la titulación", "Agregar titulación"));
                     cbTitulos.setItems(Listas.titulos);
                 } catch (IOException ex) {
-                    System.out.println("Error de lectura o escritura al abrir obtener datos");
+                    System.err.println("Error de lectura o escritura al abrir obtener datos");
                 }
             }
         });

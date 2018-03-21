@@ -124,15 +124,18 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
                         c.setPuntuacion(c.getPuntuacion() + titulacion.importancia);
                         apto = v.getAptos().estaVacia() ? true : !v.getAptos().existe(c);
                         if (c.getVacantes().get(0) != null)
+                        {
                             for (Vacante vaca : c.getVacantes()) {
-                                System.out.println("vaca = " + vaca);
-                                System.out.println("vaca.getCodigo() = " + vaca.getCodigo());
-                                System.out.println("v = " + v);
-                                System.out.println("v.getCodigo = " + v.getCodigo());
                                 if (vaca.getCodigo().equals(v.getCodigo()))
                                     apto = false;   
                             }
-                    }
+                        }
+                            
+                        if (apto) 
+                        {
+                            break;
+                        }
+                    }                 
                 }
             }
             if (apto) {
@@ -145,7 +148,9 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
                 }
                 if (c.getRetribucion() <= v.getSalario().min) c.setPuntuacion(c.getPuntuacion() + 2);
                 if (c.getRetribucion() <= v.getSalario().max) c.setPuntuacion(c.getPuntuacion() + 1);
-                aptos.addOrdenado(c, (ComparadorNodos<Candidato>) (Candidato a, Candidato b) -> a.getPuntuacion() - b.getPuntuacion());
+                aptos.addFinal(c);
+                aptos.bubbleSort((ComparadorNodos<Candidato>) (Candidato a, Candidato b) -> a.getPuntuacion() - b.getPuntuacion());
+                aptos.imprimir();
             }
         }
         return aptos;

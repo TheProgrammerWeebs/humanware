@@ -108,8 +108,11 @@ public class FXMLEvaluarVacanteController implements Initializable
     }
 
     private void reiniciarPuntuacionCandidatos() {
+        int i = 0;
         if (!aptos.estaVacia()) {
+            System.out.println("aptos = " + aptos.get(i++).getNombre());
             for (Candidato c : aptos) {
+                System.out.println("c = " + c);
                 c.setPuntuacion(0);
             }
         }

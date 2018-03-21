@@ -90,6 +90,17 @@ public class Listas
                     vaca.setNombreEmpresa(campos.get(Vacante.EMPRESA));
                     vaca.setSalario(Rango.convertirARango(campos.get(Vacante.SALARIO)));
                     vaca.setTitulaciones(TitulacionEmpresa.convertirATitulaciones(campos.get(Vacante.TITULACIONES)));
+                    for (Candidato c:candidatos){
+                        System.out.println("c: " + c.getNombre());
+                        if (c.getVacantes().get(0) != null)
+                        for (Vacante v : c.getVacantes())
+                            if (v.getCodigo().equals(vaca.getCodigo()))
+                            {
+                                System.out.println("c añadido = " + c);
+                                vaca.addApto(c);
+                                break;
+                            }
+                    }
                     if (campos.size() > 5) {
                         vaca.setHabilidades(Habilidad.convertirAHabilidades(campos.get(Vacante.HABILIDADES))); //Si tiene habilidades
                     }

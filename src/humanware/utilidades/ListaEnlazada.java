@@ -94,7 +94,7 @@ public class ListaEnlazada<T> implements Iterable<T>
         this.observableListAsociada = observableListAsociada;
     }
 
-    public void bubbleSort(ComparadorNodos<T> comparador)
+    public static <T> void ordenar (ObservableList<T> lista, ComparadorNodos<T> comparador)
     {
         boolean swap = true;
         int j = 0;
@@ -103,8 +103,31 @@ public class ListaEnlazada<T> implements Iterable<T>
         {
             swap = false;
             j++;
+            for (int i = 0; i < lista.size() - j; i++) {
+                if (comparador.compararCon(lista.get(i), lista.get(i+1)) < 0)
+                {
+                    temp = lista.get(i);
+                    lista.set(i, lista.get(i+1));
+                    lista.set(i+1, temp);
+                    swap = true;
+                }
+            }
+        }
+    }
+    
+    
+    public void bubbleSort(ComparadorNodos<T> comparador)
+    {
+        boolean swap = true;
+        ordenar(getObservableListAsociada(), comparador);
+        int j = 0;
+        T temp;
+        while(swap)
+        {
+            swap = false;
+            j++;
             for (int i = 0; i < size() - j; i++) {
-                if (comparador.compararCon(get(i), get(i+1)) > 0)
+                if (comparador.compararCon(get(i), get(i+1)) < 0)
                 {
                     temp = get(i);
                     set(i, get(i+1));

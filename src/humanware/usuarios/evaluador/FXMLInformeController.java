@@ -62,6 +62,10 @@ public class FXMLInformeController implements Initializable
     }
     private void inicializarCandidatos() {
         tbAceptados.setItems(aceptados.getObservableListAsociada());
+        for(Candidato aaa : aceptados.getObservableListAsociada())
+        {
+            System.out.print(aaa.getPuntuacion() + " ");
+        }
         tbcPuntuacion.setCellValueFactory(new PropertyValueFactory<>("puntuacion"));
         tbcNombre.setCellValueFactory(new PropertyValueFactory<>("nombre"));
         tbAceptados.getSelectionModel().selectedIndexProperty().addListener((valor, viejo, nuevo) -> {
@@ -118,9 +122,7 @@ public class FXMLInformeController implements Initializable
                 {
                     c.calcularPuntuacion(v);
                     aceptados.addFinal(c);
-                    aceptados.imprimir();
                     aceptados.bubbleSort((ComparadorNodos<Candidato>)(Candidato a, Candidato b) -> a.getPuntuacion() - b.getPuntuacion());
-                    aceptados.imprimir();
                 }
             }
                 

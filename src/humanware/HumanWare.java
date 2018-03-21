@@ -1,7 +1,5 @@
 package humanware;
 
-import humanware.utilidades.ListaEnlazada;
-import humanware.utilidades.ListaEnlazada.ComparadorNodos;
 import javafx.application.Application;
 import java.io.IOException;
 import javafx.fxml.FXMLLoader;

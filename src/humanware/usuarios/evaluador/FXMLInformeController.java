@@ -43,13 +43,11 @@ public class FXMLInformeController implements Initializable
     
     private void activarMover()
     {
-        informePane.setOnMousePressed(event
-                -> {
+        informePane.setOnMousePressed(event -> {
             xOffset = event.getSceneX();
             yOffset = event.getSceneY();
         });
-        informePane.setOnMouseDragged(event
-                -> {
+        informePane.setOnMouseDragged(event -> {
             informePane.getScene().getWindow().setX(event.getScreenX() - xOffset);
             informePane.getScene().getWindow().setY(event.getScreenY() - yOffset);
         });
@@ -111,6 +109,7 @@ public class FXMLInformeController implements Initializable
     
     public static ListaEnlazada<Candidato> obtenerCandidatos(Vacante v)
     {
+        Listas.cargarListas();
         ListaEnlazada<Candidato> aceptados = new ListaEnlazada<>();
         for (Candidato c : Listas.candidatos){
             if (c.getVacantes().get(0) != null)

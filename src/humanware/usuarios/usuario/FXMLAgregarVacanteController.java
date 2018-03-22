@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import humanware.Empresa;
 import humanware.Habilidad;
 import humanware.Listas;
 import humanware.TipoJornada;
@@ -216,7 +217,7 @@ public class FXMLAgregarVacanteController implements Initializable
             }
             if (correcto) {
                 String codigo = UUID.randomUUID().toString();
-                Vacante nuevaVacante = new Vacante(salario, jornada, titulaciones, habilidades, nombreEmpresa, descripcion, codigo);
+                Vacante nuevaVacante = new Vacante(this.tfDescripcion.getText(), Empresa.convertirAEmpresa((String)this.cbEmpresas.getValue()), salario, jornada, titulaciones, habilidades, nombreEmpresa, descripcion, codigo);
                 String linea = nuevaVacante.convertirString();
                 linea += codigo;
                 Listas.vacantes.addFinal(nuevaVacante);

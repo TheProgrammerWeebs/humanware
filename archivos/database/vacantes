@@ -2,4 +2,6 @@ DanielInc;Cantante;800000.0,400000.0;COMPLETA;Escritor/5;Japonés/3;false;0c5978
 Miguel Enterprises;Profesor de Informática;500000.0,700000.0;COMPLETA;Ingeniería de Sistemas/5,Matemáticas/3,Ingeniería Eléctrica/4,Programador/5;Inglés/2;false;9b838835-b4a3-410e-9e93-211a0afa9ca0
 Miguel Enterprises;Profesor de Matemáticas;1500000.0,2000000.0;COMPLETA;Ingeniería de Sistemas/3,Ingeniería Eléctrica/4,Matemáticas/5,Licenciatura en Matemáticas/5;;false;9f9aa400-ceaa-4df8-8182-24486cebdf38
 Miguel Enterprises;Asesinar empleado de DanielInc;700.0,900.0;COMPLETA;Demon/5;;false;51b6cbc8-e9de-4440-a8e4-f9e39791f5c2
-DanielInc;Detener Asesino de Miguel Enterprises;900.0,1000.0;COMPLETA;Angel/5;;false;4de54d35-9fe8-4f9e-9306-dcde122e9a19
+DanielInc;Detener Asesino de Miguel Enterprises;900.0,1000.0;COMPLETA;Angel/5;;false;4de54d35-9fe8-4f9e-9306-dcde122e9a19null;null;1.0,2.0;PARCIAL;Ingeniería de Sistemas/3;Inglés/2;false;a63c105b-aa0e-47ea-8957-557f9e3c5ac7
+Recuérdame ;Tururu;1.0,2.0;PARCIAL;Matemáticas/4;GG/3;false;a58d5d05-6b30-47fc-8b62-cae26b7124aa
+Miguel Enterprises;Programador;0.0,1.0;COMPLETA;Ingeniería de Sistemas/5;Inglés/4;false;c7df053f-879c-4565-bda0-3fffff037581

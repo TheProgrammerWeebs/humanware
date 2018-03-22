@@ -48,8 +48,11 @@ public class Vacante
         this.codigo = codigo;
     }
 
-    public Vacante(Rango salario, TipoJornada tipoJornada, ListaEnlazada<TitulacionEmpresa> titulaciones, ListaEnlazada<Habilidad> habilidades, String nombreEmpresa, String descripcionPuesto, String codigo) {
+    public Vacante(String descripcion, Empresa empresa ,Rango salario, TipoJornada tipoJornada, ListaEnlazada<TitulacionEmpresa> titulaciones, ListaEnlazada<Habilidad> habilidades, String nombreEmpresa, String descripcionPuesto, String codigo) {
         this();
+        this.descripcionPuesto.set(descripcion);
+        this.empresa = empresa;
+        this.nombreEmpresa.set(empresa.getNombre());
         this.salario = salario;
         this.tipoJornada = tipoJornada;
         this.titulaciones = titulaciones;

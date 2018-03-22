@@ -124,9 +124,15 @@ public class FXMLEvaluadorController implements Initializable, ControladorUsuari
 
     private ListaEnlazada<Candidato> obtenerAptos(Vacante v) {
         ListaEnlazada<Candidato> aptos = new ListaEnlazada<>();
+        boolean yaExiste = false;
         for (Candidato c : Listas.candidatos) {
             c.calcularPuntuacion(v);
-            if (c.getPuntuacion() > 0)
+            if (c.getVacantes().get(0) != null)
+                for (Vacante vaca:c.getVacantes()) {
+                    if (vaca.getCodigo().equals(v.getCodigo()))
+                        yaExiste = true;
+                }
+            if (c.getPuntuacion() > 0 && !yaExiste)
             {   
                 aptos.addFinal(c);
                 aptos.bubbleSort((ComparadorNodos<Candidato>) (Candidato a, Candidato b) -> a.getPuntuacion() - b.getPuntuacion());

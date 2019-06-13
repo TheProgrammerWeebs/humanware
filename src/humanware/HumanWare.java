@@ -36,6 +36,7 @@ public class HumanWare extends Application
             stage.show();
         } catch (IOException e) {
             System.err.println("Error de lectura o escritura en clase principal");
+            e.printStackTrace();
         }
     }
 

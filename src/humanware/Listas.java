@@ -6,10 +6,9 @@ import humanware.utilidades.Utilidades;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import static humanware.utilidades.Utilidades.SEP;
 
 /**
  *
@@ -47,7 +46,7 @@ public class Listas
     public static void cargarTitulos() {
         titulos = FXCollections.observableArrayList();
         try {
-            String ruta = "archivos\\database\\titulos";
+            String ruta = "archivos"+SEP+"database"+SEP+"titulos";
             BufferedReader buffer = Utilidades.openFileRead(ruta);
             while (buffer.ready()) {
                 Listas.titulos.add(buffer.readLine());
@@ -61,7 +60,7 @@ public class Listas
     }
     private static void cargarEmpresas() {
         empresas = new ListaEnlazada<>();
-        String ruta = "archivos\\database\\empresas";
+        String ruta = "archivos"+SEP+"database"+SEP+"empresas";
         try (BufferedReader lector = Utilidades.openFileRead(ruta)) {
             while (lector.ready()) {
                 String linea = lector.readLine();
@@ -77,7 +76,7 @@ public class Listas
     }
     private static void cargarVacantes() {
         vacantes = new ListaEnlazada<>();
-        String ruta = "archivos\\database\\vacantes";
+        String ruta = "archivos"+SEP+"database"+SEP+"vacantes";
         try (BufferedReader lector = Utilidades.openFileRead(ruta)) {
             while (lector.ready()) {
                 String linea = lector.readLine();
@@ -120,7 +119,7 @@ public class Listas
     private static void cargarCandidatos() {
         candidatos = new ListaEnlazada<>();
         try {
-            BufferedReader buffer = Utilidades.openFileRead("archivos\\database\\candidatos");
+            BufferedReader buffer = Utilidades.openFileRead("archivos"+SEP+"database"+SEP+"candidatos");
             String linea;
             
             while (buffer.ready()) {

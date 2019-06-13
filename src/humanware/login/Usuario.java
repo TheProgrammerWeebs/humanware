@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
+import static humanware.utilidades.Utilidades.SEP;
 
 public class Usuario
 {
@@ -57,7 +58,7 @@ public class Usuario
         return esValido;
     }
     public boolean nombreExiste() {
-        String ruta = "archivos\\database\\usuarios";
+        String ruta = SEP+"archivos"+SEP+"database"+SEP+"usuarios";
         boolean existe = false;
         try
         {
@@ -79,7 +80,7 @@ public class Usuario
     }
     private void determinarTipo() {
         esValido = false;
-        String ruta = "archivos\\database\\usuarios";
+        String ruta = "archivos"+SEP+"database"+SEP+"usuarios";
         try
         {
             BufferedReader buffer = Utilidades.openFileRead(ruta);
@@ -123,7 +124,7 @@ public class Usuario
     public void actualizarUsuario(int posCampo, String viejo, String nuevo) {
         try
         {
-            String ruta = "archivos\\database\\usuarios";
+            String ruta = SEP+"archivos"+SEP+"database"+SEP+"usuarios";
             BufferedReader buffer = Utilidades.openFileRead(ruta);
             PrintWriter pw;
             while (buffer.ready())
@@ -160,7 +161,7 @@ public class Usuario
         PrintWriter pw = null;
         try
         {
-            String ruta = "archivos\\database\\usuarios";
+            String ruta = "archivos"+SEP+"database"+SEP+"usuarios";
             pw = Utilidades.openFileWrite(ruta, true);
             pw.println(this.nombre.get() + ";" + this.contrasenia.get() + ";" + this.tipo);
         }

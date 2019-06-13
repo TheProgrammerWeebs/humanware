@@ -4,14 +4,12 @@ import humanware.login.ControladorUsuario;
 import humanware.login.Usuario;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.text.NumberFormat;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -19,15 +17,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import java.util.Locale;
 
 public class Utilidades
 {
-
-    public static final String RUTA_ABS = new File("").getAbsolutePath();
-
-    public static final String getRutaAbs(String archivo) {
-        return RUTA_ABS + "\\" + archivo;
-    }
+    
+    public static String SEP = File.separator;
+    public static Locale ES = new Locale("es", "CO");
+    public static String CURRENCY = "$ ";
 
     public static String quitarEspacios(String linea) {
         String lineaFinal = "";
@@ -78,8 +75,8 @@ public class Utilidades
     }
 
     public static boolean eliminarLinea(String linea, String ruta) {
-        File archivo = new File(Utilidades.getRutaAbs(ruta));
-        File temporal = new File(archivo.getAbsolutePath() + ".tmp");
+        File archivo = new File(ruta);
+        File temporal = new File(archivo + ".tmp");
         boolean encontrado;
         try (BufferedReader buffer = openFileRead(ruta); PrintWriter pw = Utilidades.openFileWrite(ruta + ".tmp", true)) {
             String line;
@@ -111,13 +108,10 @@ public class Utilidades
 
     public static PrintWriter openFileWrite(String ruta, boolean append) {
         try {
-            FileOutputStream fileStream = new FileOutputStream(new File(getRutaAbs(ruta)), append);
-            PrintWriter pw = new PrintWriter(new OutputStreamWriter(fileStream, "UTF-8"));
+            PrintWriter pw = new PrintWriter(new FileWriter(ruta, append));
             return pw;
-        } catch (FileNotFoundException ex) {
-            System.err.println("Archivo no encontrado");
-        } catch (UnsupportedEncodingException ex) {
-            System.err.println("Codificación no soportada");
+        } catch (IOException ex) {
+            System.err.println("Error de IO");
         }
         return null;
     }
@@ -125,12 +119,11 @@ public class Utilidades
     public static BufferedReader openFileRead(String ruta) {
         try {
             BufferedReader buffer;
-            buffer = new BufferedReader(new InputStreamReader(new FileInputStream(Utilidades.getRutaAbs(ruta)), "UTF-8"));
+            buffer = new BufferedReader(new FileReader(ruta));
             return buffer;
         } catch (FileNotFoundException ex) {
-            System.err.println("No se encontró el archivo");
-        } catch (UnsupportedEncodingException ex) {
-            System.out.println("Codificación no soportada");
+            
+            System.err.println("No se encontró el archivo " + ruta);
         }
         return null;
     }

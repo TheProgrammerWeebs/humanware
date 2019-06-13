@@ -14,11 +14,18 @@ import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.ObtenerDatos;
 import humanware.utilidades.Rango;
 import humanware.utilidades.Utilidades;
+import static humanware.utilidades.Utilidades.ES;
+import static humanware.utilidades.Utilidades.SEP;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -140,7 +147,7 @@ public class FXMLAgregarVacanteController implements Initializable
     }
 
     public static void agregarTitulacionBaseDatos(String titulacion) throws IOException {
-        String ruta = "archivos\\database\\titulos";
+        String ruta = "archivos"+SEP+"database"+SEP+"titulos";
         PrintWriter pw = Utilidades.openFileWrite(ruta, true);
         pw.println(titulacion);
         pw.close();
@@ -199,9 +206,15 @@ public class FXMLAgregarVacanteController implements Initializable
             ListaEnlazada<String> lineasHabilidades = Utilidades.split(taHabilidades.getText(), "\n");
             ListaEnlazada<String> lineasTitulaciones = Utilidades.split(taTitulaciones.getText(), "\n");
             try {
-                salario = new Rango(Double.parseDouble(tfMinSalario.getText()), Double.parseDouble(tfMaxSalario.getText()));
+                Number min = NumberFormat.getNumberInstance(ES).parse(tfMinSalario.getText());
+                Number max = NumberFormat.getNumberInstance(ES).parse(tfMaxSalario.getText());
+                salario = new Rango(min.doubleValue(), max.doubleValue());
             } catch (NumberFormatException e) {
-                lbError.setText("El salario solo puede contener números reales");
+                lbError.setText("El salario solo puede contener números");
+                lbError.setVisible(true);
+                correcto = false;
+            } catch (ParseException ex) {
+                lbError.setText("No se reconoce el formato del número");
                 lbError.setVisible(true);
                 correcto = false;
             }
@@ -221,7 +234,7 @@ public class FXMLAgregarVacanteController implements Initializable
                 String linea = nuevaVacante.convertirString();
                 linea += codigo;
                 Listas.vacantes.addFinal(nuevaVacante);
-                String ruta = "archivos\\database\\vacantes";
+                String ruta = "archivos"+SEP+"database"+SEP+"vacantes";
                 PrintWriter pw = Utilidades.openFileWrite(ruta, true);
                 pw.println(linea);
                 pw.close();

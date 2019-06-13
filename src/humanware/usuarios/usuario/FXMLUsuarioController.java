@@ -15,6 +15,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import humanware.Listas;
 import humanware.usuarios.FXMLMostrarCandidatoController;
+import static humanware.utilidades.Utilidades.SEP;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -162,7 +163,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
             lbErrorEmpresas.setText("Ninguno de los campos debe llevar punto y coma");
             lbErrorEmpresas.setVisible(true);
         } else {
-            String ruta = "archivos\\database\\empresas";
+            String ruta = "archivos"+SEP+"database"+SEP+"empresas";
             try (PrintWriter pw = Utilidades.openFileWrite(ruta, true)) {
                 pw.println(tfNombre.getText() + ";" + Utilidades.quitarEspacios(Utilidades.formatearTelefono(tfTelefono.getText())));
             }
@@ -173,11 +174,11 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
     }
 
     public void eliminarEmpresa() throws IOException {
-        String ruta = "archivos\\database\\empresas";
+        String ruta = "archivos"+SEP+"database"+SEP+"empresas";
         Empresa e = tbEmpresas.getSelectionModel().getSelectedItem();
         e.cargarVacantes();
         for (Vacante v : e.getVacantes()) 
-            Utilidades.eliminarLinea(v.convertirString(), "archivos\\database\\vacantes");
+            Utilidades.eliminarLinea(v.convertirString(), "archivos"+SEP+"database"+SEP+"vacantes");
         String empresa = e.getNombre() + ";" + e.getTelefonoSinEspacios();
         Utilidades.eliminarLinea(empresa, ruta);
         Listas.empresas.remove(e);
@@ -210,7 +211,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
     public void eliminarVacante() {
         Vacante v = tbVacantes.getSelectionModel().getSelectedItem();
         Listas.vacantes.remove(v);
-        Utilidades.eliminarLinea(v.convertirStringCodigo(), "archivos\\database\\vacantes");
+        Utilidades.eliminarLinea(v.convertirStringCodigo(), "archivos"+SEP+"database"+SEP+"vacantes");
         btEliminarVacante.setDisable(true);
         tbVacantes.getSelectionModel().select(null);
     }
@@ -246,7 +247,7 @@ public class FXMLUsuarioController implements Initializable, ControladorUsuario
         Candidato c = tbCandidatos.getSelectionModel().getSelectedItem();
         Listas.candidatos.remove(c);
         String linea = c.convertirAString();
-        Utilidades.eliminarLinea(linea, "archivos\\database\\candidatos");
+        Utilidades.eliminarLinea(linea, "archivos"+SEP+"database"+SEP+"candidatos");
         tbCandidatos.getSelectionModel().select(null);
     }
     

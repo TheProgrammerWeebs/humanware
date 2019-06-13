@@ -6,6 +6,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import javafx.beans.property.SimpleStringProperty;
+import static humanware.utilidades.Utilidades.SEP;
 
 public class Empresa
 {
@@ -31,7 +32,7 @@ public class Empresa
     }
 
     public final void cargarVacantes() throws FileNotFoundException, IOException {
-        String ruta = "archivos\\database\\vacantes";
+        String ruta = "archivos"+SEP+"database"+SEP+"vacantes";
         BufferedReader buffer = Utilidades.openFileRead(ruta);
         while (buffer.ready()) {
             String linea = buffer.readLine();
@@ -95,7 +96,7 @@ public class Empresa
     }
 
     public static Empresa convertirAEmpresa(String nombreEmpresa) {
-        String ruta = "archivos\\database\\empresas";
+        String ruta = "archivos"+SEP+"database"+SEP+"empresas";
         try {
             try (BufferedReader lector = Utilidades.openFileRead(ruta)) {
                 while (lector.ready()) {

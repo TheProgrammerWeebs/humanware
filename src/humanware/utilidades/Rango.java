@@ -1,5 +1,11 @@
 package humanware.utilidades;
 
+import static humanware.utilidades.Utilidades.ES;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 public class Rango
 {
     public double min;
@@ -27,8 +33,15 @@ public class Rango
     
     public static Rango convertirARango(String linea)
     {
-        ListaEnlazada<String> limites = Utilidades.split(linea, ",");
-        return new Rango(Double.parseDouble(limites.get(0)), Double.parseDouble(limites.get(1)));
+        try {
+            ListaEnlazada<String> limites = Utilidades.split(linea, ",");
+            Number limite1 = NumberFormat.getInstance(ES).parse(limites.get(0));
+            Number limite2 = NumberFormat.getInstance(ES).parse(limites.get(1));
+            return new Rango(limite1.doubleValue(), limite1.doubleValue());
+        } catch (ParseException ex) {
+            System.err.println("Problema con el formato del número");
+            return new Rango();
+        }
     }
 
     public Rango() {

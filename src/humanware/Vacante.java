@@ -6,6 +6,7 @@ import humanware.utilidades.Utilidades;
 import java.io.BufferedReader;
 import java.io.IOException;
 import javafx.beans.property.SimpleStringProperty;
+import static humanware.utilidades.Utilidades.SEP;
 
 public class Vacante
 {
@@ -172,7 +173,7 @@ public class Vacante
     
     public static Vacante convertirCodigoAVacante(String codigo)
     {
-        BufferedReader buffer = Utilidades.openFileRead("archivos\\database\\vacantes");
+        BufferedReader buffer = Utilidades.openFileRead("archivos"+SEP+"database"+SEP+"vacantes");
         boolean existe = false;
         try{
             while(buffer.ready())

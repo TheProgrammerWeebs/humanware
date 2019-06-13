@@ -5,11 +5,12 @@ import com.jfoenix.controls.JFXTextField;
 import humanware.Habilidad;
 import humanware.TitulacionEmpresa;
 import humanware.Vacante;
+import static humanware.utilidades.Utilidades.CURRENCY;
+import static humanware.utilidades.Utilidades.ES;
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -93,8 +94,8 @@ public class FXMLMostrarController implements Initializable
         this.vacante = vacante;
         tfDescripcionVer.setText(vacante.getDescripcion());
         tfEmpresaVer.setText(vacante.getNombreEmpresa());
-        tfMinSalarioVer.setText(Double.toString(vacante.getSalario().min) + " COP");
-        tfMaxSalarioVer.setText(Double.toString(vacante.getSalario().max) + " COP");
+        tfMinSalarioVer.setText(CURRENCY + NumberFormat.getInstance(ES).format(vacante.getSalario().min));
+        tfMaxSalarioVer.setText(CURRENCY + NumberFormat.getInstance(ES).format(vacante.getSalario().max));
         switch (vacante.getTipoJornada()) {
             case PARCIAL:
                 rbParcialVer.setSelected(true);

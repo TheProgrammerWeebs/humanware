@@ -11,9 +11,14 @@ import humanware.TipoJornada;
 import humanware.utilidades.ListaEnlazada;
 import humanware.utilidades.ObtenerDatos;
 import humanware.utilidades.Utilidades;
+import static humanware.utilidades.Utilidades.ES;
+import static humanware.utilidades.Utilidades.SEP;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URL;
+import java.util.Locale;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -161,33 +166,37 @@ public class FXMLAgregarCandidatoController implements Initializable
             lbError.setText("El formato del teléfono es incorrecto");
             lbError.setVisible(true);
         } else {
-            String nombre = this.tfNombreCandidato.getText();
-            String email = this.tfEmail.getText();
-            double retribucion = Double.parseDouble(this.tfRetribucionMinima.getText());
-            TipoJornada tipo = rbAmbas.isSelected() ? TipoJornada.AMBAS : rbCompleta.isSelected() ? TipoJornada.COMPLETA : TipoJornada.PARCIAL;
-            ListaEnlazada<String> lineasHabilidades = Utilidades.split(taHabilidades.getText(), "\n");
-            ListaEnlazada<String> lineasTitulaciones = Utilidades.split(taTitulaciones.getText(), "\n");
-            ListaEnlazada<String> titulaciones = new ListaEnlazada();
-            ListaEnlazada<Habilidad> habilidades = new ListaEnlazada();
-            for (String linea : lineasHabilidades) {
-                if (Utilidades.quitarEspacios(linea).equals("")) {
-                    continue;
+            try {
+                String nombre = this.tfNombreCandidato.getText();
+                String email = this.tfEmail.getText();
+                Number retribucion = NumberFormat.getCurrencyInstance(ES).parse(this.tfRetribucionMinima.getText());
+                TipoJornada tipo = rbAmbas.isSelected() ? TipoJornada.AMBAS : rbCompleta.isSelected() ? TipoJornada.COMPLETA : TipoJornada.PARCIAL;
+                ListaEnlazada<String> lineasHabilidades = Utilidades.split(taHabilidades.getText(), "\n");
+                ListaEnlazada<String> lineasTitulaciones = Utilidades.split(taTitulaciones.getText(), "\n");
+                ListaEnlazada<String> titulaciones = new ListaEnlazada();
+                ListaEnlazada<Habilidad> habilidades = new ListaEnlazada();
+                for (String linea : lineasHabilidades) {
+                    if (Utilidades.quitarEspacios(linea).equals("")) {
+                        continue;
+                    }
+                    ListaEnlazada<String> campos = Utilidades.split(linea, "/");
+                    habilidades.addFinal(new Habilidad(campos.get(0), Integer.parseInt(campos.get(1))));
                 }
-                ListaEnlazada<String> campos = Utilidades.split(linea, "/");
-                habilidades.addFinal(new Habilidad(campos.get(0), Integer.parseInt(campos.get(1))));
-            }
-            for (String linea : lineasTitulaciones) {
-                if (Utilidades.quitarEspacios(linea).equals("")) {
-                    continue;
+                for (String linea : lineasTitulaciones) {
+                    if (Utilidades.quitarEspacios(linea).equals("")) {
+                        continue;
+                    }
+                    titulaciones.addFinal(linea);
                 }
-                titulaciones.addFinal(linea);
+                Candidato nuevo = new Candidato(nombre, telefono, email, titulaciones, habilidades, tipo, retribucion.doubleValue());
+                Listas.candidatos.addFinal(nuevo);
+                PrintWriter pw = Utilidades.openFileWrite("archivos"+SEP+"database"+SEP+"candidatos", true);
+                pw.println(nuevo.convertirAString());
+                pw.close();
+                this.agregarCandidatoPane.getScene().getWindow().hide();
+            } catch (ParseException ex) {
+                System.err.println("Error de formato");
             }
-            Candidato nuevo = new Candidato(nombre, telefono, email, titulaciones, habilidades, tipo, retribucion);
-            Listas.candidatos.addFinal(nuevo);
-            PrintWriter pw = Utilidades.openFileWrite("archivos\\database\\candidatos", true);
-            pw.println(nuevo.convertirAString());
-            pw.close();
-            this.agregarCandidatoPane.getScene().getWindow().hide();
         }
     }
 

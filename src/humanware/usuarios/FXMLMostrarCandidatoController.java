@@ -5,8 +5,11 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import humanware.Candidato;
 import humanware.Habilidad;
+import static humanware.utilidades.Utilidades.CURRENCY;
+import static humanware.utilidades.Utilidades.ES;
 import java.io.IOException;
 import java.net.URL;
+import java.text.NumberFormat;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -96,7 +99,7 @@ public class FXMLMostrarCandidatoController implements Initializable
         tfNombreCandidato.setText(candidato.getNombre());
         tfTelefono.setText(candidato.getTelefono());
         tfEmail.setText(candidato.getEmail());
-        tfRetribucionMinima.setText(Double.toString(candidato.getRetribucion()) + " COP");
+        tfRetribucionMinima.setText(CURRENCY + NumberFormat.getInstance(ES).format(candidato.getRetribucion()));
         switch (candidato.getTipoJornada()) {
             case AMBAS:
                 rbAmbas.setSelected(true);

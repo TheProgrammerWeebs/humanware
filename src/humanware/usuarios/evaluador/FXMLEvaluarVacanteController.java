@@ -19,6 +19,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javax.swing.JOptionPane;
+import static humanware.utilidades.Utilidades.SEP;
 
 public class FXMLEvaluarVacanteController implements Initializable
 {
@@ -65,7 +66,7 @@ public class FXMLEvaluarVacanteController implements Initializable
         reiniciarBotones();
     }
     public void agregarVacante(Candidato c, String codigo) {
-        String ruta = "archivos\\database\\candidatos";
+        String ruta = "archivos"+SEP+"database"+SEP+"candidatos";
         BufferedReader buffer = Utilidades.openFileRead(ruta);
         try {
             while (buffer.ready()) {

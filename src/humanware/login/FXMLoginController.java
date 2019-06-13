@@ -20,6 +20,7 @@ import javafx.stage.StageStyle;
 import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javax.swing.JOptionPane;
+import static humanware.utilidades.Utilidades.SEP;
 
 public class FXMLoginController implements Initializable
 {
@@ -142,7 +143,7 @@ public class FXMLoginController implements Initializable
     }
 
     private void actualizarCookies() {
-        String ruta = "archivos\\database\\cookies";
+        String ruta = "archivos"+SEP+"database"+SEP+"cookies";
         PrintWriter pw;
         pw = Utilidades.openFileWrite(ruta, false);
         if (cbRemember.isSelected()) {
@@ -157,7 +158,8 @@ public class FXMLoginController implements Initializable
     private void cargarCookies() {
         BufferedReader lector;
         try {
-            String ruta = "archivos\\database\\cookies";
+            String ruta = "archivos"+SEP+"database"+SEP+"cookies";
+            
             lector = Utilidades.openFileRead(ruta);
             if (lector.readLine().equals("true")) //la primera línea dice si el checkbox recuérdame está activo
             {
